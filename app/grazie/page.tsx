@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { CheckCircle2, ChevronRight } from 'lucide-react'
 
-// ─── Inline SVG Icons ────────────────────────────────────────────────────────
 function InstagramIcon({ size = 24 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -23,14 +22,12 @@ function WhatsappIcon({ size = 20 }: { size?: number }) {
   )
 }
 
-// ─── Types ────────────────────────────────────────────────────────────────────
 declare global {
   interface Window {
     fbq?: (...args: unknown[]) => void
   }
 }
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
 const checklist = [
   'Vieni senza trucco se possibile — ci permette di valutare meglio la pelle',
   "Porta l'elenco dei farmaci che assumi, se presenti",
@@ -40,34 +37,47 @@ const checklist = [
   "Porta con te eventuali foto di riferimento se hai un'idea di risultato in mente",
 ]
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
 export default function GraziePage() {
-  const [trattamentoPre, setTrattamentoPre] = useState<null | 'si' | 'no'>(null)
   const [notaLibera, setNotaLibera] = useState('')
   const [inviato, setInviato] = useState(false)
 
-  // Fire Meta Pixel CompleteRegistration event
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.fbq) {
-      window.fbq('track', 'CompleteRegistration', {
+    const trackConversion = () => {
+      // Schedule = evento standard Meta per prenotazioni appuntamenti
+      window.fbq?.('track', 'Schedule', {
+        content_name: 'Consulto Dr. Anton Kamel',
+        content_category: 'Medicina Estetica',
+      })
+      // CompleteRegistration = fallback per campagne ottimizzate su registrazioni
+      window.fbq?.('track', 'CompleteRegistration', {
         content_name: 'Prenotazione Consulto Anton Kamel',
         status: 'confirmed',
       })
+    }
+
+    if (window.fbq) {
+      trackConversion()
+    } else {
+      window.addEventListener('fbq:ready', trackConversion, { once: true })
+      return () => window.removeEventListener('fbq:ready', trackConversion)
     }
   }, [])
 
   const handleInvia = () => {
     if (!notaLibera.trim()) return
+    const msg = encodeURIComponent(
+      `Ciao Anton, ho appena prenotato un consulto. Il trattamento che ho in mente: ${notaLibera}`
+    )
+    window.open(`https://wa.me/393801035896?text=${msg}`, '_blank')
     setInviato(true)
   }
 
   return (
     <main className="bg-[#0a0a0a] min-h-screen text-white">
 
-      {/* ── SECTION 1: Conferma ──────────────────────────────────────────── */}
-      <section className="min-h-screen flex flex-col items-center justify-center px-6 py-24 text-center">
+      {/* SECTION 1: Conferma */}
+      <section className="flex flex-col items-center justify-center px-6 pt-32 pb-16 text-center">
 
-        {/* Animated checkmark */}
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -119,30 +129,16 @@ export default function GraziePage() {
             A presto nello studio. Hai fatto il primo passo.
           </p>
 
-          {/* Confirm card */}
-          <div className="mx-auto max-w-lg rounded-2xl border border-[#C9A97A]/30 bg-white/5 p-8 mb-8 text-left">
+          <div className="mx-auto max-w-lg rounded-2xl border border-[#C9A97A]/30 bg-white/5 p-8 text-left">
             <p className="text-white/70 text-base leading-relaxed">
               Riceverai a breve una conferma via email o SMS con tutti i dettagli del tuo appuntamento.
-              Se hai domande nel frattempo, scrivimi su Instagram o WhatsApp.
             </p>
           </div>
-
-          {/* WhatsApp CTA */}
-          <a
-            href="https://wa.me/393801035896"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 rounded-full px-8 py-4 font-semibold text-white text-base transition-all duration-300 hover:scale-105"
-            style={{ background: '#25D366', boxShadow: '0 0 24px rgba(37,211,102,0.3)' }}
-          >
-            <WhatsappIcon size={20} />
-            Scrivi su WhatsApp →
-          </a>
         </motion.div>
       </section>
 
-      {/* ── SECTION 2: Come prepararsi ───────────────────────────────────── */}
-      <section className="py-24 px-6 bg-[#0a0a0a]">
+      {/* SECTION 2: Come prepararsi */}
+      <section className="pt-8 pb-24 px-6 bg-[#0a0a0a]">
         <div className="mx-auto max-w-2xl">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -180,7 +176,7 @@ export default function GraziePage() {
         </div>
       </section>
 
-      {/* ── SECTION 3: Social ────────────────────────────────────────────── */}
+      {/* SECTION 3: Social */}
       <section className="py-24 px-6 bg-[#0a0a0a]">
         <div className="mx-auto max-w-3xl text-center">
           <motion.div
@@ -197,7 +193,6 @@ export default function GraziePage() {
             </p>
 
             <div className="grid grid-cols-1 max-w-sm mx-auto gap-6">
-              {/* Instagram */}
               <div className="rounded-2xl border border-white/10 bg-white/5 p-8 flex flex-col items-start gap-4 hover:border-[#C9A97A]/30 transition-all duration-300">
                 <div className="flex items-center gap-3">
                   <span className="text-[#C9A97A]"><InstagramIcon size={24} /></span>
@@ -221,7 +216,7 @@ export default function GraziePage() {
         </div>
       </section>
 
-      {/* ── SECTION 4: Domanda rapida ────────────────────────────────────── */}
+      {/* SECTION 4: Domanda pre-appuntamento */}
       <section className="py-24 px-6 bg-[#0a0a0a] border-t border-white/10">
         <div className="mx-auto max-w-xl text-center">
           <motion.div
@@ -230,67 +225,46 @@ export default function GraziePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <h2 className="text-3xl font-bold text-white/90 mb-8">
-              Hai già in mente il trattamento?
+            <h2 className="text-3xl font-bold text-white/90 mb-4">
+              Hai una domanda prima dell&apos;appuntamento?
             </h2>
+            <p className="text-white/50 text-base mb-8">
+              Scrivimi su WhatsApp — rispondo personalmente.
+            </p>
 
-            <div className="flex gap-4 justify-center mb-8 flex-wrap">
-              {[
-                { key: 'si', label: "Sì, ho già un'idea" },
-                { key: 'no', label: 'Lo decideremo insieme' },
-              ].map(({ key, label }) => (
-                <button
-                  key={key}
-                  onClick={() => setTrattamentoPre(key as 'si' | 'no')}
-                  className={`rounded-full px-6 py-3 text-sm font-medium transition-all duration-200 cursor-pointer ${
-                    trattamentoPre === key
-                      ? 'bg-[#C9A97A] text-black'
-                      : 'border border-white/20 text-white/60 hover:border-white/40 hover:text-white'
-                  }`}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
-
-            <AnimatePresence>
-              {trattamentoPre === 'si' && !inviato && (
+            <AnimatePresence mode="wait">
+              {!inviato ? (
                 <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="overflow-hidden"
+                  key="form"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="flex flex-col gap-4"
                 >
-                  <div className="flex flex-col gap-4">
-                    <textarea
-                      value={notaLibera}
-                      onChange={(e) => setNotaLibera(e.target.value)}
-                      placeholder="Scrivilo qui (facoltativo)..."
-                      rows={3}
-                      className="w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white/80 text-sm leading-relaxed placeholder-white/30 focus:border-[#C9A97A]/50 focus:outline-none resize-none transition-colors"
-                    />
-                    <button
-                      onClick={handleInvia}
-                      disabled={!notaLibera.trim()}
-                      className="self-center rounded-full bg-[#C9A97A] px-8 py-3 text-black font-semibold text-sm transition-all duration-200 hover:scale-105 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
-                      style={{ boxShadow: '0 0 20px rgba(201,169,122,0.3)' }}
-                    >
-                      Invia → Anton
-                    </button>
-                  </div>
+                  <textarea
+                    value={notaLibera}
+                    onChange={(e) => setNotaLibera(e.target.value)}
+                    placeholder="Es: posso fare il filler labbra e il botulino nella stessa seduta?"
+                    rows={3}
+                    className="w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white/80 text-sm leading-relaxed placeholder-white/30 focus:border-[#C9A97A]/50 focus:outline-none resize-none transition-colors"
+                  />
+                  <button
+                    onClick={handleInvia}
+                    disabled={!notaLibera.trim()}
+                    className="self-center rounded-full bg-[#C9A97A] px-8 py-3 text-black font-semibold text-sm transition-all duration-200 hover:scale-105 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                    style={{ boxShadow: '0 0 20px rgba(201,169,122,0.3)' }}
+                  >
+                    Invia ad Anton via WhatsApp →
+                  </button>
                 </motion.div>
-              )}
-            </AnimatePresence>
-
-            <AnimatePresence>
-              {inviato && (
+              ) : (
                 <motion.p
+                  key="sent"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="text-[#C9A97A] text-sm mt-2"
+                  className="text-[#C9A97A] text-base"
                 >
-                  Grazie! Anton lo leggerà prima del tuo appuntamento. 🌿
+                  Messaggio inviato. Anton risponderà prima del tuo appuntamento.
                 </motion.p>
               )}
             </AnimatePresence>
@@ -301,7 +275,7 @@ export default function GraziePage() {
       {/* Footer minimal */}
       <div className="py-8 px-6 text-center border-t border-white/10">
         <p className="text-white/25 text-xs">
-          © 2025 Anton Kamel · Medico Estetico · Verona
+          © {new Date().getFullYear()} Anton Kamel · Medico Estetico · Verona
         </p>
       </div>
     </main>

@@ -16,7 +16,6 @@ function buildFramePaths(): string[] {
 
 const FRAME_PATHS = buildFramePaths()
 
-// Beat definitions: [start, end] as fractions of scroll progress
 const BEATS = [
   { start: 0.0, end: 0.2 },
   { start: 0.25, end: 0.45 },
@@ -66,17 +65,14 @@ export default function AKHero() {
   const { scrollYProgress } = useScroll({ target: wrapperRef })
   const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 })
 
-  // Scroll indicator: visible at start, fades by 8%
   const scrollIndicatorOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0])
 
-  // Beat D CTA: pointer-events need to be active at beat D
   const beat3Opacity = useTransform(
     scrollYProgress,
     [BEATS[3].start, BEATS[3].start + 0.08, BEATS[3].end - 0.08, BEATS[3].end],
     [0, 1, 1, 0]
   )
 
-  // Draw frame on canvas (contain logic)
   const drawFrame = useCallback((index: number) => {
     const canvas = canvasRef.current
     const img = imagesRef.current[index]
@@ -84,8 +80,13 @@ export default function AKHero() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    const cw = canvas.width
-    const ch = canvas.height
+    const dpr = window.devicePixelRatio || 1
+    // Dimensioni CSS (coordinate di disegno)
+    const cw = canvas.width / dpr
+    const ch = canvas.height / dpr
+
+    ctx.save()
+    ctx.scale(dpr, dpr)
     ctx.clearRect(0, 0, cw, ch)
     ctx.fillStyle = '#0a0a0a'
     ctx.fillRect(0, 0, cw, ch)
@@ -93,61 +94,62 @@ export default function AKHero() {
     const imgAspect = img.naturalWidth / img.naturalHeight
     const canvasAspect = cw / ch
 
+    const SCALE = 0.72
     let drawW: number, drawH: number, drawX: number, drawY: number
     if (imgAspect > canvasAspect) {
-      drawH = ch
-      drawW = ch * imgAspect
+      drawH = ch * SCALE
+      drawW = drawH * imgAspect
       drawX = (cw - drawW) / 2
-      drawY = 0
+      drawY = (ch - drawH) / 2
     } else {
-      drawW = cw
-      drawH = cw / imgAspect
-      drawX = 0
+      drawW = cw * SCALE
+      drawH = drawW / imgAspect
+      drawX = (cw - drawW) / 2
       drawY = (ch - drawH) / 2
     }
 
+    ctx.imageSmoothingEnabled = true
+    ctx.imageSmoothingQuality = 'high'
     ctx.drawImage(img, drawX, drawY, drawW, drawH)
+    ctx.restore()
   }, [])
 
-  // Resize canvas to match window
   const resizeCanvas = useCallback(() => {
     const canvas = canvasRef.current
     if (!canvas) return
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
+    const dpr = window.devicePixelRatio || 1
+    const w = window.innerWidth
+    const h = window.innerHeight
+    canvas.width = w * dpr
+    canvas.height = h * dpr
+    canvas.style.width = `${w}px`
+    canvas.style.height = `${h}px`
     drawFrame(currentFrameRef.current)
   }, [drawFrame])
 
-  // Preload all frames
   useEffect(() => {
     let loaded = 0
     const images: HTMLImageElement[] = []
     imagesRef.current = images
 
+    const onFrameSettled = () => {
+      loaded++
+      setLoadProgress(Math.round((loaded / TOTAL_FRAMES) * 100))
+      if (loaded === TOTAL_FRAMES) {
+        setIsLoaded(true)
+        setTimeout(() => setShowLoader(false), 600)
+      }
+    }
+
     FRAME_PATHS.forEach((src, i) => {
       const img = new window.Image()
       img.src = src
-      img.onload = () => {
-        loaded++
-        setLoadProgress(Math.round((loaded / TOTAL_FRAMES) * 100))
-        if (loaded === TOTAL_FRAMES) {
-          setIsLoaded(true)
-          setTimeout(() => setShowLoader(false), 600)
-        }
-      }
-      img.onerror = () => {
-        loaded++
-        setLoadProgress(Math.round((loaded / TOTAL_FRAMES) * 100))
-        if (loaded === TOTAL_FRAMES) {
-          setIsLoaded(true)
-          setTimeout(() => setShowLoader(false), 600)
-        }
-      }
+      img.onload = onFrameSettled
+      img.onerror = onFrameSettled
       images[i] = img
     })
   }, [])
 
-  // Setup canvas resize
   useEffect(() => {
     resizeCanvas()
     window.addEventListener('resize', resizeCanvas)
@@ -157,7 +159,6 @@ export default function AKHero() {
     }
   }, [resizeCanvas])
 
-  // Animation loop driven by spring progress
   useEffect(() => {
     const unsubscribe = smoothProgress.on('change', (val) => {
       const clamped = Math.max(0, Math.min(1, val))
@@ -177,6 +178,9 @@ export default function AKHero() {
     }
   }, [smoothProgress, drawFrame])
 
+  // Suppress unused variable warning — isLoaded used for future transitions
+  void isLoaded
+
   const handleCtaClick = () => {
     const el = document.querySelector('#prenota')
     if (el) el.scrollIntoView({ behavior: 'smooth' })
@@ -193,7 +197,6 @@ export default function AKHero() {
             transition={{ duration: 0.6 }}
             className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#0a0a0a]"
           >
-            {/* Spinner */}
             <div className="relative mb-8">
               <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
                 <circle cx="30" cy="30" r="26" stroke="rgba(255,255,255,0.08)" strokeWidth="3" />
@@ -216,7 +219,6 @@ export default function AKHero() {
               Preparando la tua esperienza…
             </p>
 
-            {/* Progress bar */}
             <div className="w-48 h-0.5 bg-white/10 rounded-full overflow-hidden">
               <motion.div
                 className="h-full bg-[#C9A97A] rounded-full"
@@ -234,14 +236,14 @@ export default function AKHero() {
       <div className="sticky top-0 h-screen overflow-hidden">
         <canvas
           ref={canvasRef}
+          role="img"
+          aria-label="Sequenza video del Dr. Anton Kamel"
           className="absolute inset-0 w-full h-full"
           style={{ background: '#0a0a0a' }}
         />
 
         {/* Gradient vignette */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/40 via-transparent to-[#0a0a0a]/60 pointer-events-none" />
-
-        {/* Beat overlays */}
 
         {/* Beat A — centered */}
         <BeatOverlay scrollYProgress={scrollYProgress} beat={BEATS[0]}>
@@ -280,17 +282,11 @@ export default function AKHero() {
         </BeatOverlay>
 
         {/* Beat D — centered with CTA */}
-        <motion.div
-          style={{
-            opacity: beat3Opacity,
-            position: 'absolute',
-            inset: 0,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <div className="flex flex-col items-center justify-center text-center px-6">
+        <BeatOverlay scrollYProgress={scrollYProgress} beat={BEATS[3]}>
+          <motion.div
+            style={{ pointerEvents: beat3Opacity.get() > 0 ? 'auto' : 'none' }}
+            className="w-full flex flex-col items-center justify-center text-center px-6"
+          >
             <h2 className="text-5xl md:text-8xl font-bold tracking-tighter text-white/90 leading-none">
               PRENOTA IL TUO<br />CONSULTO.
             </h2>
@@ -313,8 +309,8 @@ export default function AKHero() {
             >
               Prenota ora →
             </button>
-          </div>
-        </motion.div>
+          </motion.div>
+        </BeatOverlay>
 
         {/* Scroll indicator */}
         <motion.div

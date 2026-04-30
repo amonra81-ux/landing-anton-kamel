@@ -5,10 +5,10 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
 const navLinks = [
-  { href: '#perche', label: 'Perché scegliermi' },
-  { href: '#trattamenti', label: 'Trattamenti' },
-  { href: '#faq', label: 'FAQ' },
-  { href: '#prenota', label: 'Prenota' },
+  { href: '#perche', label: 'Perché scegliermi', cta: false },
+  { href: '#trattamenti', label: 'Trattamenti', cta: false },
+  { href: '#faq', label: 'FAQ', cta: false },
+  { href: '#prenota', label: 'Prenota', cta: true },
 ]
 
 export default function Navbar() {
@@ -27,9 +27,13 @@ export default function Navbar() {
     if (el) el.scrollIntoView({ behavior: 'smooth' })
   }
 
+  const desktopLinks = navLinks.filter((l) => !l.cta)
+  const ctaLink = navLinks.find((l) => l.cta)!
+
   return (
     <>
       <nav
+        aria-label="Navigazione principale"
         className={`fixed top-0 z-50 w-full transition-all duration-500 ${
           scrolled ? 'bg-black/80 backdrop-blur-md' : 'bg-black/40 backdrop-blur-sm'
         }`}
@@ -43,7 +47,7 @@ export default function Navbar() {
 
           {/* Desktop Links */}
           <div className="hidden items-center gap-8 md:flex">
-            {navLinks.slice(0, 3).map((link) => (
+            {desktopLinks.map((link) => (
               <button
                 key={link.href}
                 onClick={() => handleNavClick(link.href)}
@@ -53,10 +57,10 @@ export default function Navbar() {
               </button>
             ))}
             <button
-              onClick={() => handleNavClick('#prenota')}
+              onClick={() => handleNavClick(ctaLink.href)}
               className="rounded-full border border-[#C9A97A] px-4 py-1.5 text-sm text-[#C9A97A] transition-all duration-200 hover:bg-[#C9A97A]/10 cursor-pointer"
             >
-              Prenota
+              {ctaLink.label}
             </button>
           </div>
 
@@ -64,7 +68,8 @@ export default function Navbar() {
           <button
             className="md:hidden text-white/80 hover:text-white transition-colors"
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Menu"
+            aria-label={mobileOpen ? 'Chiudi menu' : 'Apri menu'}
+            aria-expanded={mobileOpen}
           >
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -86,9 +91,7 @@ export default function Navbar() {
                 key={link.href}
                 onClick={() => handleNavClick(link.href)}
                 className={`text-left text-lg font-medium transition-colors ${
-                  link.href === '#prenota'
-                    ? 'text-[#C9A97A]'
-                    : 'text-white/70 hover:text-white'
+                  link.cta ? 'text-[#C9A97A]' : 'text-white/70 hover:text-white'
                 }`}
               >
                 {link.label}

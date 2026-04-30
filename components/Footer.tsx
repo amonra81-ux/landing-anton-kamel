@@ -75,7 +75,7 @@ export default function Footer() {
                 href="https://www.instagram.com/dr.antonlips/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 text-white/60 text-sm hover:text-white transition-colors group"
+                className="flex items-center gap-3 text-white/60 text-sm hover:text-white transition-colors"
               >
                 <span className="text-[#C9A97A] shrink-0"><InstagramIcon size={18} /></span>
                 <span>@dr.antonlips</span>
@@ -84,7 +84,7 @@ export default function Footer() {
                 href="https://wa.me/393801035896"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 text-white/60 text-sm hover:text-white transition-colors group"
+                className="flex items-center gap-3 text-white/60 text-sm hover:text-white transition-colors"
               >
                 <span className="text-[#C9A97A] shrink-0"><WhatsappIcon size={18} /></span>
                 <span>WhatsApp</span>
@@ -97,7 +97,7 @@ export default function Footer() {
         <div className="border-t border-white/10 pt-8">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <p className="text-white/30 text-xs">
-              © 2025 Anton Kamel. Tutti i diritti riservati.
+              © {new Date().getFullYear()} Anton Kamel. Tutti i diritti riservati.
             </p>
             <div className="flex items-center gap-4">
               <a href="/privacy" className="text-white/30 text-xs hover:text-white/60 transition-colors">

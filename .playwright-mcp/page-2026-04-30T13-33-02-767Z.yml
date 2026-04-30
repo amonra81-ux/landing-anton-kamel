@@ -1,0 +1,66 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - img [ref=e7]
+      - generic [ref=e11]:
+        - heading "Prenotazione confermata." [level=1] [ref=e12]
+        - paragraph [ref=e13]: A presto nello studio. Hai fatto il primo passo.
+        - paragraph [ref=e15]: Riceverai a breve una conferma via email o SMS con tutti i dettagli del tuo appuntamento. Se hai domande nel frattempo, scrivimi su Instagram o WhatsApp.
+        - link "Scrivi su WhatsApp →" [ref=e16] [cursor=pointer]:
+          - /url: https://wa.me/393801035896
+          - img [ref=e17]
+          - text: Scrivi su WhatsApp →
+    - generic [ref=e20]:
+      - heading "Prima di venire, tieni a mente:" [level=2] [ref=e21]
+      - list [ref=e22]:
+        - listitem [ref=e23]:
+          - img [ref=e25]
+          - generic [ref=e28]: Vieni senza trucco se possibile — ci permette di valutare meglio la pelle
+        - listitem [ref=e29]:
+          - img [ref=e31]
+          - generic [ref=e34]: Porta l'elenco dei farmaci che assumi, se presenti
+        - listitem [ref=e35]:
+          - img [ref=e37]
+          - generic [ref=e40]: Se hai allergie accertate, segnalalo anche in anticipo
+        - listitem [ref=e41]:
+          - img [ref=e43]
+          - generic [ref=e46]: Non è necessaria nessun'altra preparazione speciale
+        - listitem [ref=e47]:
+          - img [ref=e49]
+          - generic [ref=e52]: Il consulto è un momento di ascolto — non ci sono domande sbagliate
+        - listitem [ref=e53]:
+          - img [ref=e55]
+          - generic [ref=e58]: Porta con te eventuali foto di riferimento se hai un'idea di risultato in mente
+    - generic [ref=e61]:
+      - heading "Nel frattempo, seguimi." [level=2] [ref=e62]
+      - paragraph [ref=e63]: Condivido casi reali, risposte a domande frequenti e il dietro le quinte dello studio. Senza filtri.
+      - generic [ref=e65]:
+        - generic [ref=e66]:
+          - img [ref=e68]
+          - generic [ref=e72]: "@dr.antonlips"
+        - paragraph [ref=e73]: Reel, risultati, storie di pazienti veri.
+        - link "Seguimi su Instagram" [ref=e74] [cursor=pointer]:
+          - /url: https://www.instagram.com/dr.antonlips/
+          - text: Seguimi su Instagram
+          - img [ref=e75]
+    - generic [ref=e79]:
+      - heading "Hai già in mente il trattamento?" [level=2] [ref=e80]
+      - generic [ref=e81]:
+        - button "Sì, ho già un'idea" [ref=e82] [cursor=pointer]
+        - button "Lo decideremo insieme" [ref=e83] [cursor=pointer]
+    - paragraph [ref=e85]: © 2026 Anton Kamel · Medico Estetico · Verona
+  - dialog "Preferenze cookie" [ref=e86]:
+    - generic [ref=e87]:
+      - paragraph [ref=e88]:
+        - text: Utilizziamo cookie tecnici necessari e, previo consenso, cookie di profilazione (Meta Pixel) per misurare l'efficacia delle campagne pubblicitarie.
+        - link "Cookie Policy" [ref=e89] [cursor=pointer]:
+          - /url: /cookie
+        - text: ·
+        - link "Privacy Policy" [ref=e90] [cursor=pointer]:
+          - /url: /privacy
+      - generic [ref=e91]:
+        - button "Rifiuta" [ref=e92] [cursor=pointer]
+        - button "Accetta" [ref=e93] [cursor=pointer]
+  - button "Open Next.js Dev Tools" [ref=e99] [cursor=pointer]:
+    - img [ref=e100]
+  - alert [ref=e103]

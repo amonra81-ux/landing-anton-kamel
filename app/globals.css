@@ -41,3 +41,12 @@ body {
 a, button {
   -webkit-tap-highlight-color: transparent;
 }
+
+/* Marquee animation for SocialProof */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-33.33333%); }
+}
+.animate-marquee {
+  animation: marquee 50s linear infinite;
+}

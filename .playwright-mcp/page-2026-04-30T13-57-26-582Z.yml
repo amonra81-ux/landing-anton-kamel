@@ -1,0 +1,314 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation "Navigazione principale" [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - paragraph [ref=e6]: ANTON KAMEL
+          - paragraph [ref=e7]: Medico Estetico · Verona
+        - generic [ref=e8]:
+          - button "Perché scegliermi" [ref=e9] [cursor=pointer]
+          - button "Trattamenti" [ref=e10] [cursor=pointer]
+          - button "FAQ" [ref=e11] [cursor=pointer]
+          - button "Prenota" [ref=e12] [cursor=pointer]
+    - generic [ref=e22]:
+      - img "Sequenza video del Dr. Anton Kamel" [ref=e23]
+      - generic:
+        - generic:
+          - heading "LA TUA BELLEZZA." [level=1]
+          - paragraph: Non da cambiare. Da svelare.
+      - generic:
+        - generic:
+          - heading "SGUARDO CLINICO." [level=2]:
+            - text: SGUARDO
+            - text: CLINICO.
+          - paragraph: Ogni viso è unico. Ogni trattamento, costruito su di te.
+      - generic:
+        - generic:
+          - heading "RISULTATI NATURALI." [level=2]:
+            - text: RISULTATI
+            - text: NATURALI.
+          - paragraph: Nessuna maschera. Solo la versione migliore di te.
+      - generic:
+        - generic:
+          - heading "PRENOTA IL TUO CONSULTO." [level=2]:
+            - text: PRENOTA IL TUO
+            - text: CONSULTO.
+          - paragraph: "Primo passo: una conversazione. Senza impegno."
+          - button "Prenota ora →" [ref=e24] [cursor=pointer]
+      - generic:
+        - generic: Scorri per scoprire
+        - generic:
+          - img
+    - generic [ref=e26]:
+      - generic [ref=e27]:
+        - heading "Perché scegliere Anton Kamel." [level=2] [ref=e28]
+        - paragraph [ref=e29]: Medicina estetica non significa cambiare. Significa riconoscersi.
+      - generic [ref=e30]:
+        - generic [ref=e31]:
+          - img [ref=e33]
+          - heading "Medico prima di tutto" [level=3] [ref=e37]
+          - paragraph [ref=e38]: "Anton Kamel non lavora sull'aspetto. Lavora sulla persona. Ogni consulto parte dall'ascolto: chi sei, cosa senti, cosa vuoi davvero."
+        - generic [ref=e39]:
+          - img [ref=e41]
+          - heading "Nessun risultato standard" [level=3] [ref=e44]
+          - paragraph [ref=e45]: Ogni viso racconta una storia diversa. I trattamenti sono costruiti attorno alle tue proporzioni, non su un modello ideale prestabilito.
+        - generic [ref=e46]:
+          - img [ref=e48]
+          - heading "Trasparenza totale" [level=3] [ref=e51]
+          - paragraph [ref=e52]: Prima di qualsiasi trattamento, una conversazione aperta su aspettative, tempi, rischi e risultati attesi. Nessuna sorpresa.
+    - generic [ref=e54]:
+      - generic [ref=e55]:
+        - heading "I trattamenti." [level=2] [ref=e56]
+        - paragraph [ref=e57]: Soluzioni personalizzate per ogni esigenza estetica.
+      - generic [ref=e58]:
+        - generic [ref=e60] [cursor=pointer]:
+          - generic [ref=e62]:
+            - heading "Consulto / Prima visita" [level=3] [ref=e63]
+            - generic [ref=e64]: 45–60 min
+          - button "Scopri e prenota" [ref=e65]:
+            - text: Scopri e prenota
+            - img [ref=e66]
+        - generic [ref=e69] [cursor=pointer]:
+          - generic [ref=e71]:
+            - heading "Filler labbra" [level=3] [ref=e72]
+            - generic [ref=e73]: 30–45 min
+          - button "Scopri e prenota" [ref=e74]:
+            - text: Scopri e prenota
+            - img [ref=e75]
+        - generic [ref=e78] [cursor=pointer]:
+          - generic [ref=e79]:
+            - generic [ref=e80]:
+              - heading "Filler viso (zigomi, mento, mandibola)" [level=3] [ref=e81]
+              - generic [ref=e82]: 45–60 min
+            - paragraph [ref=e632]: Armonizzazione e definizione dei volumi facciali per un effetto lifting non chirurgico.
+          - button "Scopri e prenota" [ref=e83]:
+            - text: Scopri e prenota
+            - img [ref=e84]
+        - generic [ref=e87] [cursor=pointer]:
+          - generic [ref=e89]:
+            - heading "Rinofiller" [level=3] [ref=e90]
+            - generic [ref=e91]: 20–30 min
+          - button "Scopri e prenota" [ref=e92]:
+            - text: Scopri e prenota
+            - img [ref=e93]
+        - generic [ref=e96] [cursor=pointer]:
+          - generic [ref=e98]:
+            - heading "Tossina botulinica (rughe frontali, zampe di gallina, glabella)" [level=3] [ref=e99]
+            - generic [ref=e100]: 20–30 min
+          - button "Scopri e prenota" [ref=e101]:
+            - text: Scopri e prenota
+            - img [ref=e102]
+        - generic [ref=e105] [cursor=pointer]:
+          - generic [ref=e107]:
+            - heading "Botulino massetere (bruxismo / jaw slimming)" [level=3] [ref=e108]
+            - generic [ref=e109]: 20–30 min
+          - button "Scopri e prenota" [ref=e110]:
+            - text: Scopri e prenota
+            - img [ref=e111]
+        - generic [ref=e114] [cursor=pointer]:
+          - generic [ref=e116]:
+            - heading "Biorivitalizzazione / Biostimolazione" [level=3] [ref=e117]
+            - generic [ref=e118]: 30–45 min
+          - button "Scopri e prenota" [ref=e119]:
+            - text: Scopri e prenota
+            - img [ref=e120]
+        - generic [ref=e123] [cursor=pointer]:
+          - generic [ref=e125]:
+            - heading "Fili di lifting riassorbibili" [level=3] [ref=e126]
+            - generic [ref=e127]: 60–90 min
+          - button "Scopri e prenota" [ref=e128]:
+            - text: Scopri e prenota
+            - img [ref=e129]
+        - generic [ref=e132] [cursor=pointer]:
+          - generic [ref=e134]:
+            - heading "Trattamento occhiaie" [level=3] [ref=e135]
+            - generic [ref=e136]: 30–45 min
+          - button "Scopri e prenota" [ref=e137]:
+            - text: Scopri e prenota
+            - img [ref=e138]
+        - generic [ref=e141] [cursor=pointer]:
+          - generic [ref=e143]:
+            - heading "Trattamento acne e cicatrici" [level=3] [ref=e144]
+            - generic [ref=e145]: 45–60 min
+          - button "Scopri e prenota" [ref=e146]:
+            - text: Scopri e prenota
+            - img [ref=e147]
+        - generic [ref=e150] [cursor=pointer]:
+          - generic [ref=e152]:
+            - heading "Skinbooster" [level=3] [ref=e153]
+            - generic [ref=e154]: 30–45 min
+          - button "Scopri e prenota" [ref=e155]:
+            - text: Scopri e prenota
+            - img [ref=e156]
+        - generic [ref=e159] [cursor=pointer]:
+          - generic [ref=e161]:
+            - heading "Peeling chimico" [level=3] [ref=e162]
+            - generic [ref=e163]: 30–45 min
+          - button "Scopri e prenota" [ref=e164]:
+            - text: Scopri e prenota
+            - img [ref=e165]
+        - generic [ref=e168] [cursor=pointer]:
+          - generic [ref=e170]:
+            - heading "Profilazione del viso (armonizzazione facciale)" [level=3] [ref=e171]
+            - generic [ref=e172]: 60–90 min
+          - button "Scopri e prenota" [ref=e173]:
+            - text: Scopri e prenota
+            - img [ref=e174]
+    - generic [ref=e177]:
+      - generic [ref=e178]:
+        - heading "Cosa dicono i pazienti." [level=2] [ref=e179]
+        - paragraph [ref=e180]: Risultati reali e storie vere.
+      - generic [ref=e181]:
+        - button "Recensione precedente" [ref=e182] [cursor=pointer]:
+          - img [ref=e183]
+        - generic [ref=e186]:
+          - generic [ref=e633]:
+            - img [ref=e634]
+            - generic [ref=e637]:
+              - img [ref=e638]
+              - img [ref=e640]
+              - img [ref=e642]
+              - img [ref=e644]
+              - img [ref=e646]
+            - paragraph [ref=e648]: “Terza volta da Anton. Il risultato è sempre naturale, il viso rilassato senza quell'effetto congelato che temevo. Studio pulitissimo, professionalità massima.”
+            - generic [ref=e649]:
+              - paragraph [ref=e650]: Alessia R.
+              - paragraph [ref=e651]: Tossina Botulinica
+          - generic [ref=e652]:
+            - img [ref=e653]
+            - generic [ref=e656]:
+              - img [ref=e657]
+              - img [ref=e659]
+              - img [ref=e661]
+              - img [ref=e663]
+              - img [ref=e665]
+            - paragraph [ref=e667]: "“Pelle spenta e disidratata dopo l'inverno. Dopo il trattamento, letteralmente luminosa. Il dottore ha un approccio molto medico: spiega tutto, non spinge su trattamenti inutili.”"
+            - generic [ref=e668]:
+              - paragraph [ref=e669]: Federica C.
+              - paragraph [ref=e670]: Biorivitalizzazione
+          - generic [ref=e671]:
+            - img [ref=e672]
+            - generic [ref=e675]:
+              - img [ref=e676]
+              - img [ref=e678]
+              - img [ref=e680]
+              - img [ref=e682]
+              - img [ref=e684]
+            - paragraph [ref=e686]: "“Piano completo: zigomi, mento e labbra. Risultato armonioso e naturale. Non sembro operata, sembro riposata e in forma. Migliore investimento degli ultimi anni.”"
+            - generic [ref=e687]:
+              - paragraph [ref=e688]: Martina B.
+              - paragraph [ref=e689]: Armonizzazione Facciale
+        - button "Recensione successiva" [ref=e244] [cursor=pointer]:
+          - img [ref=e245]
+      - generic [ref=e248]:
+        - button "Vai alla recensione 1" [ref=e249] [cursor=pointer]
+        - button "Vai alla recensione 2" [ref=e250] [cursor=pointer]
+        - button "Vai alla recensione 3" [ref=e251] [cursor=pointer]
+        - button "Vai alla recensione 4" [ref=e252] [cursor=pointer]
+        - button "Vai alla recensione 5" [ref=e253] [cursor=pointer]
+        - button "Vai alla recensione 6" [ref=e254] [cursor=pointer]
+      - generic [ref=e255]:
+        - button "Prenota la tua consulenza" [ref=e256] [cursor=pointer]:
+          - img [ref=e257]
+          - text: Prenota la tua consulenza
+        - paragraph [ref=e259]: I posti disponibili ogni mese sono limitati.
+    - generic [ref=e615]:
+      - paragraph [ref=e616]: Prenota online
+      - heading "Prenota il tuo consulto." [level=2] [ref=e617]:
+        - text: Prenota il tuo
+        - text: consulto.
+      - paragraph [ref=e618]: Scegli giorno e orario in autonomia. Conferma immediata via email o SMS.
+      - button "Scegli data e orario" [ref=e619] [cursor=pointer]:
+        - img [ref=e620]
+        - text: Scegli data e orario
+        - img [ref=e622]
+      - generic [ref=e624]:
+        - generic [ref=e625]:
+          - img [ref=e626]
+          - text: Prenotazione sicura
+        - generic [ref=e629]:
+          - img [ref=e630]
+          - text: Conferma immediata via SMS
+    - generic [ref=e317]:
+      - generic [ref=e318]:
+        - heading "Hai qualche domanda?" [level=2] [ref=e319]
+        - paragraph [ref=e320]: Le risposte più comuni. Per arrivare al consulto già informata/o.
+      - generic [ref=e321]:
+        - button "È necessario un consulto prima di qualsiasi trattamento?" [ref=e323] [cursor=pointer]:
+          - generic [ref=e324]: È necessario un consulto prima di qualsiasi trattamento?
+          - img [ref=e326]
+        - button "I risultati sembreranno naturali?" [ref=e328] [cursor=pointer]:
+          - generic [ref=e329]: I risultati sembreranno naturali?
+          - img [ref=e331]
+        - button "I trattamenti fanno male?" [ref=e333] [cursor=pointer]:
+          - generic [ref=e334]: I trattamenti fanno male?
+          - img [ref=e336]
+        - button "Quanto durano i risultati del filler?" [ref=e338] [cursor=pointer]:
+          - generic [ref=e339]: Quanto durano i risultati del filler?
+          - img [ref=e341]
+        - button "Posso fare i trattamenti se sono in gravidanza o allattamento?" [ref=e343] [cursor=pointer]:
+          - generic [ref=e344]: Posso fare i trattamenti se sono in gravidanza o allattamento?
+          - img [ref=e346]
+        - button "Cosa sono i fili riassorbibili?" [ref=e348] [cursor=pointer]:
+          - generic [ref=e349]: Cosa sono i fili riassorbibili?
+          - img [ref=e351]
+        - button "Il botulino blocca le espressioni del viso?" [ref=e353] [cursor=pointer]:
+          - generic [ref=e354]: Il botulino blocca le espressioni del viso?
+          - img [ref=e356]
+        - button "Cos'è il rinofiller e come funziona?" [ref=e358] [cursor=pointer]:
+          - generic [ref=e359]: Cos'è il rinofiller e come funziona?
+          - img [ref=e361]
+        - button "Il botulino per il bruxismo funziona davvero?" [ref=e363] [cursor=pointer]:
+          - generic [ref=e364]: Il botulino per il bruxismo funziona davvero?
+          - img [ref=e366]
+        - button "Posso combinare più trattamenti nella stessa seduta?" [ref=e368] [cursor=pointer]:
+          - generic [ref=e369]: Posso combinare più trattamenti nella stessa seduta?
+          - img [ref=e371]
+        - button "Ci sono controindicazioni?" [ref=e373] [cursor=pointer]:
+          - generic [ref=e374]: Ci sono controindicazioni?
+          - img [ref=e376]
+        - button "Come mi preparo alla prima visita?" [ref=e378] [cursor=pointer]:
+          - generic [ref=e379]: Come mi preparo alla prima visita?
+          - img [ref=e381]
+    - generic [ref=e383]:
+      - generic [ref=e384]:
+        - generic [ref=e385]:
+          - paragraph [ref=e386]: ANTON KAMEL
+          - paragraph [ref=e387]: Medico Estetico
+          - paragraph [ref=e388]: Verona, Italia
+          - paragraph [ref=e389]: “La tua bellezza è un'altra cosa.”
+        - generic [ref=e390]:
+          - paragraph [ref=e391]: Link rapidi
+          - list [ref=e392]:
+            - listitem [ref=e393]:
+              - button "Perché scegliermi" [ref=e394] [cursor=pointer]
+            - listitem [ref=e395]:
+              - button "Trattamenti" [ref=e396] [cursor=pointer]
+            - listitem [ref=e397]:
+              - button "FAQ" [ref=e398] [cursor=pointer]
+            - listitem [ref=e399]:
+              - button "Prenota" [ref=e400] [cursor=pointer]
+        - generic [ref=e401]:
+          - paragraph [ref=e402]: Contatti e social
+          - generic [ref=e403]:
+            - link "@dr.antonlips" [ref=e404] [cursor=pointer]:
+              - /url: https://www.instagram.com/dr.antonlips/
+              - img [ref=e406]
+              - generic [ref=e410]: "@dr.antonlips"
+            - link "WhatsApp" [ref=e411] [cursor=pointer]:
+              - /url: https://wa.me/393801035896
+              - img [ref=e413]
+              - generic [ref=e415]: WhatsApp
+      - generic [ref=e416]:
+        - generic [ref=e417]:
+          - paragraph [ref=e418]: © 2026 Anton Kamel. Tutti i diritti riservati.
+          - generic [ref=e419]:
+            - link "Privacy Policy" [ref=e420] [cursor=pointer]:
+              - /url: /privacy
+            - generic [ref=e421]: ·
+            - link "Cookie Policy" [ref=e422] [cursor=pointer]:
+              - /url: /cookie
+        - paragraph [ref=e423]: Le informazioni presenti in questo sito hanno finalità informative e non sostituiscono in alcun modo una visita medica.
+  - button "Open Next.js Dev Tools" [ref=e437] [cursor=pointer]:
+    - img [ref=e438]
+  - alert [ref=e498]

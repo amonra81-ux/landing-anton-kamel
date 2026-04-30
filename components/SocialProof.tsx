@@ -1,119 +1,212 @@
 'use client'
 
-import { Star, Quote, Calendar } from 'lucide-react'
+import { useState, useEffect, useCallback, useRef } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react'
 
-// Abbiamo preparato un template con recensioni altamente performanti per la medicina estetica.
-// Puoi inserire i testi esatti prendendoli da Google My Business.
+// TODO: sostituisci con le recensioni reali da Google My Business
 const testimonials = [
   {
-    name: "Marta R.",
-    treatment: "Filler Labbra",
-    text: "Il Dott. Kamel ha capito perfettamente cosa volevo. Il risultato è super naturale e armonioso con il mio viso. Non potrei essere più felice!",
+    name: 'Valentina M.',
+    treatment: 'Filler Labbra',
+    text: 'Prima ero terrorizzata dall\'idea. Anton mi ha spiegato tutto con calma, senza fretta. Risultato super naturale, proporzionato. Le labbra sembrano le mie ma più definite.',
     rating: 5,
   },
   {
-    name: "Giulia B.",
-    treatment: "Rinofiller",
-    text: "Professionalità e gentilezza uniche. Mi sono sentita subito a mio agio fin dalla prima consulenza. Il risultato ha superato le mie aspettative.",
+    name: 'Giorgia T.',
+    treatment: 'Rinofiller',
+    text: 'Avevo una piccola gobba che mi ha sempre un po\' disturbato. In 20 minuti, senza dolore, risolta. Non sembra rifatto per niente. Sono contentissima del risultato.',
     rating: 5,
   },
   {
-    name: "Chiara V.",
-    treatment: "Tossina Botulinica",
-    text: "Mani d'oro! Nessun dolore e un effetto finale wow, ma senza sembrare finta o artefatta. Tornerò sicuramente per altri trattamenti.",
+    name: 'Alessia R.',
+    treatment: 'Tossina Botulinica',
+    text: 'Terza volta da Anton. Il risultato è sempre naturale, il viso rilassato senza quell\'effetto congelato che temevo. Studio pulitissimo, professionalità massima.',
     rating: 5,
   },
   {
-    name: "Elena S.",
-    treatment: "Biorivitalizzazione",
-    text: "La mia pelle è letteralmente rinata. Luminosa, compatta e idratata. Un'esperienza a 5 stelle che consiglio a tutte le mie amiche.",
+    name: 'Federica C.',
+    treatment: 'Biorivitalizzazione',
+    text: 'Pelle spenta e disidratata dopo l\'inverno. Dopo il trattamento, letteralmente luminosa. Il dottore ha un approccio molto medico: spiega tutto, non spinge su trattamenti inutili.',
     rating: 5,
   },
   {
-    name: "Francesca L.",
-    treatment: "Armonizzazione Viso",
-    text: "Risultato eccezionale e naturale. L'attenzione ai dettagli del dottore è incredibile. Mi sento molto più sicura di me stessa.",
+    name: 'Martina B.',
+    treatment: 'Armonizzazione Facciale',
+    text: 'Piano completo: zigomi, mento e labbra. Risultato armonioso e naturale. Non sembro operata, sembro riposata e in forma. Migliore investimento degli ultimi anni.',
     rating: 5,
-  }
+  },
+  {
+    name: 'Chiara F.',
+    treatment: 'Botulino Massetere',
+    text: 'Bruxismo da anni. Con il botulino nel massetere le tensioni sono sparite e l\'ovale del viso si è assottigliato. Effetto immediato. Tornerò sicuramente.',
+    rating: 5,
+  },
 ]
 
+const VISIBLE = 3
+const AUTO_INTERVAL = 4000
+
 export default function SocialProof() {
-  const handlePrenotaClick = () => {
-    const el = document.querySelector('#prenota')
-    if (el) el.scrollIntoView({ behavior: 'smooth' })
+  const [current, setCurrent] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const [direction, setDirection] = useState(1)
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const total = testimonials.length
+
+  const go = useCallback((dir: 1 | -1) => {
+    setDirection(dir)
+    setCurrent((c) => (c + dir + total) % total)
+  }, [total])
+
+  const goTo = useCallback((idx: number) => {
+    setDirection(idx > current ? 1 : -1)
+    setCurrent(idx)
+  }, [current])
+
+  useEffect(() => {
+    if (paused) return
+    timerRef.current = setInterval(() => go(1), AUTO_INTERVAL)
+    return () => { if (timerRef.current) clearInterval(timerRef.current) }
+  }, [paused, go])
+
+  // Indici delle 3 card visibili (con wrap)
+  const visibleIndices = Array.from({ length: VISIBLE }, (_, i) => (current + i) % total)
+
+  const variants = {
+    enter: (d: number) => ({ opacity: 0, x: d > 0 ? 80 : -80 }),
+    center: { opacity: 1, x: 0 },
+    exit: (d: number) => ({ opacity: 0, x: d > 0 ? -80 : 80 }),
   }
 
   return (
-    <section className="py-24 bg-[#0a0a0a] border-t border-white/10 overflow-hidden relative">
+    <section
+      className="py-24 bg-[#0a0a0a] border-t border-white/10 relative overflow-hidden"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#C9A97A] opacity-[0.03] blur-[120px] rounded-full pointer-events-none" />
 
-      <div className="mx-auto max-w-6xl relative z-10 px-6 mb-16 text-center">
-        <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight">
-          Cosa dicono i pazienti.
-        </h2>
-        <p className="text-white/60 max-w-2xl mx-auto text-lg">
-          Risultati reali e storie vere. La soddisfazione di chi si affida a noi è la nostra migliore garanzia.
-        </p>
-      </div>
-
-      {/* Marquee Container */}
-      <div className="relative flex overflow-x-hidden group mb-16">
-        {/* Gradient fades for edges */}
-        <div className="absolute top-0 bottom-0 left-0 w-24 sm:w-48 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
-        <div className="absolute top-0 bottom-0 right-0 w-24 sm:w-48 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
-        
-        <div className="flex animate-marquee group-hover:[animation-play-state:paused] whitespace-nowrap py-4">
-          {/* Triplichiamo l'array per un loop continuo perfetto */}
-          {[...testimonials, ...testimonials, ...testimonials].map((testimonial, idx) => (
-            <div
-              key={idx}
-              className="w-[320px] sm:w-[400px] flex-none bg-white/[0.03] border border-white/10 rounded-2xl p-8 mx-4 relative hover:bg-white/[0.05] hover:border-[#C9A97A]/30 transition-all duration-300 flex flex-col whitespace-normal h-[300px]"
-            >
-              <Quote className="absolute top-6 right-6 text-white/10 w-8 h-8 transition-colors" />
-              
-              <div className="flex gap-1 mb-6">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} size={16} className="fill-[#C9A97A] text-[#C9A97A]" />
-                ))}
-              </div>
-              
-              <p className="text-white/80 text-sm leading-relaxed mb-8 flex-grow">
-                "{testimonial.text}"
-              </p>
-              
-              <div className="mt-auto border-t border-white/10 pt-4">
-                <p className="text-white font-medium text-sm">{testimonial.name}</p>
-                <p className="text-[#C9A97A] text-xs mt-1">{testimonial.treatment}</p>
-              </div>
-            </div>
-          ))}
+      <div className="mx-auto max-w-6xl relative z-10 px-6">
+        {/* Header */}
+        <div className="mb-16 text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight"
+          >
+            Cosa dicono i pazienti.
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="text-white/60 max-w-2xl mx-auto text-lg"
+          >
+            Risultati reali e storie vere.
+          </motion.p>
         </div>
-      </div>
-      
-      {/* CTA section to push for booking */}
-      <div className="mx-auto max-w-xl px-6 text-center mt-12 relative z-10">
-        <button
-          onClick={handlePrenotaClick}
-          className="inline-flex items-center justify-center gap-3 bg-[#C9A97A] hover:bg-white text-black px-10 py-5 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 shadow-[0_0_30px_rgba(201,169,122,0.3)] hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] cursor-pointer w-full sm:w-auto"
-        >
-          <Calendar size={20} />
-          Prenota la tua consulenza
-        </button>
-        <p className="text-white/40 text-sm mt-4">
-          I posti disponibili ogni mese sono limitati.
-        </p>
-      </div>
 
-      <style dangerouslySetInnerHTML={{__html: `
-        @keyframes marquee {
-          0% { transform: translateX(0%); }
-          100% { transform: translateX(-33.33333%); }
-        }
-        .animate-marquee {
-          animation: marquee 50s linear infinite;
-        }
-      `}} />
+        {/* Carousel */}
+        <div className="relative">
+          {/* Arrow left */}
+          <button
+            onClick={() => { go(-1); setPaused(true) }}
+            aria-label="Recensione precedente"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-20 hidden md:flex items-center justify-center w-10 h-10 rounded-full border border-white/20 bg-[#0a0a0a] text-white/60 hover:border-[#C9A97A]/50 hover:text-[#C9A97A] transition-all duration-200 cursor-pointer"
+          >
+            <ChevronLeft size={18} />
+          </button>
+
+          {/* Cards */}
+          <div className="overflow-hidden px-2">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <AnimatePresence mode="popLayout" custom={direction}>
+                {visibleIndices.map((idx) => {
+                  const t = testimonials[idx]
+                  return (
+                    <motion.div
+                      key={`${idx}-${current}`}
+                      custom={direction}
+                      variants={variants}
+                      initial="enter"
+                      animate="center"
+                      exit="exit"
+                      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                      className="relative bg-white/[0.03] border border-white/10 rounded-2xl p-8 flex flex-col hover:bg-white/[0.05] hover:border-[#C9A97A]/30 transition-colors duration-300 h-[280px]"
+                    >
+                      <Quote className="absolute top-6 right-6 text-white/10 w-7 h-7" />
+
+                      <div className="flex gap-1 mb-5">
+                        {Array.from({ length: t.rating }).map((_, i) => (
+                          <Star key={i} size={14} className="fill-[#C9A97A] text-[#C9A97A]" />
+                        ))}
+                      </div>
+
+                      <p className="text-white/75 text-sm leading-relaxed flex-grow">
+                        &ldquo;{t.text}&rdquo;
+                      </p>
+
+                      <div className="mt-auto border-t border-white/10 pt-4">
+                        <p className="text-white font-medium text-sm">{t.name}</p>
+                        <p className="text-[#C9A97A] text-xs mt-0.5">{t.treatment}</p>
+                      </div>
+                    </motion.div>
+                  )
+                })}
+              </AnimatePresence>
+            </div>
+          </div>
+
+          {/* Arrow right */}
+          <button
+            onClick={() => { go(1); setPaused(true) }}
+            aria-label="Recensione successiva"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-20 hidden md:flex items-center justify-center w-10 h-10 rounded-full border border-white/20 bg-[#0a0a0a] text-white/60 hover:border-[#C9A97A]/50 hover:text-[#C9A97A] transition-all duration-200 cursor-pointer"
+          >
+            <ChevronRight size={18} />
+          </button>
+        </div>
+
+        {/* Dots + mobile arrows */}
+        <div className="mt-10 flex items-center justify-center gap-6">
+          <button
+            onClick={() => { go(-1); setPaused(true) }}
+            aria-label="Precedente"
+            className="md:hidden flex items-center justify-center w-9 h-9 rounded-full border border-white/20 text-white/60 hover:border-[#C9A97A]/50 hover:text-[#C9A97A] transition-all cursor-pointer"
+          >
+            <ChevronLeft size={16} />
+          </button>
+
+          <div className="flex items-center gap-2">
+            {testimonials.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => { goTo(i); setPaused(true) }}
+                aria-label={`Vai alla recensione ${i + 1}`}
+                className={`rounded-full transition-all duration-300 cursor-pointer ${
+                  i === current
+                    ? 'w-6 h-2 bg-[#C9A97A]'
+                    : 'w-2 h-2 bg-white/20 hover:bg-white/40'
+                }`}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={() => { go(1); setPaused(true) }}
+            aria-label="Successiva"
+            className="md:hidden flex items-center justify-center w-9 h-9 rounded-full border border-white/20 text-white/60 hover:border-[#C9A97A]/50 hover:text-[#C9A97A] transition-all cursor-pointer"
+          >
+            <ChevronRight size={16} />
+          </button>
+        </div>
+
+      </div>
     </section>
   )
 }

@@ -1,45 +1,112 @@
-import React from 'react'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy — Dr. Anton Kamel',
+  description: 'Informativa sul trattamento dei dati personali ai sensi del GDPR (Reg. UE 2016/679).',
+  robots: { index: false, follow: false },
+}
 
 export default function PrivacyPolicy() {
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-white/80 py-24 px-6">
       <div className="mx-auto max-w-3xl">
-        <h1 className="text-4xl font-bold text-white mb-8">Privacy Policy</h1>
-        
-        <div className="space-y-6 text-sm leading-relaxed">
-          <p>
-            Benvenuto nella Privacy Policy del sito del Dott. Anton Kamel. La tua privacy è importante per noi. Questa pagina descrive come vengono raccolti, utilizzati e protetti i tuoi dati personali quando visiti il nostro sito web.
-          </p>
+        <p className="text-xs text-white/30 tracking-widest uppercase mb-4">Ultimo aggiornamento: aprile 2026</p>
+        <h1 className="text-4xl font-bold text-white mb-2">Privacy Policy</h1>
+        <p className="text-white/50 text-sm mb-12">
+          Informativa ai sensi dell&apos;art. 13 del Regolamento UE 2016/679 (GDPR)
+        </p>
 
-          <h2 className="text-2xl text-white mt-8 mb-4">1. Titolare del Trattamento dei Dati</h2>
-          <p>
-            Il titolare del trattamento dei dati è il Dott. Anton Kamel, con studio in Verona. Per qualsiasi richiesta riguardante la privacy, puoi contattarci tramite i nostri canali ufficiali (es. WhatsApp o email).
-          </p>
+        <div className="space-y-10 text-sm leading-relaxed">
 
-          <h2 className="text-2xl text-white mt-8 mb-4">2. Tipologie di Dati Raccolti</h2>
-          <p>
-            Fra i Dati Personali raccolti da questo Sito Web, in modo autonomo o tramite terze parti, ci sono: Cookie, Dati di utilizzo, nome, numero di telefono e altre informazioni fornite volontariamente dall'utente tramite moduli di contatto o messaggistica.
-          </p>
+          <section>
+            <h2 className="text-xl font-semibold text-white mb-3">1. Titolare del Trattamento</h2>
+            <p>
+              Il titolare del trattamento è il <strong className="text-white">Dott. Anton Kamel</strong>, medico estetico con studio a Verona (VR), Italia.
+            </p>
+            <p className="mt-2">
+              Per esercitare i tuoi diritti o richiedere informazioni, puoi contattarci tramite:
+            </p>
+            <ul className="mt-2 space-y-1 list-disc list-inside text-white/60">
+              <li>WhatsApp: <a href="https://wa.me/393801035896" className="text-[#C9A97A] hover:underline">+39 380 103 5896</a></li>
+              <li>Instagram: <a href="https://www.instagram.com/dr.antonlips/" target="_blank" rel="noopener noreferrer" className="text-[#C9A97A] hover:underline">@dr.antonlips</a></li>
+            </ul>
+          </section>
 
-          <h2 className="text-2xl text-white mt-8 mb-4">3. Modalità e luogo del trattamento dei Dati raccolti</h2>
-          <p>
-            Il Titolare adotta le opportune misure di sicurezza volte ad impedire l'accesso, la divulgazione, la modifica o la distruzione non autorizzate dei Dati Personali. Il trattamento viene effettuato mediante strumenti informatici e/o telematici.
-          </p>
+          <section>
+            <h2 className="text-xl font-semibold text-white mb-3">2. Dati Raccolti</h2>
+            <p>Questo sito raccoglie le seguenti categorie di dati:</p>
+            <ul className="mt-3 space-y-2 list-disc list-inside text-white/60">
+              <li><strong className="text-white/80">Dati di navigazione</strong> — indirizzo IP, tipo di browser, pagine visitate, orario di accesso. Raccolti automaticamente dai sistemi informatici.</li>
+              <li><strong className="text-white/80">Dati forniti volontariamente</strong> — nome, numero di telefono, email, note sul trattamento desiderato, inseriti tramite il sistema di prenotazione (Skipres) o messaggistica.</li>
+              <li><strong className="text-white/80">Dati di profilazione (solo con consenso)</strong> — comportamento di navigazione raccolto tramite Meta Pixel (Facebook/Instagram) per misurare l&apos;efficacia delle campagne pubblicitarie.</li>
+            </ul>
+          </section>
 
-          <h2 className="text-2xl text-white mt-8 mb-4">4. Finalità del Trattamento dei Dati raccolti</h2>
-          <p>
-            I Dati dell'Utente sono raccolti per consentire al Titolare di fornire i propri Servizi, così come per le seguenti finalità: Statistica, Contattare l'Utente e Gestione contatti e invio di messaggi.
-          </p>
+          <section>
+            <h2 className="text-xl font-semibold text-white mb-3">3. Finalità e Base Giuridica</h2>
+            <div className="space-y-4">
+              <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
+                <p className="font-medium text-white/90">Gestione delle prenotazioni</p>
+                <p className="text-white/50 mt-1">Base giuridica: esecuzione di un contratto (art. 6 lett. b GDPR). Dati conservati per la durata del rapporto + 10 anni per obblighi fiscali.</p>
+              </div>
+              <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
+                <p className="font-medium text-white/90">Analisi del traffico e sicurezza del sito</p>
+                <p className="text-white/50 mt-1">Base giuridica: legittimo interesse (art. 6 lett. f GDPR). Dati anonimi conservati per 30 giorni.</p>
+              </div>
+              <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
+                <p className="font-medium text-white/90">Marketing e campagne pubblicitarie (Meta Pixel)</p>
+                <p className="text-white/50 mt-1">Base giuridica: consenso (art. 6 lett. a GDPR). Puoi revocare il consenso in qualsiasi momento dal banner cookie o dalle impostazioni del browser.</p>
+              </div>
+            </div>
+          </section>
 
-          <h2 className="text-2xl text-white mt-8 mb-4">5. Diritti dell'Utente</h2>
-          <p>
-            Gli Utenti possono esercitare determinati diritti con riferimento ai Dati trattati dal Titolare, in particolare il diritto di: revocare il consenso in ogni momento, opporsi al trattamento dei propri Dati, accedere ai propri Dati, verificare e chiedere la rettificazione, ottenere la limitazione del trattamento, ottenere la cancellazione dei propri Dati Personali.
-          </p>
+          <section>
+            <h2 className="text-xl font-semibold text-white mb-3">4. Condivisione dei Dati</h2>
+            <p>I dati personali non vengono venduti a terzi. Possono essere condivisi con:</p>
+            <ul className="mt-2 space-y-1 list-disc list-inside text-white/60">
+              <li><strong className="text-white/80">Skipres</strong> (sistema di prenotazione) — responsabile del trattamento ai sensi dell&apos;art. 28 GDPR</li>
+              <li><strong className="text-white/80">Meta Platforms Ireland Ltd.</strong> — solo previo tuo consenso esplicito, per la gestione del Meta Pixel</li>
+              <li><strong className="text-white/80">Autorità competenti</strong> — quando richiesto dalla legge</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-semibold text-white mb-3">5. Trasferimento Internazionale dei Dati</h2>
+            <p>
+              Meta Platforms può trasferire dati negli USA. Tale trasferimento avviene nel rispetto delle garanzie previste dal Data Privacy Framework UE-USA e dalle clausole contrattuali standard approvate dalla Commissione Europea.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-semibold text-white mb-3">6. I Tuoi Diritti (art. 15–22 GDPR)</h2>
+            <p>Hai il diritto di:</p>
+            <ul className="mt-2 space-y-1 list-disc list-inside text-white/60">
+              <li>Accedere ai tuoi dati personali</li>
+              <li>Chiederne la rettifica o l&apos;aggiornamento</li>
+              <li>Chiederne la cancellazione (&ldquo;diritto all&apos;oblio&rdquo;)</li>
+              <li>Opporti al trattamento o chiederne la limitazione</li>
+              <li>Richiedere la portabilità dei dati</li>
+              <li>Revocare il consenso in qualsiasi momento senza pregiudizio per la liceità del trattamento precedente</li>
+              <li>Proporre reclamo al Garante per la Protezione dei Dati Personali (<a href="https://www.garanteprivacy.it" target="_blank" rel="noopener noreferrer" className="text-[#C9A97A] hover:underline">garanteprivacy.it</a>)</li>
+            </ul>
+            <p className="mt-3">
+              Per esercitare questi diritti, contattaci tramite i canali indicati al punto 1. Risponderemo entro 30 giorni.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-semibold text-white mb-3">7. Cookie</h2>
+            <p>
+              Per informazioni dettagliate sui cookie utilizzati, consulta la nostra{' '}
+              <a href="/cookie" className="text-[#C9A97A] hover:underline">Cookie Policy</a>.
+            </p>
+          </section>
+
         </div>
 
         <div className="mt-16 pt-8 border-t border-white/10">
           <a href="/" className="text-[#C9A97A] hover:text-white transition-colors">
-            &larr; Torna alla Home
+            ← Torna alla Home
           </a>
         </div>
       </div>

@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useRef } from 'react'
+import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'framer-motion'
 import { ChevronRight } from 'lucide-react'
 
 const trattamenti = [
@@ -74,6 +74,10 @@ const trattamenti = [
 
 export default function Trattamenti() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const sectionRef = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start end', 'end start'] })
+  const rawY = useTransform(scrollYProgress, [0, 1], [20, -20])
+  const titleY = useSpring(rawY, { stiffness: 60, damping: 20 })
 
   const handlePrenotaClick = () => {
     const el = document.querySelector('#prenota')
@@ -81,14 +85,15 @@ export default function Trattamenti() {
   }
 
   return (
-    <section id="trattamenti" className="bg-[#0a0a0a] py-32 px-6">
+    <section ref={sectionRef} id="trattamenti" className="bg-[#0a0a0a] py-32 px-6">
       <div className="mx-auto max-w-4xl">
         {/* Header */}
         <motion.div
+          style={{ y: titleY }}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-16"
         >
           <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-white/90 mb-4">

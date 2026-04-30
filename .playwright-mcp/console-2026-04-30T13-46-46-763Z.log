@@ -1,0 +1,6 @@
+[      90ms] [WARNING] Native: tried calling StatusBar.styleDefault, but Cordova is not available. Make sure to include cordova.js or run in a device/simulator @ https://skipres.com/vendor-es2015.baf056e10c957ff047bd.js:0
+[     124ms] [WARNING] Google Maps JavaScript API has been loaded directly without loading=async. This can result in suboptimal performance. For best-practice loading patterns please see https://goo.gle/js-api-loading @ https://maps.googleapis.com/maps/api/js?key=AIzaSyA6i7KmBADK077HIQxi69uu68kRtZ54EnI&v=3.exp&libraries=places:1434
+[     141ms] [LOG] NOT LOGGED BY TOKEN @ https://skipres.com/main-es2015.40b4efd3a60c557310d3.js:0
+[     170ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ https://skipres.com/steps/antonkamel/1266:0
+[     292ms] [LOG] LOAD BASIC CATEGORY @ https://skipres.com/main-es2015.40b4efd3a60c557310d3.js:0
+[     293ms] [LOG] NOT LOGGED AFTER CHECK @ https://skipres.com/main-es2015.40b4efd3a60c557310d3.js:0

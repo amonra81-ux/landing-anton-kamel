@@ -2,7 +2,14 @@
   "permissions": {
     "allow": [
       "Read(//Users/salvatore/.claude/plugins/**)",
-      "Read(//Users/salvatore/.claude/**)"
+      "Read(//Users/salvatore/.claude/**)",
+      "Bash(claude plugins *)",
+      "Bash(npm run *)",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_take_screenshot",
+      "mcp__playwright__browser_wait_for",
+      "mcp__playwright__browser_evaluate",
+      "Bash(npx tsc *)"
     ]
   }
 }

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import Script from 'next/script'
+import CookieBanner from '@/components/CookieBanner'
 import './globals.css'
 
 const inter = Inter({
@@ -13,6 +13,9 @@ export const metadata: Metadata = {
   title: 'Dr. Anton Kamel — Medico Estetico a Verona | Consulto & Prenotazione',
   description:
     'Medicina estetica premium a Verona. Filler, botulino, rinofiller, biorivitalizzazione e trattamenti personalizzati con il Dr. Anton Kamel. Prenota il tuo consulto online.',
+  alternates: {
+    canonical: 'https://antonkamel.it',
+  },
   openGraph: {
     title: 'Dr. Anton Kamel — Medico Estetico a Verona',
     description:
@@ -21,11 +24,55 @@ export const metadata: Metadata = {
     siteName: 'Anton Kamel Medico Estetico',
     locale: 'it_IT',
     type: 'website',
+    images: [
+      {
+        url: 'https://antonkamel.it/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Dr. Anton Kamel — Medico Estetico a Verona',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Dr. Anton Kamel — Medico Estetico a Verona',
+    description: 'Medicina estetica premium a Verona. Risultati naturali, approccio medico.',
+    images: ['https://antonkamel.it/og-image.jpg'],
   },
   robots: {
     index: true,
     follow: true,
   },
+}
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Physician',
+  name: 'Dr. Anton Kamel',
+  description: 'Medico estetico a Verona specializzato in medicina estetica non chirurgica: filler, botulino, rinofiller, biorivitalizzazione, fili di lifting.',
+  url: 'https://antonkamel.it',
+  telephone: '+39 380 103 5896',
+  image: 'https://antonkamel.it/og-image.jpg',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Verona',
+    addressRegion: 'VR',
+    addressCountry: 'IT',
+  },
+  sameAs: [
+    'https://www.instagram.com/dr.antonlips/',
+  ],
+  medicalSpecialty: 'PlasticSurgery',
+  availableService: [
+    { '@type': 'MedicalProcedure', 'name': 'Filler labbra' },
+    { '@type': 'MedicalProcedure', 'name': 'Filler viso' },
+    { '@type': 'MedicalProcedure', 'name': 'Rinofiller' },
+    { '@type': 'MedicalProcedure', 'name': 'Tossina botulinica' },
+    { '@type': 'MedicalProcedure', 'name': 'Biorivitalizzazione' },
+    { '@type': 'MedicalProcedure', 'name': 'Fili di lifting riassorbibili' },
+    { '@type': 'MedicalProcedure', 'name': 'Skinbooster' },
+    { '@type': 'MedicalProcedure', 'name': 'Peeling chimico' },
+  ],
 }
 
 export default function RootLayout({
@@ -36,33 +83,14 @@ export default function RootLayout({
   return (
     <html lang="it" className={inter.variable}>
       <head>
-        {/* Meta Pixel Code */}
-        <Script id="facebook-pixel" strategy="afterInteractive">
-          {`
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '1957888308158186');
-            fbq('track', 'PageView');
-          `}
-        </Script>
-        <noscript>
-          <img
-            height="1"
-            width="1"
-            style={{ display: 'none' }}
-            src="https://www.facebook.com/tr?id=1957888308158186&ev=PageView&noscript=1"
-            alt=""
-          />
-        </noscript>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body className="font-sans antialiased">
         {children}
+        <CookieBanner />
       </body>
     </html>
   )

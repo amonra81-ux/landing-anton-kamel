@@ -1,6 +1,7 @@
 'use client'
 
-import { motion, Variants } from 'framer-motion'
+import { motion, Variants, useScroll, useTransform, useSpring } from 'framer-motion'
+import { useRef } from 'react'
 import { Stethoscope, Sparkles, ShieldCheck } from 'lucide-react'
 
 const reasons = [
@@ -22,24 +23,39 @@ const reasons = [
 ]
 
 const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 48, scale: 0.97 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, delay: i * 0.15, ease: 'easeOut' },
+    scale: 1,
+    transition: { duration: 0.7, delay: i * 0.18, ease: [0.22, 1, 0.36, 1] },
   }),
 }
 
 export default function PercheScegliere() {
+  const sectionRef = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start end', 'end start'] })
+  const rawY = useTransform(scrollYProgress, [0, 1], [30, -30])
+  const bgY = useSpring(rawY, { stiffness: 60, damping: 20 })
+
   return (
-    <section id="perche" className="bg-[#0a0a0a] py-32 px-6">
-      <div className="mx-auto max-w-6xl">
+    <section ref={sectionRef} id="perche" className="relative bg-[#0a0a0a] py-32 px-6 overflow-hidden">
+      {/* Soft parallax glow */}
+      <motion.div
+        style={{ y: bgY }}
+        className="pointer-events-none absolute inset-0 flex items-center justify-center"
+        aria-hidden
+      >
+        <div className="w-[700px] h-[400px] rounded-full bg-[#C9A97A] opacity-[0.025] blur-[140px]" />
+      </motion.div>
+
+      <div className="relative mx-auto max-w-6xl">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-20"
         >
           <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-white/90 mb-5">
@@ -58,13 +74,20 @@ export default function PercheScegliere() {
               custom={i}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.2 }}
               variants={cardVariants}
-              className="group rounded-2xl border border-white/10 bg-white/5 p-8 transition-all duration-300 hover:border-[#C9A97A]/30 hover:bg-white/[0.08]"
+              whileHover={{ y: -6, transition: { duration: 0.3, ease: 'easeOut' } }}
+              className="group rounded-2xl border border-white/10 bg-white/5 p-8 transition-colors duration-300 hover:border-[#C9A97A]/30 hover:bg-white/[0.08] cursor-default"
             >
-              <div className="mb-6 inline-flex rounded-xl bg-[#C9A97A]/10 p-3">
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.18 + 0.2, ease: 'backOut' }}
+                className="mb-6 inline-flex rounded-xl bg-[#C9A97A]/10 p-3 group-hover:bg-[#C9A97A]/20 transition-colors duration-300"
+              >
                 <Icon className="text-[#C9A97A]" size={28} />
-              </div>
+              </motion.div>
               <h3 className="mb-3 text-xl font-semibold text-white/90">{title}</h3>
               <p className="text-white/55 text-base leading-relaxed">{text}</p>
             </motion.div>
