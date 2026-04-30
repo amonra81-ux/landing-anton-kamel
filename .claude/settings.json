@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/salvatore/.claude/plugins/**)",
+      "Read(//Users/salvatore/.claude/**)"
+    ]
+  }
+}

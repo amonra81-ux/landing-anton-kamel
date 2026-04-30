@@ -15,14 +15,6 @@ function InstagramIcon({ size = 24 }: { size?: number }) {
   )
 }
 
-function YoutubeIcon({ size = 24 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M23 7s-.3-2-1.2-2.8c-1.1-1.2-2.4-1.2-3-1.3C16.2 2.8 12 2.8 12 2.8s-4.2 0-6.8.1c-.6.1-1.9.1-3 1.3C1.3 5 1 7 1 7S.7 9.1.7 11.2v2c0 2.1.3 4.2.3 4.2s.3 2 1.2 2.8c1.1 1.2 2.6 1.1 3.3 1.2C7.2 21.5 12 21.5 12 21.5s4.2 0 6.8-.2c.6-.1 1.9-.1 3-1.2.9-.8 1.2-2.8 1.2-2.8s.3-2.1.3-4.2v-2C23.3 9.1 23 7 23 7zM9.7 15.5V8.4l6.6 3.6-6.6 3.5z" />
-    </svg>
-  )
-}
-
 function WhatsappIcon({ size = 20 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -204,7 +196,7 @@ export default function GraziePage() {
               Condivido casi reali, risposte a domande frequenti e il dietro le quinte dello studio. Senza filtri.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 max-w-sm mx-auto gap-6">
               {/* Instagram */}
               <div className="rounded-2xl border border-white/10 bg-white/5 p-8 flex flex-col items-start gap-4 hover:border-[#C9A97A]/30 transition-all duration-300">
                 <div className="flex items-center gap-3">
@@ -221,26 +213,6 @@ export default function GraziePage() {
                   className="mt-auto inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2.5 text-sm text-white/70 hover:border-[#C9A97A]/50 hover:text-white transition-all duration-200"
                 >
                   Seguimi su Instagram
-                  <ChevronRight size={14} />
-                </a>
-              </div>
-
-              {/* YouTube */}
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-8 flex flex-col items-start gap-4 hover:border-[#C9A97A]/30 transition-all duration-300">
-                <div className="flex items-center gap-3">
-                  <span className="text-[#C9A97A]"><YoutubeIcon size={24} /></span>
-                  <span className="font-semibold text-white/90">YouTube</span>
-                </div>
-                <p className="text-white/55 text-sm leading-relaxed text-left">
-                  Video più lunghi, spiegazioni dettagliate, testimonianze.
-                </p>
-                <a
-                  href="https://www.youtube.com/@antonkamel"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-auto inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2.5 text-sm text-white/70 hover:border-[#C9A97A]/50 hover:text-white transition-all duration-200"
-                >
-                  Guarda i video
                   <ChevronRight size={14} />
                 </a>
               </div>

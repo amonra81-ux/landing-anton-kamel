@@ -2,6 +2,7 @@ import Navbar from '@/components/Navbar'
 import AKHero from '@/components/AKHero'
 import PercheScegliere from '@/components/PercheScegliere'
 import Trattamenti from '@/components/Trattamenti'
+import SocialProof from '@/components/SocialProof'
 import WidgetPrenotazione from '@/components/WidgetPrenotazione'
 import FAQ from '@/components/FAQ'
 import Footer from '@/components/Footer'
@@ -13,6 +14,7 @@ export default function Home() {
       <AKHero />
       <PercheScegliere />
       <Trattamenti />
+      <SocialProof />
       <WidgetPrenotazione />
       <FAQ />
       <Footer />
