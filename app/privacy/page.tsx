@@ -98,7 +98,7 @@ export default function PrivacyPolicy() {
             <h2 className="text-xl font-semibold text-white mb-3">7. Cookie</h2>
             <p>
               Per informazioni dettagliate sui cookie utilizzati, consulta la nostra{' '}
-              <a href="/cookie" className="text-[#C9A97A] hover:underline">Cookie Policy</a>.
+              <a href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/cookie`} className="text-[#C9A97A] hover:underline">Cookie Policy</a>.
             </p>
           </section>
 

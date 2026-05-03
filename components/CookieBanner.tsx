@@ -85,11 +85,11 @@ export default function CookieBanner() {
           <div className="mx-auto max-w-4xl flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between">
             <p className="text-white/65 text-sm leading-relaxed">
               Utilizziamo cookie tecnici necessari e, previo consenso, cookie di profilazione (Meta Pixel) per misurare l&apos;efficacia delle campagne pubblicitarie.{' '}
-              <a href="/cookie" className="text-[#C9A97A] hover:underline underline-offset-2">
+              <a href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/cookie`} className="text-[#C9A97A] hover:underline underline-offset-2">
                 Cookie Policy
               </a>{' '}
               ·{' '}
-              <a href="/privacy" className="text-[#C9A97A] hover:underline underline-offset-2">
+              <a href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/privacy`} className="text-[#C9A97A] hover:underline underline-offset-2">
                 Privacy Policy
               </a>
             </p>

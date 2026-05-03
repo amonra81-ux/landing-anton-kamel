@@ -100,11 +100,11 @@ export default function Footer() {
               © {new Date().getFullYear()} Anton Kamel. Tutti i diritti riservati.
             </p>
             <div className="flex items-center gap-4">
-              <a href="/privacy" className="text-white/30 text-xs hover:text-white/60 transition-colors">
+              <a href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/privacy`} className="text-white/30 text-xs hover:text-white/60 transition-colors">
                 Privacy Policy
               </a>
               <span className="text-white/20 text-xs">·</span>
-              <a href="/cookie" className="text-white/30 text-xs hover:text-white/60 transition-colors">
+              <a href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/cookie`} className="text-white/30 text-xs hover:text-white/60 transition-colors">
                 Cookie Policy
               </a>
             </div>

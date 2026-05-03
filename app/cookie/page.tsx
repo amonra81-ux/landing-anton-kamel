@@ -99,7 +99,7 @@ export default function CookiePolicy() {
             <h2 className="text-xl font-semibold text-white mb-3">Contatti</h2>
             <p>
               Per domande sulla gestione dei cookie, contattaci tramite i canali indicati nella{' '}
-              <a href="/privacy" className="text-[#C9A97A] hover:underline">Privacy Policy</a>.
+              <a href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/privacy`} className="text-[#C9A97A] hover:underline">Privacy Policy</a>.
             </p>
           </section>
 

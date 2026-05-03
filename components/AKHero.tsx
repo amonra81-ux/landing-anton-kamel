@@ -5,13 +5,14 @@ import { useScroll, useSpring, useTransform, motion, AnimatePresence } from 'fra
 import { ChevronDown } from 'lucide-react'
 
 const TOTAL_FRAMES = 122
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 function zeroPad(n: number, len = 3) {
   return String(n).padStart(len, '0')
 }
 
 function buildFramePaths(): string[] {
-  return Array.from({ length: TOTAL_FRAMES }, (_, i) => `/hero-frames/frame_${zeroPad(i)}.jpg`)
+  return Array.from({ length: TOTAL_FRAMES }, (_, i) => `${BASE_PATH}/hero-frames/frame_${zeroPad(i)}.jpg`)
 }
 
 const FRAME_PATHS = buildFramePaths()
@@ -63,7 +64,7 @@ export default function AKHero() {
   const [showLoader, setShowLoader] = useState(true)
 
   const { scrollYProgress } = useScroll({ target: wrapperRef })
-  const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 })
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 220, damping: 38, mass: 0.6, restDelta: 0.0005 })
 
   const scrollIndicatorOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0])
 
@@ -109,7 +110,7 @@ export default function AKHero() {
     }
 
     ctx.imageSmoothingEnabled = true
-    ctx.imageSmoothingQuality = 'high'
+    ctx.imageSmoothingQuality = 'medium'
     ctx.drawImage(img, drawX, drawY, drawW, drawH)
     ctx.restore()
   }, [])
@@ -160,16 +161,27 @@ export default function AKHero() {
   }, [resizeCanvas])
 
   useEffect(() => {
+    let pendingFrame = -1
+    let rafScheduled = false
+
+    const flush = () => {
+      rafScheduled = false
+      const target = pendingFrame
+      if (target >= 0 && target !== currentFrameRef.current) {
+        currentFrameRef.current = target
+        drawFrame(target)
+      }
+    }
+
     const unsubscribe = smoothProgress.on('change', (val) => {
-      const clamped = Math.max(0, Math.min(1, val))
-      const frameIndex = Math.min(
+      const clamped = val < 0 ? 0 : val > 1 ? 1 : val
+      pendingFrame = Math.min(
         Math.floor(clamped * (TOTAL_FRAMES - 1)),
         TOTAL_FRAMES - 1
       )
-      if (frameIndex !== currentFrameRef.current) {
-        currentFrameRef.current = frameIndex
-        if (rafRef.current) cancelAnimationFrame(rafRef.current)
-        rafRef.current = requestAnimationFrame(() => drawFrame(frameIndex))
+      if (!rafScheduled) {
+        rafScheduled = true
+        rafRef.current = requestAnimationFrame(flush)
       }
     })
     return () => {
@@ -187,7 +199,7 @@ export default function AKHero() {
   }
 
   return (
-    <div ref={wrapperRef} style={{ height: '400vh', position: 'relative' }}>
+    <div ref={wrapperRef} style={{ height: '220vh', position: 'relative' }}>
       {/* Loader */}
       <AnimatePresence>
         {showLoader && (
