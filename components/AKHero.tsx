@@ -18,10 +18,10 @@ function buildFramePaths(): string[] {
 const FRAME_PATHS = buildFramePaths()
 
 const BEATS = [
-  { start: 0.0, end: 0.2 },
-  { start: 0.25, end: 0.45 },
-  { start: 0.5, end: 0.7 },
-  { start: 0.75, end: 0.95 },
+  { start: 0.0, end: 0.14 },
+  { start: 0.17, end: 0.38 },
+  { start: 0.42, end: 0.62 },
+  { start: 0.66, end: 0.95 },
 ]
 
 interface BeatTextProps {
@@ -34,12 +34,12 @@ function BeatOverlay({ scrollYProgress, beat, children }: BeatTextProps) {
   const { start, end } = beat
   const opacity = useTransform(
     scrollYProgress,
-    [start, start + 0.08, end - 0.08, end],
+    [start, start + 0.035, end - 0.035, end],
     [0, 1, 1, 0]
   )
   const y = useTransform(
     scrollYProgress,
-    [start, start + 0.08, end - 0.08, end],
+    [start, start + 0.035, end - 0.035, end],
     [24, 0, 0, -24]
   )
   return (
@@ -70,7 +70,7 @@ export default function AKHero() {
 
   const beat3Opacity = useTransform(
     scrollYProgress,
-    [BEATS[3].start, BEATS[3].start + 0.08, BEATS[3].end - 0.08, BEATS[3].end],
+    [BEATS[3].start, BEATS[3].start + 0.035, BEATS[3].end - 0.035, BEATS[3].end],
     [0, 1, 1, 0]
   )
 
