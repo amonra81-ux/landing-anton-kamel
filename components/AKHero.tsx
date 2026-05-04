@@ -199,7 +199,7 @@ export default function AKHero() {
   }
 
   return (
-    <div ref={wrapperRef} style={{ height: '220vh', position: 'relative' }}>
+    <div ref={wrapperRef} style={{ height: '300vh', position: 'relative' }}>
       {/* Loader */}
       <AnimatePresence>
         {showLoader && (
