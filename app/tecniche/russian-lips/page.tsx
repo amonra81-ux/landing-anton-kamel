@@ -12,9 +12,34 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://antonkamel.it/tecniche/russian-lips' },
 }
 
+const procedureSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalProcedure',
+  name: 'Russian Lips Technique',
+  alternateName: 'Filler labbra Russian Lips',
+  description:
+    'Tecnica iniettiva avanzata di origine russa per filler labbra. Privilegia il disegno verticale del labbro per ottenere altezza e definizione con minor volume rispetto al filler classico.',
+  procedureType: 'https://schema.org/Therapeutic',
+  bodyLocation: 'Lips',
+  preparation: 'Consulto valutativo, valutazione anatomica labbra',
+  followup: 'Controllo post-trattamento, gonfiore 3-5 giorni',
+  howPerformed:
+    'Anestetico topico + lidocaina. Iniezioni verticali sul vermiglio con tecnica russa.',
+  performer: {
+    '@type': 'Physician',
+    name: 'Dr. Anton Kamel',
+    url: 'https://antonkamel.it',
+  },
+  status: 'https://schema.org/EventScheduled',
+}
+
 export default function Page() {
   return (
     <main className="bg-[#0a0a0a] min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(procedureSchema) }}
+      />
       <Navbar />
 
       <PageHero

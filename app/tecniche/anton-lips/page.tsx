@@ -13,6 +13,27 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://antonkamel.it/tecniche/anton-lips' },
 }
 
+const procedureSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalProcedure',
+  name: 'Anton Lips Technique™',
+  alternateName: 'Filler labbra Anton Lips',
+  description:
+    'Tecnica iniettiva proprietaria di filler labbra ideata dal Dr. Anton Kamel. Combina precisione anatomica della Russian Lips con un approccio italiano alla naturalezza per risultati definiti e simmetrici senza effetto «papera».',
+  procedureType: 'https://schema.org/Therapeutic',
+  bodyLocation: 'Lips',
+  preparation: 'Consulto valutativo, valutazione anatomica, mappatura punti di iniezione',
+  followup: 'Controllo a 14-21 giorni post-trattamento',
+  howPerformed:
+    'Crema anestetica + filler con lidocaina. Tecnica multi-punto con micro-iniezioni precise.',
+  performer: {
+    '@type': 'Physician',
+    name: 'Dr. Anton Kamel',
+    url: 'https://antonkamel.it',
+  },
+  status: 'https://schema.org/EventScheduled',
+}
+
 const principi = [
   {
     icon: Target,
@@ -43,6 +64,10 @@ const principi = [
 export default function Page() {
   return (
     <main className="bg-[#0a0a0a] min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(procedureSchema) }}
+      />
       <Navbar />
 
       <PageHero
