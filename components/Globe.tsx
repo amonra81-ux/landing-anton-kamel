@@ -7,6 +7,8 @@ interface Marker {
   id: string
   location: [number, number]
   label: string
+  pulseDelay?: number
+  isHome?: boolean
 }
 
 interface Arc {
@@ -194,6 +196,12 @@ export function Globe({
 
   return (
     <div className={`relative aspect-square select-none ${className}`}>
+      <style>{`
+        @keyframes cobe-pulse-expand {
+          0%   { transform: scale(0.3); opacity: 0.85; }
+          100% { transform: scale(1.6); opacity: 0; }
+        }
+      `}</style>
       <canvas
         ref={canvasRef}
         onPointerDown={handlePointerDown}
@@ -207,20 +215,78 @@ export function Globe({
           touchAction: 'none',
         }}
       />
+
+      {/* Pulse ring overlays — sit on each marker */}
+      {markers.map((m) => {
+        const delay = m.pulseDelay ?? 0
+        const color = m.isHome ? '#C9A97A' : '#33ccdd'
+        return (
+          <div
+            key={`pulse-${m.id}`}
+            style={{
+              position: 'absolute',
+              ...({ positionAnchor: `--cobe-${m.id}` } as React.CSSProperties),
+              bottom: 'anchor(center)',
+              left: 'anchor(center)',
+              translate: '-50% 50%',
+              width: 44,
+              height: 44,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              pointerEvents: 'none' as const,
+              opacity: `var(--cobe-visible-${m.id}, 0)`,
+              transition: 'opacity 0.5s',
+            }}
+          >
+            <span
+              style={{
+                position: 'absolute',
+                inset: 0,
+                border: `2px solid ${color}`,
+                borderRadius: '50%',
+                opacity: 0,
+                animation: `cobe-pulse-expand 2.2s ease-out infinite ${delay}s`,
+              }}
+            />
+            <span
+              style={{
+                position: 'absolute',
+                inset: 0,
+                border: `2px solid ${color}`,
+                borderRadius: '50%',
+                opacity: 0,
+                animation: `cobe-pulse-expand 2.2s ease-out infinite ${delay + 0.7}s`,
+              }}
+            />
+            <span
+              style={{
+                width: m.isHome ? 12 : 9,
+                height: m.isHome ? 12 : 9,
+                background: color,
+                borderRadius: '50%',
+                boxShadow: `0 0 0 3px #0a0a0a, 0 0 0 5px ${color}`,
+              }}
+            />
+          </div>
+        )
+      })}
+
+      {/* Labels */}
       {markers.map((m) => (
         <div
-          key={m.id}
+          key={`label-${m.id}`}
           style={{
             position: 'absolute',
             ...({ positionAnchor: `--cobe-${m.id}` } as React.CSSProperties),
             bottom: 'anchor(top)',
             left: 'anchor(center)',
             translate: '-50% 0',
-            marginBottom: 8,
+            marginBottom: 18,
             padding: '3px 8px',
             background: '#0a0a0a',
-            border: '1px solid rgba(201,169,122,0.45)',
-            color: '#C9A97A',
+            border: `1px solid ${m.isHome ? 'rgba(201,169,122,0.6)' : 'rgba(51,204,221,0.55)'}`,
+            color: m.isHome ? '#C9A97A' : '#33ccdd',
             fontFamily: 'monospace',
             fontSize: '0.62rem',
             letterSpacing: '0.08em',
@@ -241,7 +307,7 @@ export function Globe({
               left: '50%',
               transform: 'translate3d(-50%, -1px, 0)',
               border: '5px solid transparent',
-              borderTopColor: '#C9A97A',
+              borderTopColor: m.isHome ? '#C9A97A' : '#33ccdd',
             }}
           />
         </div>

@@ -54,10 +54,12 @@ const members = [
   },
 ]
 
-const globeMarkers = members.map((m) => ({
+const globeMarkers = members.map((m, i) => ({
   id: m.id,
   location: m.location,
   label: m.city.split(',')[0],
+  isHome: m.you,
+  pulseDelay: m.you ? 0 : i * 0.35,
 }))
 
 // Anton è il centro: archi da Anton verso ogni altro
@@ -132,7 +134,13 @@ export default function GlobalAcademy() {
             transition={{ duration: 0.9 }}
             className="mx-auto w-full max-w-[440px]"
           >
-            <Globe markers={globeMarkers} arcs={globeArcs} />
+            <Globe
+              markers={globeMarkers}
+              arcs={globeArcs}
+              markerSize={0.001}
+              markerColor={[0.79, 0.66, 0.48]}
+              arcColor={[0.79, 0.66, 0.48]}
+            />
             <p className="mt-4 text-center text-xs text-white/35 italic">
               Trascina il globo per esplorare
             </p>
