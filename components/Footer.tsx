@@ -161,12 +161,25 @@ export default function Footer() {
               <span className="text-white/55">Master:</span> Medicina Estetica · Padova (2017) + Verona (2019)
             </p>
             <p>
-              <span className="text-white/55">Iscrizione Albo Medici:</span> [VERONA — n° da verificare]
+              <span className="text-white/55">Iscrizione Albo Medici:</span>{' '}
+              [Verona — n° da fornire]
+            </p>
+            <p>
+              <span className="text-white/55">P. IVA:</span>{' '}
+              <span className="tabular-nums">04276600238</span>
+            </p>
+            <p>
+              <span className="text-white/55">C.F.:</span>{' '}
+              <span className="tabular-nums">NTNKML83D23Z226B</span>
+            </p>
+            <p>
+              <span className="text-white/55">Federazioni:</span> FMSI
             </p>
             <p className="md:col-span-2">
-              <span className="text-white/55">P.IVA / C.F.:</span> [DA INSERIRE]
-              {' · '}
-              <span className="text-white/55">Federazioni:</span> FMSI
+              <span className="text-white/55">Sede legale:</span> Via Vincenzo Monti 1,
+              37015 Sant&apos;Ambrogio di Valpolicella (VR){' '}
+              <span className="text-white/30">·</span>{' '}
+              <span className="text-white/55">Studio:</span> Via San Lucillo 16, 37100 Verona
             </p>
           </div>
           <p className="text-white/30 text-[11px] mt-3 italic">
