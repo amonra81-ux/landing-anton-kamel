@@ -28,10 +28,10 @@ const members = [
   {
     id: 'ghofran',
     name: 'Dr. Ghofran',
-    city: 'Italia',
+    city: 'Cairo, Egitto',
     handle: '@thedrghofran',
     url: 'https://www.instagram.com/thedrghofran/',
-    location: [41.9028, 12.4964] as [number, number], // Roma area
+    location: [30.0626, 31.2497] as [number, number], // Cairo (offset da Nahla)
     badge: '81k follower',
   },
   {
@@ -109,7 +109,7 @@ export default function GlobalAcademy() {
           className="grid grid-cols-3 gap-3 sm:gap-6 mb-10 md:mb-14 max-w-3xl mx-auto"
         >
           {[
-            { icon: GlobeIcon, value: '4', label: 'Paesi' },
+            { icon: GlobeIcon, value: '3', label: 'Paesi' },
             { icon: Users, value: '300k+', label: 'Follower combinati' },
             { icon: Award, value: '5000+', label: 'Medici formati' },
           ].map((s) => (
