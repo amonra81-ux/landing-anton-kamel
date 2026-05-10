@@ -3,23 +3,33 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Phone } from 'lucide-react'
+import { useBooking } from './BookingProvider'
 
 const TEL = '+393801035896'
 const TEL_DISPLAY = '380 103 5896'
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
-const navLinks = [
+interface NavLink {
+  href: string
+  label: string
+  cta: boolean
+  page: boolean
+  bookingTrigger?: boolean
+}
+
+const navLinks: NavLink[] = [
   { href: '/chi-sono', label: 'Chi sono', cta: false, page: true },
   { href: '#trattamenti', label: 'Trattamenti', cta: false, page: false },
   { href: '#faq', label: 'FAQ', cta: false, page: false },
   { href: '/chiamami', label: 'Ti richiamo', cta: false, page: true },
-  { href: '#prenota', label: 'Prenota', cta: true, page: false },
+  { href: '#booking', label: 'Prenota', cta: true, page: false, bookingTrigger: true },
 ]
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const { open: openBooking } = useBooking()
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
@@ -27,19 +37,30 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const handleNavClick = (href: string, isPage: boolean) => {
+  const handleNavClick = (link: NavLink) => {
     setMobileOpen(false)
-    if (isPage) {
-      window.location.assign(`${BASE_PATH}${href}`)
+
+    // CTA Prenota → apre modal direttamente, NO scroll
+    if (link.bookingTrigger) {
+      openBooking('Navbar Prenota')
       return
     }
-    // Hash link: scroll su home page (se siamo già lì) o naviga + hash
-    if (typeof window !== 'undefined' && window.location.pathname.endsWith('/')) {
-      const el = document.querySelector(href)
-      if (el) el.scrollIntoView({ behavior: 'smooth' })
+
+    if (link.page) {
+      window.location.assign(`${BASE_PATH}${link.href}`)
       return
     }
-    window.location.assign(`${BASE_PATH}/${href}`)
+
+    // Hash link
+    if (typeof window !== 'undefined') {
+      const isHome = window.location.pathname === `${BASE_PATH}/` || window.location.pathname === '/'
+      if (isHome) {
+        const el = document.querySelector(link.href)
+        if (el) el.scrollIntoView({ behavior: 'smooth' })
+        return
+      }
+      window.location.assign(`${BASE_PATH}/${link.href}`)
+    }
   }
 
   const desktopLinks = navLinks.filter((l) => !l.cta)
@@ -65,7 +86,7 @@ export default function Navbar() {
             {desktopLinks.map((link) => (
               <button
                 key={link.href}
-                onClick={() => handleNavClick(link.href, link.page)}
+                onClick={() => handleNavClick(link)}
                 className="text-sm text-white/60 transition-colors duration-200 hover:text-white cursor-pointer"
               >
                 {link.label}
@@ -79,8 +100,8 @@ export default function Navbar() {
               {TEL_DISPLAY}
             </a>
             <button
-              onClick={() => handleNavClick(ctaLink.href, ctaLink.page)}
-              className="rounded-full border border-[#C9A97A] px-4 py-1.5 text-sm text-[#C9A97A] transition-all duration-200 hover:bg-[#C9A97A]/10 cursor-pointer"
+              onClick={() => handleNavClick(ctaLink)}
+              className="rounded-full bg-[#C9A97A] px-4 py-1.5 text-sm text-black font-semibold transition-all duration-200 hover:scale-[1.03] cursor-pointer"
             >
               {ctaLink.label}
             </button>
@@ -120,7 +141,7 @@ export default function Navbar() {
             {navLinks.map((link) => (
               <button
                 key={link.href}
-                onClick={() => handleNavClick(link.href, link.page)}
+                onClick={() => handleNavClick(link)}
                 className={`text-left text-lg font-medium transition-colors ${
                   link.cta ? 'text-[#C9A97A]' : 'text-white/70 hover:text-white'
                 }`}

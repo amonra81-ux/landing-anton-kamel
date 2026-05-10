@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Calendar, Phone } from 'lucide-react'
+import { useBooking } from './BookingProvider'
 
 declare global {
   interface Window {
@@ -14,6 +15,7 @@ const TEL = '+393801035896'
 
 export default function StickyCTA() {
   const [visible, setVisible] = useState(false)
+  const { open, isOpen } = useBooking()
 
   useEffect(() => {
     const onScroll = () => {
@@ -25,14 +27,7 @@ export default function StickyCTA() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const handlePrenota = () => {
-    window.fbq?.('track', 'InitiateCheckout', {
-      content_name: 'Sticky Mobile CTA',
-      content_category: 'Prenotazione',
-    })
-    const el = document.querySelector('#prenota')
-    if (el) el.scrollIntoView({ behavior: 'smooth' })
-  }
+  const handlePrenota = () => open('Sticky Mobile CTA')
 
   const handleCall = () => {
     window.fbq?.('track', 'Contact', {
@@ -40,9 +35,12 @@ export default function StickyCTA() {
     })
   }
 
+  // Non mostrare la sticky se modal aperto
+  const show = visible && !isOpen
+
   return (
     <AnimatePresence>
-      {visible && (
+      {show && (
         <motion.div
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import CookieBanner from '@/components/CookieBanner'
+import { BookingProvider } from '@/components/BookingProvider'
 import './globals.css'
 
 const inter = Inter({
@@ -175,8 +176,10 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased">
-        {children}
-        <CookieBanner />
+        <BookingProvider>
+          {children}
+          <CookieBanner />
+        </BookingProvider>
       </body>
     </html>
   )
