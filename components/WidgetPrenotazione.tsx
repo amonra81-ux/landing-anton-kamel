@@ -21,8 +21,12 @@ export default function WidgetPrenotazione() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
-            <p className="mb-4 text-xs font-semibold tracking-widest text-[#C9A97A] uppercase">
-              Prenota online
+            <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#C9A97A]/30 bg-[#C9A97A]/[0.06] px-3 py-1 text-[10px] font-semibold tracking-widest text-[#C9A97A] uppercase">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#C9A97A] opacity-60" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#C9A97A]" />
+              </span>
+              Disponibilità limitate · verifica nel calendario
             </p>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-white/95 mb-4 leading-[1.05]">
               Prenota il tuo consulto.

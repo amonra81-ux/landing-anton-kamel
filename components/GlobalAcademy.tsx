@@ -105,14 +105,15 @@ export default function GlobalAcademy() {
           className="text-center mb-12 md:mb-16"
         >
           <p className="mb-3 text-xs font-semibold tracking-[0.2em] text-[#C9A97A] uppercase">
-            Network internazionale
+            Riconosciuto a livello internazionale
           </p>
           <h2 className="text-3xl md:text-5xl font-bold tracking-tighter text-white/95 mb-4">
-            Global Experts Academy.
+            Non solo Verona.
           </h2>
           <p className="text-white/60 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-            Anton è membro di un network di medici estetici internazionale che condivide
-            tecniche, formazione e protocolli. Aggiornamento continuo, confronto costante.
+            Anton condivide protocolli, casistica e aggiornamento clinico con un network
+            di medici estetici di riferimento in Italia, Egitto e Albania. Confronto
+            continuo = tecniche sempre allineate al meglio della disciplina.
           </p>
         </motion.div>
 
@@ -126,15 +127,15 @@ export default function GlobalAcademy() {
         >
           {[
             { icon: GlobeIcon, value: '3', label: 'Paesi' },
-            { icon: Users, value: '300k+', label: 'Follower combinati' },
-            { icon: Award, value: '5000+', label: 'Medici formati' },
+            { icon: Users, value: '4', label: 'Città in network' },
+            { icon: Award, value: 'Anton Lips', label: 'Tecnica firmata IT' },
           ].map((s) => (
             <div
               key={s.label}
               className="text-center rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-5"
             >
               <s.icon size={18} className="mx-auto mb-2 text-[#C9A97A]" />
-              <p className="text-xl md:text-2xl font-bold text-white tabular-nums">{s.value}</p>
+              <p className="text-base md:text-xl font-bold text-white tabular-nums leading-tight">{s.value}</p>
               <p className="mt-0.5 text-[10px] uppercase tracking-wider text-white/45">{s.label}</p>
             </div>
           ))}
@@ -202,11 +203,6 @@ export default function GlobalAcademy() {
                         Anton
                       </span>
                     )}
-                    {m.badge && (
-                      <span className="text-[10px] uppercase tracking-wider text-[#C9A97A]/80 tabular-nums">
-                        {m.badge}
-                      </span>
-                    )}
                   </div>
                   <p className="text-white/45 text-xs mt-0.5">
                     {m.city} · <span className="text-white/55">{m.handle}</span>
@@ -220,19 +216,6 @@ export default function GlobalAcademy() {
               </motion.a>
             ))}
 
-            {/* Link academy */}
-            <motion.a
-              href="https://www.instagram.com/global.experts.academy/"
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="block text-center pt-3 text-xs text-white/40 hover:text-[#C9A97A] transition-colors"
-            >
-              Scopri @global.experts.academy →
-            </motion.a>
           </div>
         </div>
       </div>

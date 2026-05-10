@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { Star, ChevronDown } from 'lucide-react'
+import { Star, ChevronDown, Sparkles } from 'lucide-react'
 import { useBooking } from './BookingProvider'
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
@@ -61,6 +61,19 @@ export default function HeroLight() {
             </span>
           </motion.div>
 
+          {/* Anton Lips authority badge */}
+          <motion.div
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.05 }}
+            className="mb-5 inline-flex items-center gap-2 rounded-full bg-[#C9A97A]/15 border border-[#C9A97A]/40 px-3 py-1 backdrop-blur-md"
+          >
+            <Sparkles size={12} className="text-[#C9A97A]" />
+            <span className="text-[10px] sm:text-[11px] tracking-wider text-[#C9A97A] font-semibold uppercase">
+              Ideatore Anton Lips Technique™
+            </span>
+          </motion.div>
+
           {/* Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
@@ -84,25 +97,25 @@ export default function HeroLight() {
             e trattamenti su misura — con un approccio medico, mai standard.
           </motion.p>
 
-          {/* CTAs */}
+          {/* CTA primario unico */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.5, ease: 'easeOut' }}
-            className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
+            className="mt-9 flex flex-col items-center gap-4"
           >
             <button
               onClick={handlePrenotaClick}
-              className="w-full sm:w-auto inline-flex items-center justify-center rounded-full bg-[#C9A97A] px-8 py-4 text-black font-semibold text-base sm:text-lg transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] cursor-pointer"
-              style={{ boxShadow: '0 0 30px rgba(201,169,122,0.4)' }}
+              className="w-full sm:w-auto inline-flex items-center justify-center rounded-full bg-[#C9A97A] px-10 py-4 text-black font-semibold text-base sm:text-lg transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] cursor-pointer"
+              style={{ boxShadow: '0 0 36px rgba(201,169,122,0.45)' }}
             >
               Prenota il consulto →
             </button>
             <button
               onClick={handleScopriClick}
-              className="w-full sm:w-auto inline-flex items-center justify-center rounded-full border border-white/30 bg-white/5 backdrop-blur-md px-8 py-4 text-white font-medium text-base sm:text-lg transition-all duration-300 hover:bg-white/10 hover:border-white/50 cursor-pointer"
+              className="text-sm text-white/55 hover:text-[#C9A97A] underline-offset-4 hover:underline transition-colors cursor-pointer"
             >
-              Vedi trattamenti
+              o vedi prima i trattamenti
             </button>
           </motion.div>
 
