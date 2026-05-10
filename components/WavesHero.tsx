@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, type Variants } from 'framer-motion'
-import { Sparkles } from 'lucide-react'
+import { Sparkles, ChevronDown } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { useBooking } from './BookingProvider'
@@ -45,7 +45,6 @@ export default function WavesHero() {
     let animationId: number
     let time = 0
 
-    // Brand colors (Anton): #C9A97A gold + dark
     const wavePalette: WaveConfig[] = [
       { offset: 0, amplitude: 70, frequency: 0.003, color: 'rgba(201,169,122,0.85)', opacity: 0.5 },
       { offset: Math.PI / 2, amplitude: 90, frequency: 0.0026, color: 'rgba(201,169,122,0.65)', opacity: 0.4 },
@@ -144,12 +143,16 @@ export default function WavesHero() {
 
   return (
     <section
-      className="relative isolate flex min-h-screen w-full items-center justify-center overflow-hidden bg-[#0a0a0a]"
+      className="relative isolate w-full min-h-screen overflow-hidden bg-[#0a0a0a]"
       role="region"
-      aria-label="Hero immersivo Dr. Anton Kamel"
+      aria-label="Dr. Anton Kamel — hero"
     >
-      {/* Wave canvas */}
-      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" aria-hidden="true" />
+      {/* Wave canvas — sfondo */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 h-full w-full"
+        aria-hidden="true"
+      />
 
       {/* Soft glows */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
@@ -157,20 +160,53 @@ export default function WavesHero() {
         <div className="absolute bottom-0 right-0 h-[360px] w-[360px] rounded-full bg-[#C9A97A]/[0.03] blur-[120px]" />
       </div>
 
-      <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center px-6 pt-28 pb-16 md:py-24 text-center">
+      {/* Mobile: foto bleed top + content sotto.
+          Desktop: split 2 colonne (text sx, foto half dx). */}
+      <div className="relative z-10 min-h-screen flex flex-col md:grid md:grid-cols-12 md:items-center md:gap-8 lg:gap-12 max-w-7xl mx-auto px-6 pt-24 pb-12 md:pt-20 md:pb-16">
+
+        {/* MOBILE — foto sopra, full bleed */}
+        <div className="md:hidden -mx-6 mb-6">
+          <div className="relative aspect-[4/5] w-full overflow-hidden">
+            <Image
+              src={`${BASE_PATH}/hero-image.jpg`}
+              alt="Dr. Anton Kamel — Medico Estetico Verona"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-[42%_28%]"
+              style={{ filter: 'brightness(0.85) contrast(1.05)' }}
+            />
+            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-b from-transparent to-[#0a0a0a]" />
+            {/* Cornice gold sottile decorativa */}
+            <div className="pointer-events-none absolute inset-3 sm:inset-5 rounded-[2rem] border border-[#C9A97A]/30" />
+          </div>
+        </div>
+
+        {/* TEXT COLUMN */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="w-full flex flex-col items-center"
+          className="md:col-span-7 lg:col-span-6 text-center md:text-left"
         >
           {/* Brand pill */}
           <motion.div
             variants={itemVariants}
-            className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/40 px-4 py-1.5 backdrop-blur-md"
+            className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/40 px-3 py-1 backdrop-blur-md"
           >
-            <Sparkles className="h-3.5 w-3.5 text-[#C9A97A]" aria-hidden="true" />
-            <span className="text-[11px] tracking-[0.25em] text-white/80 uppercase">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#C9A97A]" />
+            <span className="text-[10px] tracking-[0.2em] text-white/80 uppercase">
+              Dr. Anton Kamel · Verona
+            </span>
+          </motion.div>
+
+          {/* Anton Lips authority badge */}
+          <motion.div
+            variants={itemVariants}
+            className="mb-5 inline-flex items-center gap-2 rounded-full bg-[#C9A97A]/15 border border-[#C9A97A]/40 px-3 py-1 backdrop-blur-md"
+          >
+            <Sparkles size={11} className="text-[#C9A97A]" />
+            <span className="text-[10px] tracking-wider text-[#C9A97A] font-semibold uppercase">
               Ideatore Anton Lips Technique™
             </span>
           </motion.div>
@@ -178,7 +214,7 @@ export default function WavesHero() {
           {/* Headline */}
           <motion.h1
             variants={itemVariants}
-            className="mb-5 text-4xl font-bold tracking-tighter text-white md:text-6xl lg:text-7xl leading-[1.05]"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-white leading-[1.05]"
           >
             Risultati naturali.
             <br />
@@ -188,34 +224,21 @@ export default function WavesHero() {
           {/* Subtitle */}
           <motion.p
             variants={itemVariants}
-            className="mx-auto mb-9 max-w-2xl text-base text-white/70 md:text-xl leading-relaxed"
+            className="mt-5 max-w-xl mx-auto md:mx-0 text-base sm:text-lg text-white/70 leading-relaxed"
           >
             Medicina estetica costruita su di te. Filler, botulino, rinofiller —
             con un approccio medico, mai standard.
           </motion.p>
 
-          {/* Foto Anton */}
+          {/* CTAs */}
           <motion.div
             variants={itemVariants}
-            className="relative mb-9 h-44 w-44 sm:h-52 sm:w-52 md:h-60 md:w-60 rounded-full overflow-hidden border-2 border-[#C9A97A]/40 shadow-[0_0_60px_rgba(201,169,122,0.25)]"
+            className="mt-7 flex flex-col sm:flex-row items-center md:justify-start justify-center gap-3"
           >
-            <Image
-              src={`${BASE_PATH}/hero-image.jpg`}
-              alt="Dr. Anton Kamel"
-              fill
-              priority
-              sizes="(max-width: 640px) 11rem, (max-width: 768px) 13rem, 15rem"
-              className="object-cover object-[42%_30%]"
-            />
-            <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-full" />
-          </motion.div>
-
-          {/* CTA */}
-          <motion.div variants={itemVariants} className="flex flex-col items-center gap-4">
             <button
-              onClick={() => open('Hero CTA Waves')}
-              className="inline-flex items-center justify-center rounded-full bg-[#C9A97A] px-10 py-4 text-black font-semibold text-base sm:text-lg hover:scale-[1.03] active:scale-[0.98] transition-transform cursor-pointer"
-              style={{ boxShadow: '0 0 40px rgba(201,169,122,0.5)' }}
+              onClick={() => open('Hero CTA')}
+              className="w-full sm:w-auto inline-flex items-center justify-center rounded-full bg-[#C9A97A] px-9 py-4 text-black font-semibold text-base sm:text-lg hover:scale-[1.03] active:scale-[0.98] transition-transform cursor-pointer"
+              style={{ boxShadow: '0 0 36px rgba(201,169,122,0.4)' }}
             >
               Prenota la consulenza →
             </button>
@@ -230,7 +253,44 @@ export default function WavesHero() {
             </button>
           </motion.div>
         </motion.div>
+
+        {/* DESKTOP — foto half right column */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          className="hidden md:block md:col-span-5 lg:col-span-6 md:relative md:h-[78vh] md:max-h-[680px]"
+        >
+          <div className="relative h-full w-full overflow-hidden rounded-[2rem]">
+            <Image
+              src={`${BASE_PATH}/hero-image.jpg`}
+              alt="Dr. Anton Kamel — Medico Estetico Verona"
+              fill
+              priority
+              sizes="(min-width: 1024px) 50vw, 42vw"
+              className="object-cover object-[42%_30%]"
+              style={{ filter: 'brightness(0.92) contrast(1.05)' }}
+            />
+            {/* Cornice gold sottile decorativa */}
+            <div className="pointer-events-none absolute inset-4 rounded-[1.5rem] border border-[#C9A97A]/35" />
+            {/* Gold glow accent */}
+            <div className="pointer-events-none absolute -bottom-8 -right-8 h-40 w-40 rounded-full bg-[#C9A97A]/20 blur-[80px]" />
+          </div>
+        </motion.div>
       </div>
+
+      {/* Scroll indicator (desktop only) */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 1.2 }}
+        className="hidden md:flex absolute bottom-6 left-1/2 -translate-x-1/2 flex-col items-center gap-1 pointer-events-none"
+      >
+        <span className="text-[10px] tracking-widest uppercase text-white/40">Scorri</span>
+        <motion.div animate={{ y: [0, 5, 0] }} transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}>
+          <ChevronDown size={16} className="text-white/40" />
+        </motion.div>
+      </motion.div>
     </section>
   )
 }
