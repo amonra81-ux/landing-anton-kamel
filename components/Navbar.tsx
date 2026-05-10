@@ -2,11 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Phone } from 'lucide-react'
+import { Menu, X, MessageCircle } from 'lucide-react'
 import { useBooking } from './BookingProvider'
 
-const TEL = '+393801035896'
-const TEL_DISPLAY = '380 103 5896'
+const WA_URL = 'https://wa.me/393801035896'
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
@@ -22,7 +21,7 @@ const navLinks: NavLink[] = [
   { href: '/chi-sono', label: 'Chi sono', cta: false, page: true },
   { href: '#trattamenti', label: 'Trattamenti', cta: false, page: false },
   { href: '#faq', label: 'FAQ', cta: false, page: false },
-  { href: '/chiamami', label: 'Ti richiamo', cta: false, page: true },
+  { href: '/chiamami', label: 'Scrivimi', cta: false, page: true },
   { href: '#booking', label: 'Prenota', cta: true, page: false, bookingTrigger: true },
 ]
 
@@ -93,11 +92,13 @@ export default function Navbar() {
               </button>
             ))}
             <a
-              href={`tel:${TEL}`}
-              className="inline-flex items-center gap-1.5 text-sm text-white/70 hover:text-white transition-colors"
+              href={WA_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-sm text-white/70 hover:text-[#25D366] transition-colors"
             >
-              <Phone size={14} className="text-[#C9A97A]" />
-              {TEL_DISPLAY}
+              <MessageCircle size={14} className="text-[#25D366]" />
+              WhatsApp
             </a>
             <button
               onClick={() => handleNavClick(ctaLink)}
@@ -110,11 +111,13 @@ export default function Navbar() {
           {/* Mobile right side: phone + hamburger */}
           <div className="flex items-center gap-1 md:hidden">
             <a
-              href={`tel:${TEL}`}
-              aria-label={`Chiama ${TEL_DISPLAY}`}
-              className="flex items-center justify-center w-10 h-10 rounded-full text-[#C9A97A] active:scale-95 transition-transform"
+              href={WA_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Scrivimi su WhatsApp"
+              className="flex items-center justify-center w-10 h-10 rounded-full text-[#25D366] active:scale-95 transition-transform"
             >
-              <Phone size={18} />
+              <MessageCircle size={18} />
             </a>
             <button
               className="text-white/80 hover:text-white transition-colors p-2"

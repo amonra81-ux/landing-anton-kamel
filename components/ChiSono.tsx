@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { GraduationCap, Sparkles, MapPin, Languages, Award, Calendar } from 'lucide-react'
+import { GraduationCap, Sparkles, Languages, Award, Calendar, MessageCircle } from 'lucide-react'
 import Link from 'next/link'
 import { useBooking } from './BookingProvider'
 
@@ -243,10 +243,10 @@ export default function ChiSono() {
             </button>
             <Link
               href="/chiamami"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-4 text-white font-medium text-base hover:bg-white/10 transition-colors"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-[#25D366]/40 bg-[#25D366]/[0.08] px-8 py-4 text-[#25D366] font-medium text-base hover:bg-[#25D366]/[0.15] transition-colors"
             >
-              <MapPin size={16} />
-              Ti richiamo io
+              <MessageCircle size={16} />
+              Scrivimi su WhatsApp
             </Link>
           </div>
         </div>

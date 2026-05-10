@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Calendar, Phone } from 'lucide-react'
+import { Calendar, MessageCircle } from 'lucide-react'
 import { useBooking } from './BookingProvider'
 
 interface Props {
@@ -38,10 +38,10 @@ export default function CTAFinale({ eyebrow = 'Pronta?', title, subtitle }: Prop
           </button>
           <Link
             href="/chiamami"
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-4 text-white font-medium text-base hover:bg-white/10 transition-colors"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-[#25D366]/40 bg-[#25D366]/[0.08] px-8 py-4 text-[#25D366] font-medium text-base hover:bg-[#25D366]/[0.15] transition-colors"
           >
-            <Phone size={16} />
-            Ti richiamo io
+            <MessageCircle size={16} />
+            Scrivimi su WhatsApp
           </Link>
         </div>
       </div>

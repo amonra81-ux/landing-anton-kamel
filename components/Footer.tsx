@@ -30,7 +30,7 @@ const quickLinks: QuickLink[] = [
   { href: '/chi-sono', label: 'Chi sono' },
   { href: '/#trattamenti', label: 'Trattamenti' },
   { href: '/#faq', label: 'FAQ' },
-  { href: '/chiamami', label: 'Ti richiamo io' },
+  { href: '/chiamami', label: 'Scrivimi su WhatsApp' },
   { href: '#booking', label: 'Prenota', bookingTrigger: true },
 ]
 
@@ -86,11 +86,17 @@ export default function Footer() {
                 </span>
               </a>
               <a
-                href="tel:+393801035896"
-                className="flex items-center gap-2 text-white/60 text-sm hover:text-white transition-colors tabular-nums"
+                href="https://wa.me/393801035896"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-2 text-white/60 text-sm hover:text-white transition-colors"
               >
-                <span className="text-[#C9A97A] shrink-0"><Phone size={14} /></span>
-                <span>380 103 5896</span>
+                <span className="text-[#25D366] shrink-0 mt-0.5"><Phone size={14} /></span>
+                <span>
+                  <span className="tabular-nums">380 103 5896</span>
+                  <br />
+                  <span className="text-white/35 text-xs">Solo WhatsApp · no chiamate</span>
+                </span>
               </a>
               <div className="flex items-start gap-2 text-white/60 text-sm">
                 <span className="text-[#C9A97A] shrink-0 mt-0.5"><Clock size={14} /></span>
