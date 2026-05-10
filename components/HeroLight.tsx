@@ -2,10 +2,16 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { ChevronDown } from 'lucide-react'
+import { Star, ChevronDown } from 'lucide-react'
 import { useBooking } from './BookingProvider'
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+
+const trust = [
+  { value: '12+', label: 'Anni di esperienza' },
+  { value: '1500+', label: 'Pazienti trattati' },
+  { value: '4.7', label: '79 recensioni Google', icon: Star },
+]
 
 export default function HeroLight() {
   const { open } = useBooking()
@@ -98,6 +104,28 @@ export default function HeroLight() {
             >
               Vedi trattamenti
             </button>
+          </motion.div>
+
+          {/* Trust badges */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.7, ease: 'easeOut' }}
+            className="mt-8 flex flex-wrap items-center justify-center gap-5 sm:gap-10"
+          >
+            {trust.map((t) => (
+              <div key={t.label} className="flex flex-col items-center text-center">
+                <div className="flex items-center gap-1.5">
+                  {t.icon && <t.icon size={18} className="fill-[#C9A97A] text-[#C9A97A]" />}
+                  <span className="text-2xl sm:text-3xl font-bold text-white tabular-nums">
+                    {t.value}
+                  </span>
+                </div>
+                <span className="mt-1 text-[11px] sm:text-xs uppercase tracking-wider text-white/55">
+                  {t.label}
+                </span>
+              </div>
+            ))}
           </motion.div>
 
         </div>
