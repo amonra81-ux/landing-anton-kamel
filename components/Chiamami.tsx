@@ -24,13 +24,23 @@ const trattamenti = [
   'Non lo so ancora — voglio un consiglio',
 ]
 
+const tempistiche = [
+  'Prima possibile',
+  'Entro 30 giorni',
+  'Entro 60 giorni',
+  'Entro 6 mesi',
+  'Sto ancora valutando',
+]
+
 function buildWhatsappMessage(opts: {
   name: string
   topic: string
+  timing: string
   note: string
 }) {
   const lines: string[] = [`Ciao Anton, sono ${opts.name}.`]
   if (opts.topic) lines.push(`Trattamento di interesse: ${opts.topic}.`)
+  if (opts.timing) lines.push(`Quando vorrei farlo: ${opts.timing}.`)
   if (opts.note) lines.push(`Note / dubbi: ${opts.note}`)
   lines.push('Ti scrivo dal sito antonkamel.it. Grazie!')
   return encodeURIComponent(lines.join('\n\n'))
@@ -39,10 +49,11 @@ function buildWhatsappMessage(opts: {
 export default function Chiamami() {
   const [name, setName] = useState('')
   const [topic, setTopic] = useState('')
+  const [timing, setTiming] = useState('')
   const [note, setNote] = useState('')
   const [sent, setSent] = useState(false)
 
-  const valid = name.trim().length >= 2
+  const valid = name.trim().length >= 2 && timing.length > 0
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -51,9 +62,15 @@ export default function Chiamami() {
     window.fbq?.('track', 'Lead', {
       content_name: 'Form WhatsApp',
       content_category: topic || 'Non specificato',
+      timing: timing,
     })
 
-    const msg = buildWhatsappMessage({ name: name.trim(), topic, note: note.trim() })
+    const msg = buildWhatsappMessage({
+      name: name.trim(),
+      topic,
+      timing,
+      note: note.trim(),
+    })
     window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank', 'noopener,noreferrer')
     setSent(true)
   }
@@ -125,6 +142,55 @@ export default function Chiamami() {
                   ))}
                 </select>
               </label>
+
+              <fieldset>
+                <legend className="block text-xs uppercase tracking-widest text-white/55 mb-3">
+                  Quando vorresti eseguire il trattamento? *
+                </legend>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {tempistiche.map((opt) => {
+                    const selected = timing === opt
+                    return (
+                      <label
+                        key={opt}
+                        className={`flex items-center gap-3 rounded-xl border px-4 py-3 cursor-pointer transition-colors ${
+                          selected
+                            ? 'border-[#C9A97A]/60 bg-[#C9A97A]/[0.08]'
+                            : 'border-white/15 bg-black/30 hover:border-white/25'
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="timing"
+                          value={opt}
+                          checked={selected}
+                          onChange={() => setTiming(opt)}
+                          className="sr-only"
+                          required
+                        />
+                        <span
+                          className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 transition-colors ${
+                            selected
+                              ? 'border-[#C9A97A] bg-[#C9A97A]'
+                              : 'border-white/30'
+                          }`}
+                        >
+                          {selected && (
+                            <span className="h-1.5 w-1.5 rounded-full bg-black" />
+                          )}
+                        </span>
+                        <span
+                          className={`text-sm ${
+                            selected ? 'text-white' : 'text-white/70'
+                          }`}
+                        >
+                          {opt}
+                        </span>
+                      </label>
+                    )
+                  })}
+                </div>
+              </fieldset>
 
               <label className="block">
                 <span className="block text-xs uppercase tracking-widest text-white/55 mb-2">

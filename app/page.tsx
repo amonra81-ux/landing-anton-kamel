@@ -1,5 +1,5 @@
 import Navbar from '@/components/Navbar'
-import HeroLight from '@/components/HeroLight'
+import WavesHero from '@/components/WavesHero'
 import InfoStrip from '@/components/InfoStrip'
 import PercheScegliere from '@/components/PercheScegliere'
 import PerTeSection from '@/components/PerTeSection'
@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <main className="bg-[#0a0a0a] min-h-screen">
       <Navbar />
-      <HeroLight />
+      <WavesHero />
       <InfoStrip />
       <PercheScegliere />
       <PerTeSection />
