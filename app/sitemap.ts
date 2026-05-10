@@ -13,7 +13,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '',
     '/chi-sono',
     '/chiamami',
+    '/contatti',
     '/studio',
+    '/trattamenti/labbra',
+    '/trattamenti/viso',
+    '/trattamenti/rughe',
+    '/trattamenti/pelle',
     '/tecniche/anton-lips',
     '/tecniche/russian-lips',
     '/per-te/prima-volta',
@@ -28,6 +33,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${SITE}${path}`,
     lastModified: now,
     changeFrequency: path === '' ? 'weekly' : 'monthly',
-    priority: path === '' ? 1.0 : path.startsWith('/tecniche') || path.startsWith('/per-te') ? 0.8 : 0.6,
+    priority:
+      path === ''
+        ? 1.0
+        : path.startsWith('/trattamenti')
+          ? 0.9
+          : path.startsWith('/tecniche') || path.startsWith('/per-te')
+            ? 0.8
+            : 0.6,
   }))
 }
