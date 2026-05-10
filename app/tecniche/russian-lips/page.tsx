@@ -21,7 +21,7 @@ const procedureSchema = {
     'Tecnica iniettiva avanzata di origine russa per filler labbra. Privilegia il disegno verticale del labbro per ottenere altezza e definizione con minor volume rispetto al filler classico.',
   procedureType: 'https://schema.org/Therapeutic',
   bodyLocation: 'Lips',
-  preparation: 'Consulenza valutativo, valutazione anatomica labbra',
+  preparation: 'Consulenza valutativa, valutazione anatomica labbra',
   followup: 'Controllo post-trattamento, gonfiore 3-5 giorni',
   howPerformed:
     'Anestetico topico + lidocaina. Iniezioni verticali sul vermiglio con tecnica russa.',

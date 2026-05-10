@@ -32,7 +32,7 @@ export default function WidgetPrenotazione() {
               Prenota la tua consulenza.
             </h2>
             <p className="text-white/55 text-base sm:text-lg mb-8 md:mb-12 max-w-md mx-auto leading-relaxed">
-              Consulenza valutativo in studio a Verona. Valutazione clinica
+              Consulenza valutativa in studio a Verona. Valutazione clinica
               + piano di trattamento personalizzato.
             </p>
 
