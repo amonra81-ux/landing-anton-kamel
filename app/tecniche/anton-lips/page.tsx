@@ -22,7 +22,7 @@ const procedureSchema = {
     'Tecnica iniettiva proprietaria di filler labbra ideata dal Dr. Anton Kamel. Combina precisione anatomica della Russian Lips con un approccio italiano alla naturalezza per risultati definiti e simmetrici senza effetto «papera».',
   procedureType: 'https://schema.org/Therapeutic',
   bodyLocation: 'Lips',
-  preparation: 'Consulto valutativo, valutazione anatomica, mappatura punti di iniezione',
+  preparation: 'Consulenza valutativo, valutazione anatomica, mappatura punti di iniezione',
   followup: 'Controllo a 14-21 giorni post-trattamento',
   howPerformed:
     'Crema anestetica + filler con lidocaina. Tecnica multi-punto con micro-iniezioni precise.',
@@ -150,7 +150,7 @@ export default function Page() {
             {[
               {
                 n: '01',
-                title: 'Consulto valutativo',
+                title: 'Consulenza valutativo',
                 text:
                   'Conversazione di 30-45 minuti. Valuto la tua anatomia, ascolto cosa vorresti, ti spiego cosa è possibile e cosa no.',
               },
@@ -196,8 +196,8 @@ export default function Page() {
 
       <CTAFinale
         eyebrow="Vuoi provarla?"
-        title="Prenota un consulto Anton Lips."
-        subtitle="Prenota il consulto in studio. Decidi tu se procedere col trattamento."
+        title="Prenota una consulenza Anton Lips."
+        subtitle="Prenota la consulenza in studio. Decidi tu se procedere col trattamento."
       />
 
       <Footer />

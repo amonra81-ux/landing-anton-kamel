@@ -8,7 +8,7 @@ const reasons = [
   {
     icon: Stethoscope,
     title: 'Medico prima di tutto',
-    text: 'Anton Kamel non lavora sull\'aspetto. Lavora sulla persona. Ogni consulto parte dall\'ascolto: chi sei, cosa senti, cosa vuoi davvero.',
+    text: 'Anton Kamel non lavora sull\'aspetto. Lavora sulla persona. Ogni consulenza parte dall\'ascolto: chi sei, cosa senti, cosa vuoi davvero.',
   },
   {
     icon: Sparkles,

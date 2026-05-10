@@ -29,10 +29,10 @@ export default function WidgetPrenotazione() {
               Disponibilità limitate · verifica nel calendario
             </p>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-white/95 mb-4 leading-[1.05]">
-              Prenota il tuo consulto.
+              Prenota la tua consulenza.
             </h2>
             <p className="text-white/55 text-base sm:text-lg mb-8 md:mb-12 max-w-md mx-auto leading-relaxed">
-              Consulto valutativo in studio a Verona. Valutazione clinica
+              Consulenza valutativo in studio a Verona. Valutazione clinica
               + piano di trattamento personalizzato.
             </p>
 
@@ -55,12 +55,12 @@ export default function WidgetPrenotazione() {
               </div>
               <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5">
                 <Clock size={14} className="text-[#C9A97A]" />
-                <span className="text-xs text-white/55">45 min consulto</span>
+                <span className="text-xs text-white/55">45 min consulenza</span>
               </div>
             </div>
 
             <p className="mt-5 text-white/40 text-xs leading-relaxed max-w-xs mx-auto">
-              Il consulto è a pagamento. Costo e disponibilità reali sono
+              La consulenza è a pagamento. Costo e disponibilità reali sono
               indicati nel calendario di prenotazione.
             </p>
 

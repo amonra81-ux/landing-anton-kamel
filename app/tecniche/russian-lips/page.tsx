@@ -21,7 +21,7 @@ const procedureSchema = {
     'Tecnica iniettiva avanzata di origine russa per filler labbra. Privilegia il disegno verticale del labbro per ottenere altezza e definizione con minor volume rispetto al filler classico.',
   procedureType: 'https://schema.org/Therapeutic',
   bodyLocation: 'Lips',
-  preparation: 'Consulto valutativo, valutazione anatomica labbra',
+  preparation: 'Consulenza valutativo, valutazione anatomica labbra',
   followup: 'Controllo post-trattamento, gonfiore 3-5 giorni',
   howPerformed:
     'Anestetico topico + lidocaina. Iniezioni verticali sul vermiglio con tecnica russa.',
@@ -100,7 +100,7 @@ export default function Page() {
               gioca su definizione + simmetria con un approccio italiano alla naturalezza.
             </p>
             <p className="text-white/55 text-sm italic">
-              Nel consulto ti mostro le differenze e scegliamo insieme.
+              Nella consulenza ti mostro le differenze e scegliamo insieme.
             </p>
           </div>
         </div>
@@ -108,7 +108,7 @@ export default function Page() {
 
       <CTAFinale
         eyebrow="Pronta?"
-        title="Prenota consulto Russian Lips."
+        title="Prenota la consulenza Russian Lips."
       />
 
       <Footer />

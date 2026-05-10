@@ -109,7 +109,7 @@ export default function HeroLight() {
               className="w-full sm:w-auto inline-flex items-center justify-center rounded-full bg-[#C9A97A] px-10 py-4 text-black font-semibold text-base sm:text-lg transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] cursor-pointer"
               style={{ boxShadow: '0 0 36px rgba(201,169,122,0.45)' }}
             >
-              Prenota il consulto →
+              Prenota la consulenza →
             </button>
             <button
               onClick={handleScopriClick}

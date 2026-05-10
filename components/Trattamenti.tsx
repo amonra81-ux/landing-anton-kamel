@@ -6,7 +6,7 @@ import { ChevronRight } from 'lucide-react'
 
 const trattamenti = [
   {
-    nome: 'Consulto / Prima visita',
+    nome: 'Consulenza / Prima visita',
     descrizione: 'Valutazione completa del viso, ascolto delle tue esigenze e piano di trattamento personalizzato.',
     durata: '45–60 min',
   },

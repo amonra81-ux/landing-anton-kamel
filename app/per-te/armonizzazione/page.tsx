@@ -87,7 +87,7 @@ export default function Page() {
           </div>
           <ol className="space-y-5">
             {[
-              { n: 'Mese 0', t: 'Consulto + foto + piano', d: 'Mappatura completa del viso, foto da più angolazioni, piano scritto e condiviso.' },
+              { n: 'Mese 0', t: 'Consulenza + foto + piano', d: 'Mappatura completa del viso, foto da più angolazioni, piano scritto e condiviso.' },
               { n: 'Mese 1', t: 'Zigomi + mento', d: 'Si parte dalla struttura: si lavora sui volumi profondi.' },
               { n: 'Mese 2', t: 'Controllo + ritocco', d: 'Verifica risultato, eventuali aggiustamenti.' },
               { n: 'Mese 3-4', t: 'Mandibola + labbra', d: 'Una volta stabilito il nuovo equilibrio strutturale, si raffina.' },

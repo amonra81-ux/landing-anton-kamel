@@ -9,7 +9,7 @@ import { Heart, ShieldCheck, MessageCircle, Clock } from 'lucide-react'
 export const metadata: Metadata = {
   title: 'Prima volta dal medico estetico — Hai paura? | Dr. Anton Kamel Verona',
   description:
-    'Mai fatto un trattamento estetico? Paura degli aghi, di esagerare, del giudizio? Il primo consulto è solo una conversazione. Studio del Dr. Anton Kamel a Verona.',
+    'Mai fatto un trattamento estetico? Paura degli aghi, di esagerare, del giudizio? La prima consulenza è solo una conversazione. Studio del Dr. Anton Kamel a Verona.',
   alternates: { canonical: 'https://antonkamel.it/per-te/prima-volta' },
 }
 
@@ -21,7 +21,7 @@ export default function Page() {
       <PageHero
         eyebrow="Prima volta"
         title="Hai paura. È normale."
-        subtitle="Il primo consulto è solo una conversazione. Niente decisioni, niente fretta."
+        subtitle="La prima consulenza è solo una conversazione. Niente decisioni, niente fretta."
         accent
       />
 
@@ -52,7 +52,7 @@ export default function Page() {
               {
                 fear: '«Mi vergogno a chiedere informazioni»',
                 answer:
-                  'Non c\'è nulla da nascondere. Il consulto serve proprio a porre domande senza giudizio. Anche quelle che ti sembrano «stupide».',
+                  'Non c\'è nulla da nascondere. La consulenza serve proprio a porre domande senza giudizio. Anche quelle che ti sembrano «stupide».',
               },
               {
                 fear: '«E se poi non mi piace?»',
@@ -62,7 +62,7 @@ export default function Page() {
               {
                 fear: '«Non so se è il momento giusto»',
                 answer:
-                  'Il consulto valutativo serve a questo: capire se ha senso ora, fra 3 mesi o mai. Anche dirti «no, non serve» fa parte del lavoro.',
+                  'La consulenza valutativa serve a questo: capire se ha senso ora, fra 3 mesi o mai. Anche dirti «no, non serve» fa parte del lavoro.',
               },
             ].map((q, i) => (
               <div
@@ -101,7 +101,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Cosa succede al primo consulto */}
+      {/* Cosa succede alla prima consulenza */}
       <section className="py-12 md:py-20 px-6 bg-[#0a0a0a] border-t border-white/10">
         <div className="mx-auto max-w-3xl">
           <div className="text-center mb-10">
@@ -114,7 +114,7 @@ export default function Page() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {[
-              { icon: MessageCircle, t: 'Solo conversazione', d: 'Nessun trattamento al primo consulto. Solo ascolto e valutazione.' },
+              { icon: MessageCircle, t: 'Solo conversazione', d: 'Nessun trattamento alla prima consulenza. Solo ascolto e valutazione.' },
               { icon: Clock, t: '30-45 minuti', d: 'Tempo per capirti e per spiegarti tutto, senza fretta.' },
               { icon: Heart, t: 'Niente pressione', d: 'Decidi tu se procedere e quando. Anche dopo settimane.' },
               { icon: ShieldCheck, t: 'Trasparenza', d: 'Costi, tempi, risultati attesi e rischi — tutto chiaro prima di iniziare.' },
@@ -134,8 +134,8 @@ export default function Page() {
 
       <CTAFinale
         eyebrow="Pronta a parlarne?"
-        title="Prenota il tuo primo consulto."
-        subtitle="Niente decisioni affrettate. Decidi tu se procedere col trattamento dopo il consulto."
+        title="Prenota la tua prima consulenza."
+        subtitle="Niente decisioni affrettate. Decidi tu se procedere col trattamento dopo la consulenza."
       />
 
       <Footer />
