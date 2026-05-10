@@ -10,7 +10,7 @@ export default function PrivacyPolicy() {
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-white/80 py-24 px-6">
       <div className="mx-auto max-w-3xl">
-        <p className="text-xs text-white/30 tracking-widest uppercase mb-4">Ultimo aggiornamento: aprile 2026</p>
+        <p className="text-xs text-white/30 tracking-widest uppercase mb-4">Ultimo aggiornamento: maggio 2026</p>
         <h1 className="text-4xl font-bold text-white mb-2">Privacy Policy</h1>
         <p className="text-white/50 text-sm mb-12">
           Informativa ai sensi dell&apos;art. 13 del Regolamento UE 2016/679 (GDPR)
@@ -21,14 +21,22 @@ export default function PrivacyPolicy() {
           <section>
             <h2 className="text-xl font-semibold text-white mb-3">1. Titolare del Trattamento</h2>
             <p>
-              Il titolare del trattamento è il <strong className="text-white">Dott. Anton Kamel</strong>, medico estetico con studio a Verona (VR), Italia.
+              Il titolare del trattamento è il <strong className="text-white">Dott. Anton Kamel</strong>,
+              medico chirurgo specialista in medicina estetica.
             </p>
-            <p className="mt-2">
+            <ul className="mt-3 space-y-1 text-white/60">
+              <li><strong className="text-white/80">Sede legale:</strong> Via Vincenzo Monti 1, 37015 Sant&apos;Ambrogio di Valpolicella (VR)</li>
+              <li><strong className="text-white/80">Studio operativo:</strong> Via San Lucillo 16, 37100 Verona (VR)</li>
+              <li><strong className="text-white/80">P. IVA:</strong> <span className="tabular-nums">04276600238</span></li>
+              <li><strong className="text-white/80">C.F.:</strong> <span className="tabular-nums">NTNKML83D23Z226B</span></li>
+            </ul>
+            <p className="mt-4">
               Per esercitare i tuoi diritti o richiedere informazioni, puoi contattarci tramite:
             </p>
             <ul className="mt-2 space-y-1 list-disc list-inside text-white/60">
               <li>WhatsApp: <a href="https://wa.me/393801035896" className="text-[#C9A97A] hover:underline">+39 380 103 5896</a></li>
               <li>Instagram: <a href="https://www.instagram.com/dr.antonlips/" target="_blank" rel="noopener noreferrer" className="text-[#C9A97A] hover:underline">@dr.antonlips</a></li>
+              <li>Posta ordinaria all&apos;indirizzo della sede legale</li>
             </ul>
           </section>
 

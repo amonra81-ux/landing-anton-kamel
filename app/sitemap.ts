@@ -27,6 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/grazie',
     '/privacy',
     '/cookie',
+    '/note-legali',
   ]
 
   return routes.map((path) => ({

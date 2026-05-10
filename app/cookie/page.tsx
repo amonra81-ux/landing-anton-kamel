@@ -10,7 +10,7 @@ export default function CookiePolicy() {
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-white/80 py-24 px-6">
       <div className="mx-auto max-w-3xl">
-        <p className="text-xs text-white/30 tracking-widest uppercase mb-4">Ultimo aggiornamento: aprile 2026</p>
+        <p className="text-xs text-white/30 tracking-widest uppercase mb-4">Ultimo aggiornamento: maggio 2026</p>
         <h1 className="text-4xl font-bold text-white mb-2">Cookie Policy</h1>
         <p className="text-white/50 text-sm mb-12">
           Ai sensi del Provvedimento del Garante Privacy dell&apos;8 maggio 2014 e delle Linee Guida cookie 2021

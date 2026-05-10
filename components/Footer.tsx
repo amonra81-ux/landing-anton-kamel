@@ -204,13 +204,17 @@ export default function Footer() {
             <p className="text-white/30 text-xs">
               © {new Date().getFullYear()} Dr. Anton Kamel. Tutti i diritti riservati.
             </p>
-            <div className="flex items-center gap-4">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
               <a href={`${BASE_PATH}/privacy`} className="text-white/30 text-xs hover:text-white/60 transition-colors">
-                Privacy Policy
+                Privacy
               </a>
               <span className="text-white/20 text-xs">·</span>
               <a href={`${BASE_PATH}/cookie`} className="text-white/30 text-xs hover:text-white/60 transition-colors">
-                Cookie Policy
+                Cookie
+              </a>
+              <span className="text-white/20 text-xs">·</span>
+              <a href={`${BASE_PATH}/note-legali`} className="text-white/30 text-xs hover:text-white/60 transition-colors">
+                Note legali
               </a>
             </div>
           </div>
