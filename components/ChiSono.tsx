@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { GraduationCap, Sparkles, Languages, Award, Calendar, MessageCircle } from 'lucide-react'
+import { GraduationCap, Sparkles, Stethoscope, Award, Calendar, MessageCircle } from 'lucide-react'
 import Link from 'next/link'
 import { useBooking } from './BookingProvider'
 
@@ -204,7 +204,7 @@ export default function ChiSono() {
             { icon: Calendar, label: 'Anni di esperienza', value: '10+' },
             { icon: Award, label: 'Recensioni Google', value: '4.7 / 5' },
             { icon: GraduationCap, label: 'Master in Med. Estetica', value: '2' },
-            { icon: Languages, label: 'Lingue', value: 'IT · EN · AR' },
+            { icon: Stethoscope, label: 'Pazienti trattati', value: '1500+' },
           ].map((f) => (
             <div
               key={f.label}
