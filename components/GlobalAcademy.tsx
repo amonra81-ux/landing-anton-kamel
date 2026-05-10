@@ -54,21 +54,37 @@ const members = [
   },
 ]
 
-const globeMarkers = members.map((m, i) => ({
-  id: m.id,
-  location: m.location,
-  label: m.city.split(',')[0],
-  isHome: m.you,
-  pulseDelay: m.you ? 0 : i * 0.35,
+// Aggrega membri per città — label uniche sul globo
+type City = {
+  id: string
+  city: string
+  location: [number, number]
+  isHome?: boolean
+  count: number
+}
+
+const cities: City[] = [
+  { id: 'verona', city: 'Verona', location: ANTON, isHome: true, count: 1 },
+  { id: 'modena', city: 'Modena', location: [44.6471, 10.9252], count: 1 },
+  { id: 'cairo', city: 'Cairo', location: [30.0444, 31.2357], count: 2 }, // Ghofran + Nahla
+  { id: 'tirana', city: 'Tirana', location: [41.3275, 19.8187], count: 1 },
+]
+
+const globeMarkers = cities.map((c, i) => ({
+  id: c.id,
+  location: c.location,
+  label: c.count > 1 ? `${c.city} (${c.count})` : c.city,
+  isHome: c.isHome,
+  pulseDelay: c.isHome ? 0 : i * 0.4,
 }))
 
-// Anton è il centro: archi da Anton verso ogni altro
-const globeArcs = members
-  .filter((m) => !m.you)
-  .map((m) => ({
-    id: `arc-${m.id}`,
+// Anton è il centro: archi da Verona verso ogni altra città
+const globeArcs = cities
+  .filter((c) => !c.isHome)
+  .map((c) => ({
+    id: `arc-${c.id}`,
     from: ANTON,
-    to: m.location,
+    to: c.location,
   }))
 
 export default function GlobalAcademy() {
