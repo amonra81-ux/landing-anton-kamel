@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Calendar, Phone } from 'lucide-react'
+import { Calendar, MessageCircle } from 'lucide-react'
 import { useBooking } from './BookingProvider'
 
 declare global {
@@ -11,7 +11,7 @@ declare global {
   }
 }
 
-const TEL = '+393801035896'
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 export default function StickyCTA() {
   const [visible, setVisible] = useState(false)
@@ -29,10 +29,8 @@ export default function StickyCTA() {
 
   const handlePrenota = () => open('Sticky Mobile CTA')
 
-  const handleCall = () => {
-    window.fbq?.('track', 'Contact', {
-      content_name: 'Click telefono',
-    })
+  const handleWriteClick = () => {
+    window.fbq?.('track', 'Lead', { content_name: 'Sticky WhatsApp' })
   }
 
   // Non mostrare la sticky se modal aperto
@@ -51,12 +49,12 @@ export default function StickyCTA() {
         >
           <div className="flex items-center gap-2 px-3 py-3">
             <a
-              href={`tel:${TEL}`}
-              onClick={handleCall}
-              aria-label="Chiama lo studio"
-              className="flex shrink-0 items-center justify-center w-12 h-12 rounded-full border border-white/20 text-white/80 active:scale-95 transition-transform"
+              href={`${BASE_PATH}/chiamami`}
+              onClick={handleWriteClick}
+              aria-label="Scrivimi su WhatsApp"
+              className="flex shrink-0 items-center justify-center w-12 h-12 rounded-full bg-[#25D366]/15 border border-[#25D366]/40 text-[#25D366] active:scale-95 transition-transform"
             >
-              <Phone size={18} />
+              <MessageCircle size={18} />
             </a>
             <button
               onClick={handlePrenota}

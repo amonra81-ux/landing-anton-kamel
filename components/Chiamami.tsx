@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Phone, CheckCircle2, Clock, ShieldCheck } from 'lucide-react'
+import { CheckCircle2, Clock, ShieldCheck, MessageCircle } from 'lucide-react'
 
 declare global {
   interface Window {
@@ -10,8 +10,7 @@ declare global {
   }
 }
 
-// Formspree endpoint placeholder — sostituire con ID reale dopo crea form
-const FORMSPREE_URL = 'https://formspree.io/f/YOUR_FORM_ID'
+const WA_NUMBER = '393801035896'
 
 const trattamenti = [
   'Filler labbra (Anton Lips / Russian Lips)',
@@ -25,44 +24,38 @@ const trattamenti = [
   'Non lo so ancora — voglio un consiglio',
 ]
 
+function buildWhatsappMessage(opts: {
+  name: string
+  topic: string
+  note: string
+}) {
+  const lines: string[] = [`Ciao Anton, sono ${opts.name}.`]
+  if (opts.topic) lines.push(`Trattamento di interesse: ${opts.topic}.`)
+  if (opts.note) lines.push(`Note / dubbi: ${opts.note}`)
+  lines.push('Ti scrivo dal sito antonkamel.it. Grazie!')
+  return encodeURIComponent(lines.join('\n\n'))
+}
+
 export default function Chiamami() {
   const [name, setName] = useState('')
-  const [phone, setPhone] = useState('')
   const [topic, setTopic] = useState('')
   const [note, setNote] = useState('')
-  const [sending, setSending] = useState(false)
   const [sent, setSent] = useState(false)
-  const [error, setError] = useState<string | null>(null)
 
-  const valid = name.trim().length >= 2 && /^\+?[0-9 ]{8,}$/.test(phone.replace(/\s/g, ''))
+  const valid = name.trim().length >= 2
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!valid) return
-    setSending(true)
-    setError(null)
 
-    try {
-      // Pixel Lead event
-      window.fbq?.('track', 'Lead', {
-        content_name: 'Form Chiamami',
-        content_category: topic || 'Non specificato',
-      })
+    window.fbq?.('track', 'Lead', {
+      content_name: 'Form WhatsApp',
+      content_category: topic || 'Non specificato',
+    })
 
-      // Submit Formspree
-      const res = await fetch(FORMSPREE_URL, {
-        method: 'POST',
-        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nome: name, telefono: phone, trattamento: topic, nota: note }),
-      })
-      if (!res.ok) throw new Error('Errore invio')
-      setSent(true)
-    } catch (err) {
-      setError('Errore invio. Chiama direttamente: 380 103 5896')
-      console.error(err)
-    } finally {
-      setSending(false)
-    }
+    const msg = buildWhatsappMessage({ name: name.trim(), topic, note: note.trim() })
+    window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank', 'noopener,noreferrer')
+    setSent(true)
   }
 
   return (
@@ -78,14 +71,14 @@ export default function Chiamami() {
           className="text-center mb-10 md:mb-14"
         >
           <p className="mb-4 text-xs font-semibold tracking-[0.2em] text-[#C9A97A] uppercase">
-            Senza calendario, senza impegno
+            Domande prima di prenotare?
           </p>
           <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tighter text-white/95 leading-[1.05] mb-4">
-            Ti richiamo io.
+            Scrivimi su WhatsApp.
           </h1>
           <p className="text-white/60 text-base md:text-lg max-w-md mx-auto leading-relaxed">
-            Lasciami il tuo numero. Anton ti chiama personalmente entro 24h
-            (lavorative). Niente automation, niente call center.
+            Anton risponde personalmente in chat. Niente call center,
+            niente automation che ti lascia in attesa.
           </p>
         </motion.div>
 
@@ -117,22 +110,6 @@ export default function Chiamami() {
 
               <label className="block">
                 <span className="block text-xs uppercase tracking-widest text-white/55 mb-2">
-                  Telefono *
-                </span>
-                <input
-                  type="tel"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  required
-                  autoComplete="tel"
-                  inputMode="tel"
-                  className="w-full rounded-xl border border-white/15 bg-black/30 px-4 py-3 text-white placeholder-white/30 focus:border-[#C9A97A]/60 focus:outline-none transition-colors tabular-nums"
-                  placeholder="Es. 340 1234567"
-                />
-              </label>
-
-              <label className="block">
-                <span className="block text-xs uppercase tracking-widest text-white/55 mb-2">
                   Trattamento di interesse
                 </span>
                 <select
@@ -151,31 +128,30 @@ export default function Chiamami() {
 
               <label className="block">
                 <span className="block text-xs uppercase tracking-widest text-white/55 mb-2">
-                  Note (opzionale)
+                  Cosa vuoi sapere?
                 </span>
                 <textarea
                   value={note}
                   onChange={(e) => setNote(e.target.value)}
-                  rows={3}
+                  rows={4}
                   className="w-full rounded-xl border border-white/15 bg-black/30 px-4 py-3 text-white placeholder-white/30 focus:border-[#C9A97A]/60 focus:outline-none transition-colors resize-none"
-                  placeholder="Es. preferirei essere chiamata dopo le 18, oppure ho già fatto filler altrove…"
+                  placeholder="Es. ho già fatto filler ma non mi piace il risultato. Si può correggere?"
                 />
               </label>
 
               <button
                 type="submit"
-                disabled={!valid || sending}
-                className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#C9A97A] px-6 py-4 text-black font-bold text-base disabled:opacity-40 disabled:cursor-not-allowed hover:scale-[1.02] active:scale-[0.98] transition-transform"
-                style={{ boxShadow: valid ? '0 0 30px rgba(201,169,122,0.35)' : 'none' }}
+                disabled={!valid}
+                className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-4 text-white font-bold text-base disabled:opacity-40 disabled:cursor-not-allowed hover:scale-[1.02] active:scale-[0.98] transition-transform cursor-pointer"
+                style={{ boxShadow: valid ? '0 0 30px rgba(37,211,102,0.35)' : 'none' }}
               >
-                <Phone size={18} />
-                {sending ? 'Invio…' : 'Richiedi richiamo'}
+                <MessageCircle size={18} />
+                Apri WhatsApp con messaggio precompilato
               </button>
 
-              {error && <p className="text-red-400 text-sm text-center">{error}</p>}
-
               <p className="text-white/35 text-xs text-center pt-2">
-                I tuoi dati sono trattati secondo il GDPR. Non saranno mai venduti.
+                Il messaggio si apre nella tua app WhatsApp con i dati già scritti.
+                Lo invii tu confermando.
               </p>
             </motion.form>
           ) : (
@@ -184,28 +160,28 @@ export default function Chiamami() {
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
-              className="rounded-2xl border border-[#C9A97A]/40 bg-[#C9A97A]/[0.06] p-8 md:p-10 text-center"
+              className="rounded-2xl border border-[#25D366]/40 bg-[#25D366]/[0.06] p-8 md:p-10 text-center"
             >
-              <CheckCircle2 size={48} className="mx-auto mb-4 text-[#C9A97A]" />
+              <CheckCircle2 size={48} className="mx-auto mb-4 text-[#25D366]" />
               <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
-                Richiesta inviata.
+                WhatsApp aperto.
               </h2>
               <p className="text-white/65 text-base mb-2">
-                Anton ti chiamerà personalmente entro 24h lavorative.
+                Conferma l&apos;invio del messaggio dalla tua app.
               </p>
               <p className="text-white/40 text-sm">
-                Se preferisci, puoi anche prenotare direttamente online.
+                Anton risponde personalmente in chat (orari studio).
               </p>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Trust */}
+        {/* Trust pills */}
         <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           {[
-            { icon: Clock, label: 'Risposta entro 24h' },
+            { icon: MessageCircle, label: 'Risponde in chat' },
             { icon: ShieldCheck, label: 'Senza impegno' },
-            { icon: Phone, label: 'Anton in persona' },
+            { icon: Clock, label: 'Orari studio' },
           ].map((t) => (
             <div
               key={t.label}
@@ -216,6 +192,12 @@ export default function Chiamami() {
             </div>
           ))}
         </div>
+
+        {/* Note onesta */}
+        <p className="mt-8 text-center text-xs text-white/35 italic max-w-md mx-auto leading-relaxed">
+          Pronta a prenotare direttamente? Apri il calendario online —
+          è il modo più rapido per fissare il consulto.
+        </p>
       </div>
     </section>
   )

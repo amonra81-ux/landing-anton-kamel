@@ -5,9 +5,9 @@ import StickyCTA from '@/components/StickyCTA'
 import Chiamami from '@/components/Chiamami'
 
 export const metadata: Metadata = {
-  title: 'Ti richiamo io — Dr. Anton Kamel Verona',
+  title: 'Scrivi ad Anton su WhatsApp — Dr. Anton Kamel Verona',
   description:
-    'Lascia il tuo numero e Anton ti richiama personalmente entro 24h. Senza impegno, senza calendario.',
+    'Hai dubbi prima di prenotare? Scrivi ad Anton su WhatsApp. Risponde personalmente in chat.',
   alternates: { canonical: 'https://antonkamel.it/chiamami' },
   robots: { index: true, follow: true },
 }

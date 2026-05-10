@@ -4,7 +4,7 @@ import Footer from '@/components/Footer'
 import StickyCTA from '@/components/StickyCTA'
 import PageHero from '@/components/PageHero'
 import CTAFinale from '@/components/CTAFinale'
-import { MapPin, Phone, Clock, Car, Train } from 'lucide-react'
+import { MapPin, MessageCircle, Clock, Car, Train } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Studio Dr. Anton Kamel — Via San Lucillo 16, Verona | Mappa + orari',
@@ -68,17 +68,19 @@ export default function Page() {
             </a>
 
             <a
-              href="tel:+393801035896"
-              className="block rounded-2xl border border-white/10 bg-white/[0.03] p-6 hover:border-[#C9A97A]/30 transition-colors"
+              href="https://wa.me/393801035896"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block rounded-2xl border border-white/10 bg-white/[0.03] p-6 hover:border-[#25D366]/40 transition-colors"
             >
               <div className="flex items-start gap-4">
-                <span className="text-[#C9A97A] shrink-0"><Phone size={20} /></span>
+                <span className="text-[#25D366] shrink-0"><MessageCircle size={20} /></span>
                 <div>
-                  <p className="text-xs uppercase tracking-widest text-white/45 mb-1">Telefono</p>
+                  <p className="text-xs uppercase tracking-widest text-white/45 mb-1">WhatsApp</p>
                   <p className="text-white text-base md:text-lg font-medium tabular-nums">
                     380 103 5896
                   </p>
-                  <p className="text-white/45 text-xs mt-1">Solo per disdette · per prenotazioni usa Skipres</p>
+                  <p className="text-white/45 text-xs mt-1">Solo messaggi · no chiamate</p>
                 </div>
               </div>
             </a>
