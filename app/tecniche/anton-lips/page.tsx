@@ -172,7 +172,7 @@ export default function Page() {
       <CTAFinale
         eyebrow="Vuoi provarla?"
         title="Prenota un consulto Anton Lips."
-        subtitle="Primo passo: una conversazione. Senza impegno."
+        subtitle="Prenota il consulto in studio. Decidi tu se procedere col trattamento."
       />
 
       <Footer />

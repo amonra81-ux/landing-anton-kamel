@@ -28,7 +28,8 @@ export default function WidgetPrenotazione() {
               Prenota il tuo consulto.
             </h2>
             <p className="text-white/55 text-base sm:text-lg mb-8 md:mb-12 max-w-md mx-auto leading-relaxed">
-              Primo passo: una conversazione. Senza impegno, in studio a Verona.
+              Consulto valutativo in studio a Verona. Valutazione clinica
+              + piano di trattamento personalizzato.
             </p>
 
             <motion.button
@@ -53,6 +54,11 @@ export default function WidgetPrenotazione() {
                 <span className="text-xs text-white/55">45 min consulto</span>
               </div>
             </div>
+
+            <p className="mt-5 text-white/40 text-xs leading-relaxed max-w-xs mx-auto">
+              Il consulto è a pagamento. Costo e disponibilità reali sono
+              indicati nel calendario di prenotazione.
+            </p>
 
             <p className="mt-10 text-white/30 text-xs leading-relaxed max-w-sm mx-auto">
               Per disdette o info su appuntamenti già prenotati:{' '}

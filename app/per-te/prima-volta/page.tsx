@@ -135,7 +135,7 @@ export default function Page() {
       <CTAFinale
         eyebrow="Pronta a parlarne?"
         title="Prenota il tuo primo consulto."
-        subtitle="Senza impegno. Senza decisioni affrettate."
+        subtitle="Niente decisioni affrettate. Decidi tu se procedere col trattamento dopo il consulto."
       />
 
       <Footer />
