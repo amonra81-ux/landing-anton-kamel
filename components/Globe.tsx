@@ -216,10 +216,10 @@ export function Globe({
         }}
       />
 
-      {/* Pulse ring overlays — sit on each marker */}
+      {/* Discrete pulsing dots only — no labels, just gold/cyan beacons */}
       {markers.map((m) => {
         const delay = m.pulseDelay ?? 0
-        const color = m.isHome ? '#C9A97A' : '#33ccdd'
+        const color = m.isHome ? '#C9A97A' : '#C9A97A'
         return (
           <div
             key={`pulse-${m.id}`}
@@ -229,8 +229,8 @@ export function Globe({
               bottom: 'anchor(center)',
               left: 'anchor(center)',
               translate: '-50% 50%',
-              width: 44,
-              height: 44,
+              width: 28,
+              height: 28,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -243,75 +243,24 @@ export function Globe({
               style={{
                 position: 'absolute',
                 inset: 0,
-                border: `2px solid ${color}`,
+                border: `1.5px solid ${color}`,
                 borderRadius: '50%',
                 opacity: 0,
-                animation: `cobe-pulse-expand 2.2s ease-out infinite ${delay}s`,
+                animation: `cobe-pulse-expand 2.4s ease-out infinite ${delay}s`,
               }}
             />
             <span
               style={{
-                position: 'absolute',
-                inset: 0,
-                border: `2px solid ${color}`,
-                borderRadius: '50%',
-                opacity: 0,
-                animation: `cobe-pulse-expand 2.2s ease-out infinite ${delay + 0.7}s`,
-              }}
-            />
-            <span
-              style={{
-                width: m.isHome ? 12 : 9,
-                height: m.isHome ? 12 : 9,
+                width: m.isHome ? 8 : 5,
+                height: m.isHome ? 8 : 5,
                 background: color,
                 borderRadius: '50%',
-                boxShadow: `0 0 0 3px #0a0a0a, 0 0 0 5px ${color}`,
+                boxShadow: `0 0 6px ${color}`,
               }}
             />
           </div>
         )
       })}
-
-      {/* Labels */}
-      {markers.map((m) => (
-        <div
-          key={`label-${m.id}`}
-          style={{
-            position: 'absolute',
-            ...({ positionAnchor: `--cobe-${m.id}` } as React.CSSProperties),
-            bottom: 'anchor(top)',
-            left: 'anchor(center)',
-            translate: '-50% 0',
-            marginBottom: 18,
-            padding: '3px 8px',
-            background: '#0a0a0a',
-            border: `1px solid ${m.isHome ? 'rgba(201,169,122,0.6)' : 'rgba(51,204,221,0.55)'}`,
-            color: m.isHome ? '#C9A97A' : '#33ccdd',
-            fontFamily: 'monospace',
-            fontSize: '0.62rem',
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase' as const,
-            whiteSpace: 'nowrap' as const,
-            pointerEvents: 'none' as const,
-            borderRadius: 3,
-            opacity: `var(--cobe-visible-${m.id}, 0)`,
-            filter: `blur(calc((1 - var(--cobe-visible-${m.id}, 0)) * 8px))`,
-            transition: 'opacity 0.6s, filter 0.6s',
-          }}
-        >
-          {m.label}
-          <span
-            style={{
-              position: 'absolute',
-              top: '100%',
-              left: '50%',
-              transform: 'translate3d(-50%, -1px, 0)',
-              border: '5px solid transparent',
-              borderTopColor: m.isHome ? '#C9A97A' : '#33ccdd',
-            }}
-          />
-        </div>
-      ))}
     </div>
   )
 }
