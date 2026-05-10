@@ -39,7 +39,7 @@ export default function PercheScegliere() {
   const bgY = useSpring(rawY, { stiffness: 60, damping: 20 })
 
   return (
-    <section ref={sectionRef} id="perche" className="relative bg-[#0a0a0a] py-32 px-6 overflow-hidden">
+    <section ref={sectionRef} id="perche" className="relative bg-[#0a0a0a] py-16 sm:py-24 md:py-32 px-6 overflow-hidden">
       {/* Soft parallax glow */}
       <motion.div
         style={{ y: bgY }}
@@ -56,7 +56,7 @@ export default function PercheScegliere() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-20"
+          className="text-center mb-12 md:mb-20"
         >
           <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-white/90 mb-5">
             Perché scegliere Anton Kamel.

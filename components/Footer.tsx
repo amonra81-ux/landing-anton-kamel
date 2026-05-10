@@ -1,5 +1,7 @@
 'use client'
 
+import { MapPin, Phone, Clock } from 'lucide-react'
+
 function InstagramIcon({ size = 18 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -19,44 +21,91 @@ function WhatsappIcon({ size = 18 }: { size?: number }) {
 }
 
 const quickLinks = [
-  { href: '#perche', label: 'Perché scegliermi' },
-  { href: '#trattamenti', label: 'Trattamenti' },
-  { href: '#faq', label: 'FAQ' },
-  { href: '#prenota', label: 'Prenota' },
+  { href: '/chi-sono', label: 'Chi sono', external: true },
+  { href: '/#trattamenti', label: 'Trattamenti', external: true },
+  { href: '/#faq', label: 'FAQ', external: true },
+  { href: '/chiamami', label: 'Ti richiamo io', external: true },
+  { href: '/#prenota', label: 'Prenota', external: true },
 ]
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+
 export default function Footer() {
-  const handleNavClick = (href: string) => {
+  const handleClick = (href: string) => {
+    if (href.startsWith('/#')) {
+      // Cross-page hash navigation
+      window.location.assign(`${BASE_PATH}${href}`)
+      return
+    }
+    if (href.startsWith('/')) {
+      window.location.assign(`${BASE_PATH}${href}`)
+      return
+    }
     const el = document.querySelector(href)
     if (el) el.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
-    <footer className="bg-[#0a0a0a] border-t border-white/10 py-16 px-6">
+    <footer className="bg-[#0a0a0a] border-t border-white/10 py-12 md:py-16 px-6 pb-28 md:pb-16">
       <div className="mx-auto max-w-6xl">
-        {/* Top grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+        {/* Top grid: 4 columns */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-10 mb-10 md:mb-12">
           {/* Brand */}
           <div>
-            <p className="text-sm font-bold tracking-widest text-white mb-1">ANTON KAMEL</p>
-            <p className="text-white/40 text-sm mb-1">Medico Estetico</p>
-            <p className="text-white/40 text-sm mb-4">Verona, Italia</p>
+            <p className="text-sm font-bold tracking-widest text-white mb-1">DR. ANTON KAMEL</p>
+            <p className="text-white/40 text-sm mb-1">Medico chirurgo</p>
+            <p className="text-white/40 text-sm mb-4">Specialista in medicina estetica</p>
             <p className="text-white/30 text-sm italic leading-relaxed max-w-xs">
-              &ldquo;La tua bellezza è un&apos;altra cosa.&rdquo;
+              &ldquo;Risultati naturali. Mai maschere.&rdquo;
             </p>
+          </div>
+
+          {/* Studio */}
+          <div>
+            <p className="text-xs font-semibold tracking-widest text-white/40 uppercase mb-5">
+              Studio
+            </p>
+            <div className="space-y-3">
+              <a
+                href="https://www.google.com/maps/place/DR.+ANTON+KAMEL/@45.4425759,10.9410775,17z"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-2 text-white/60 text-sm hover:text-white transition-colors"
+              >
+                <span className="text-[#C9A97A] shrink-0 mt-0.5"><MapPin size={14} /></span>
+                <span>
+                  Via San Lucillo 16<br />
+                  37100 Verona
+                </span>
+              </a>
+              <a
+                href="tel:+393801035896"
+                className="flex items-center gap-2 text-white/60 text-sm hover:text-white transition-colors tabular-nums"
+              >
+                <span className="text-[#C9A97A] shrink-0"><Phone size={14} /></span>
+                <span>380 103 5896</span>
+              </a>
+              <div className="flex items-start gap-2 text-white/60 text-sm">
+                <span className="text-[#C9A97A] shrink-0 mt-0.5"><Clock size={14} /></span>
+                <span>
+                  Aperto su appuntamento<br />
+                  <span className="text-white/35 text-xs">Verifica orari su Skipres</span>
+                </span>
+              </div>
+            </div>
           </div>
 
           {/* Quick links */}
           <div>
             <p className="text-xs font-semibold tracking-widest text-white/40 uppercase mb-5">
-              Link rapidi
+              Naviga
             </p>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.href}>
                   <button
-                    onClick={() => handleNavClick(link.href)}
-                    className="text-white/60 text-sm hover:text-white transition-colors cursor-pointer"
+                    onClick={() => handleClick(link.href)}
+                    className="text-white/60 text-sm hover:text-white transition-colors cursor-pointer text-left"
                   >
                     {link.label}
                   </button>
@@ -65,10 +114,10 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contacts & Social */}
+          {/* Social */}
           <div>
             <p className="text-xs font-semibold tracking-widest text-white/40 uppercase mb-5">
-              Contatti e social
+              Social
             </p>
             <div className="space-y-3">
               <a
@@ -89,28 +138,63 @@ export default function Footer() {
                 <span className="text-[#C9A97A] shrink-0"><WhatsappIcon size={18} /></span>
                 <span>WhatsApp</span>
               </a>
+              <p className="text-white/35 text-xs leading-relaxed pt-1 max-w-[180px]">
+                WhatsApp solo per disdette o info su appuntamenti già prenotati.
+              </p>
             </div>
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-white/10 pt-8">
+        {/* Compliance medica (Legge Boldi 2018) */}
+        <div className="border-t border-white/10 pt-6 mb-6">
+          <p className="text-white/40 text-xs uppercase tracking-widest mb-3">
+            Informazioni sanitarie
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-1.5 text-white/35 text-xs leading-relaxed">
+            <p>
+              <span className="text-white/55">Direttore sanitario:</span> Dr. Anton Kamel
+            </p>
+            <p>
+              <span className="text-white/55">Laurea:</span> Medicina e Chirurgia, Univ. Verona (2014)
+            </p>
+            <p>
+              <span className="text-white/55">Master:</span> Medicina Estetica · Padova (2017) + Verona (2019)
+            </p>
+            <p>
+              <span className="text-white/55">Iscrizione Albo Medici:</span> [VERONA — n° da verificare]
+            </p>
+            <p className="md:col-span-2">
+              <span className="text-white/55">P.IVA / C.F.:</span> [DA INSERIRE]
+              {' · '}
+              <span className="text-white/55">Federazioni:</span> FMSI
+            </p>
+          </div>
+          <p className="text-white/30 text-[11px] mt-3 italic">
+            Pubblicità sanitaria informativa ai sensi della L. 145/2018 (Legge di Bilancio 2019,
+            art. 1 co. 525) e Codice Deontologico FNOMCeO.
+          </p>
+        </div>
+
+        {/* Bottom row */}
+        <div className="border-t border-white/10 pt-6">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <p className="text-white/30 text-xs">
-              © {new Date().getFullYear()} Anton Kamel. Tutti i diritti riservati.
+              © {new Date().getFullYear()} Dr. Anton Kamel. Tutti i diritti riservati.
             </p>
             <div className="flex items-center gap-4">
-              <a href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/privacy`} className="text-white/30 text-xs hover:text-white/60 transition-colors">
+              <a href={`${BASE_PATH}/privacy`} className="text-white/30 text-xs hover:text-white/60 transition-colors">
                 Privacy Policy
               </a>
               <span className="text-white/20 text-xs">·</span>
-              <a href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/cookie`} className="text-white/30 text-xs hover:text-white/60 transition-colors">
+              <a href={`${BASE_PATH}/cookie`} className="text-white/30 text-xs hover:text-white/60 transition-colors">
                 Cookie Policy
               </a>
             </div>
           </div>
-          <p className="text-white/20 text-xs mt-4 leading-relaxed max-w-2xl">
-            Le informazioni presenti in questo sito hanno finalità informative e non sostituiscono in alcun modo una visita medica.
+          <p className="text-white/25 text-xs mt-4 leading-relaxed max-w-3xl">
+            Le informazioni presenti in questo sito hanno finalità informative e non sostituiscono
+            in alcun modo una visita medica. Le immagini di trattamenti e risultati sono indicative;
+            i risultati possono variare in base alle caratteristiche individuali del paziente.
           </p>
         </div>
       </div>

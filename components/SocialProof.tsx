@@ -4,43 +4,66 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react'
 
-// TODO: sostituisci con le recensioni reali da Google My Business
+// Recensioni reali da Google My Business (https://g.co/kgs/AntonKamel)
+const GOOGLE_REVIEWS_URL =
+  'https://www.google.com/maps/place/DR.+ANTON+KAMEL/@45.4425759,10.9410775,17z'
+const TOTAL_REVIEWS = 79
+const AVG_RATING = 4.7
+
 const testimonials = [
   {
-    name: 'Valentina M.',
-    treatment: 'Filler Labbra',
-    text: 'Prima ero terrorizzata dall\'idea. Anton mi ha spiegato tutto con calma, senza fretta. Risultato super naturale, proporzionato. Le labbra sembrano le mie ma più definite.',
+    name: 'Aurora Garlatti',
+    treatment: 'Prima volta filler labbra',
+    story: 'Aveva paura. Si è affidata. Ora lo rifarebbe.',
+    text:
+      'È la prima volta che facevo il filler e mi sono affidata a lui. Tornassi indietro lo sceglierei ancora: super alla mano, disponibile e paziente. Lo consiglio davvero.',
     rating: 5,
+    when: '2 mesi fa',
   },
   {
-    name: 'Giorgia T.',
-    treatment: 'Rinofiller',
-    text: 'Avevo una piccola gobba che mi ha sempre un po\' disturbato. In 20 minuti, senza dolore, risolta. Non sembra rifatto per niente. Sono contentissima del risultato.',
+    name: 'Vanessa',
+    treatment: 'Correzione filler migrato',
+    story: 'Aveva migrazioni dopo anni di filler altrove. Risultato finale: labbra naturali come mai prima.',
+    text:
+      'Dopo anni di filler avevo evidenti migrazioni. Anton ha sciolto tutto con jaluronidasi, due settimane dopo abbiamo rifatto. Ora ho labbra piatte e naturali come mai prima. Top.',
     rating: 5,
+    when: '6 mesi fa',
   },
   {
-    name: 'Alessia R.',
-    treatment: 'Tossina Botulinica',
-    text: 'Terza volta da Anton. Il risultato è sempre naturale, il viso rilassato senza quell\'effetto congelato che temevo. Studio pulitissimo, professionalità massima.',
+    name: 'Cristina Zanatta',
+    treatment: 'Filler Labbra · viene da Treviso',
+    story: 'Cliente dal 2021. Fa 1h30 di strada per venire a Verona.',
+    text:
+      'Sono sua cliente dal 2021. Faccio più di un\'ora e mezza di strada da Treviso per venire a Verona, e continuo senza esitazione: la fiducia che ho nel suo lavoro è totale.',
     rating: 5,
+    when: '2 mesi fa',
   },
   {
-    name: 'Federica C.',
-    treatment: 'Biorivitalizzazione',
-    text: 'Pelle spenta e disidratata dopo l\'inverno. Dopo il trattamento, letteralmente luminosa. Il dottore ha un approccio molto medico: spiega tutto, non spinge su trattamenti inutili.',
+    name: 'Vanessa Sivi',
+    treatment: 'Filler Labbra + Botox · 3 anni',
+    story: '3 anni di trattamenti combinati. Risultato continuativo nel tempo.',
+    text:
+      'Migliore dottore di Verona. Sono tre anni che mi esegue il filler labbra e mi ha cambiato il viso. Settimana scorsa abbiamo ripreso il Botox: espressioni più rilassate, pelle più giovane.',
     rating: 5,
+    when: '2 mesi fa',
   },
   {
-    name: 'Martina B.',
-    treatment: 'Armonizzazione Facciale',
-    text: 'Piano completo: zigomi, mento e labbra. Risultato armonioso e naturale. Non sembro operata, sembro riposata e in forma. Migliore investimento degli ultimi anni.',
+    name: 'Sara Draisci',
+    treatment: 'Filler Labbra · cliente dal 2023',
+    story: '3 trattamenti, sempre lo stesso medico.',
+    text:
+      'Professionalità, naturalezza e fiducia totale. Dopo tre trattamenti di filler labbra confermo che non cambierei professionista per nulla al mondo. Sa valorizzare i lineamenti senza stravolgerli.',
     rating: 5,
+    when: '2 mesi fa',
   },
   {
-    name: 'Chiara F.',
-    treatment: 'Botulino Massetere',
-    text: 'Bruxismo da anni. Con il botulino nel massetere le tensioni sono sparite e l\'ovale del viso si è assottigliato. Effetto immediato. Tornerò sicuramente.',
+    name: 'Alice Cavaler',
+    treatment: 'Percorso continuativo',
+    story: 'Trattamento dopo trattamento, non solo tecnica — relazione.',
+    text:
+      'Prima di essere un dottore è una persona d\'oro con grande umanità. Seduta dopo seduta sta riportando le mie labbra a uno stato che pensavo non fosse più possibile. Grato.',
     rating: 5,
+    when: '5 mesi fa',
   },
 ]
 
@@ -81,7 +104,7 @@ export default function SocialProof() {
 
   return (
     <section
-      className="py-24 bg-[#0a0a0a] border-t border-white/10 relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 bg-[#0a0a0a] border-t border-white/10 relative overflow-hidden"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -90,7 +113,7 @@ export default function SocialProof() {
 
       <div className="mx-auto max-w-6xl relative z-10 px-6">
         {/* Header */}
-        <div className="mb-16 text-center">
+        <div className="mb-10 md:mb-12 text-center">
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -100,15 +123,36 @@ export default function SocialProof() {
           >
             Cosa dicono i pazienti.
           </motion.h2>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+
+          {/* Google rating badge */}
+          <motion.a
+            href={GOOGLE_REVIEWS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-white/60 max-w-2xl mx-auto text-lg"
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 hover:border-[#C9A97A]/40 hover:bg-white/[0.07] transition-colors"
           >
-            Risultati reali e storie vere.
-          </motion.p>
+            <span className="text-2xl font-bold text-white tabular-nums">{AVG_RATING}</span>
+            <span className="flex gap-0.5">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star
+                  key={i}
+                  size={14}
+                  className={
+                    i < Math.round(AVG_RATING)
+                      ? 'fill-[#C9A97A] text-[#C9A97A]'
+                      : 'text-white/20'
+                  }
+                />
+              ))}
+            </span>
+            <span className="text-sm text-white/65">
+              su {TOTAL_REVIEWS} recensioni Google
+            </span>
+          </motion.a>
         </div>
 
         {/* Carousel */}
@@ -137,22 +181,30 @@ export default function SocialProof() {
                       animate="center"
                       exit="exit"
                       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                      className="relative bg-white/[0.03] border border-white/10 rounded-2xl p-8 flex flex-col hover:bg-white/[0.05] hover:border-[#C9A97A]/30 transition-colors duration-300 h-[280px]"
+                      className="relative bg-white/[0.03] border border-white/10 rounded-2xl p-7 flex flex-col hover:bg-white/[0.05] hover:border-[#C9A97A]/30 transition-colors duration-300 h-[340px]"
                     >
                       <Quote className="absolute top-6 right-6 text-white/10 w-7 h-7" />
 
-                      <div className="flex gap-1 mb-5">
+                      <div className="flex gap-1 mb-3">
                         {Array.from({ length: t.rating }).map((_, i) => (
                           <Star key={i} size={14} className="fill-[#C9A97A] text-[#C9A97A]" />
                         ))}
                       </div>
+
+                      {/* Story line — Yasmin storyfication */}
+                      <p className="text-[#C9A97A]/85 text-xs italic leading-relaxed mb-3">
+                        {t.story}
+                      </p>
 
                       <p className="text-white/75 text-sm leading-relaxed flex-grow">
                         &ldquo;{t.text}&rdquo;
                       </p>
 
                       <div className="mt-auto border-t border-white/10 pt-4">
-                        <p className="text-white font-medium text-sm">{t.name}</p>
+                        <div className="flex items-baseline justify-between gap-3">
+                          <p className="text-white font-medium text-sm truncate">{t.name}</p>
+                          <p className="text-white/30 text-xs shrink-0">{t.when}</p>
+                        </div>
                         <p className="text-[#C9A97A] text-xs mt-0.5">{t.treatment}</p>
                       </div>
                     </motion.div>
@@ -204,6 +256,19 @@ export default function SocialProof() {
           >
             <ChevronRight size={16} />
           </button>
+        </div>
+
+        {/* Leggi tutte */}
+        <div className="mt-10 text-center">
+          <a
+            href={GOOGLE_REVIEWS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm text-white/55 hover:text-[#C9A97A] transition-colors"
+          >
+            Leggi tutte le {TOTAL_REVIEWS} recensioni su Google
+            <ChevronRight size={14} />
+          </a>
         </div>
 
       </div>

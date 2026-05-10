@@ -72,6 +72,12 @@ const trattamenti = [
   },
 ]
 
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void
+  }
+}
+
 export default function Trattamenti() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const sectionRef = useRef<HTMLElement>(null)
@@ -79,13 +85,17 @@ export default function Trattamenti() {
   const rawY = useTransform(scrollYProgress, [0, 1], [20, -20])
   const titleY = useSpring(rawY, { stiffness: 60, damping: 20 })
 
-  const handlePrenotaClick = () => {
+  const handlePrenotaClick = (trattamento: string) => {
+    window.fbq?.('track', 'ViewContent', {
+      content_name: trattamento,
+      content_category: 'Trattamento',
+    })
     const el = document.querySelector('#prenota')
     if (el) el.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
-    <section ref={sectionRef} id="trattamenti" className="bg-[#0a0a0a] py-32 px-6">
+    <section ref={sectionRef} id="trattamenti" className="bg-[#0a0a0a] py-16 sm:py-24 md:py-32 px-6">
       <div className="mx-auto max-w-4xl">
         {/* Header */}
         <motion.div
@@ -94,7 +104,7 @@ export default function Trattamenti() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
           <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-white/90 mb-4">
             I trattamenti.
@@ -146,7 +156,7 @@ export default function Trattamenti() {
                 </div>
 
                 <button
-                  onClick={handlePrenotaClick}
+                  onClick={() => handlePrenotaClick(t.nome)}
                   className={`shrink-0 flex items-center gap-1.5 text-sm font-medium rounded-full px-4 py-1.5 transition-all duration-200 cursor-pointer ${
                     hoveredIndex === i
                       ? 'bg-[#C9A97A] text-black'

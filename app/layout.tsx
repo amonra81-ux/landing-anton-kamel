@@ -45,33 +45,115 @@ export const metadata: Metadata = {
   },
 }
 
-const jsonLd = {
+const physicianSchema = {
   '@context': 'https://schema.org',
   '@type': 'Physician',
   name: 'Dr. Anton Kamel',
-  description: 'Medico estetico a Verona specializzato in medicina estetica non chirurgica: filler, botulino, rinofiller, biorivitalizzazione, fili di lifting.',
+  description:
+    'Medico chirurgo specializzato in medicina estetica a Verona. Ideatore della tecnica Anton Lips, esperto Russian Lips. Filler, botulino, rinofiller, biorivitalizzazione.',
   url: 'https://antonkamel.it',
   telephone: '+39 380 103 5896',
   image: 'https://antonkamel.it/og-image.jpg',
+  priceRange: '€€€',
   address: {
     '@type': 'PostalAddress',
+    streetAddress: 'Via San Lucillo 16',
     addressLocality: 'Verona',
+    postalCode: '37100',
     addressRegion: 'VR',
     addressCountry: 'IT',
   },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 45.4425759,
+    longitude: 10.9410775,
+  },
   sameAs: [
     'https://www.instagram.com/dr.antonlips/',
+    'https://www.facebook.com/dott.antonkamel/',
+    'https://www.doctolib.it/medico-estetico/verona/anton-kamel',
+    'https://skipres.com/antonkamel',
   ],
   medicalSpecialty: 'PlasticSurgery',
+  alumniOf: [
+    { '@type': 'CollegeOrUniversity', name: 'Università degli Studi di Verona' },
+    { '@type': 'CollegeOrUniversity', name: 'Università degli Studi di Padova' },
+  ],
+  knowsLanguage: ['it', 'en', 'ar'],
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.7',
+    reviewCount: '79',
+    bestRating: '5',
+    worstRating: '1',
+  },
   availableService: [
-    { '@type': 'MedicalProcedure', 'name': 'Filler labbra' },
-    { '@type': 'MedicalProcedure', 'name': 'Filler viso' },
-    { '@type': 'MedicalProcedure', 'name': 'Rinofiller' },
-    { '@type': 'MedicalProcedure', 'name': 'Tossina botulinica' },
-    { '@type': 'MedicalProcedure', 'name': 'Biorivitalizzazione' },
-    { '@type': 'MedicalProcedure', 'name': 'Fili di lifting riassorbibili' },
-    { '@type': 'MedicalProcedure', 'name': 'Skinbooster' },
-    { '@type': 'MedicalProcedure', 'name': 'Peeling chimico' },
+    { '@type': 'MedicalProcedure', name: 'Filler labbra (Anton Lips Technique)' },
+    { '@type': 'MedicalProcedure', name: 'Filler labbra (Russian Lips Technique)' },
+    { '@type': 'MedicalProcedure', name: 'Filler viso (zigomi, mento, mandibola)' },
+    { '@type': 'MedicalProcedure', name: 'Rinofiller' },
+    { '@type': 'MedicalProcedure', name: 'Tossina botulinica' },
+    { '@type': 'MedicalProcedure', name: 'Botulino massetere (bruxismo)' },
+    { '@type': 'MedicalProcedure', name: 'Biorivitalizzazione' },
+    { '@type': 'MedicalProcedure', name: 'Fili di lifting riassorbibili' },
+    { '@type': 'MedicalProcedure', name: 'Skinbooster' },
+    { '@type': 'MedicalProcedure', name: 'Peeling chimico' },
+    { '@type': 'MedicalProcedure', name: 'Armonizzazione facciale' },
+  ],
+}
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'È necessario un consulto prima di qualsiasi trattamento?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Sì, sempre. Prima di qualsiasi trattamento il Dr. Anton Kamel effettua una visita conoscitiva per valutare le tue esigenze, le caratteristiche del viso e spiegare cosa aspettarsi.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'I risultati sembreranno naturali?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'È la priorità assoluta. I trattamenti sono calibrati sulle proporzioni naturali del paziente: nessun effetto gonfiato o rifatto, solo una versione più riposata e armoniosa.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Quanto durano i risultati del filler?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'I filler con acido ialuronico durano in media tra i 9 e i 18 mesi, a seconda del tipo, della zona trattata e del metabolismo individuale. Il botox dura circa 4–6 mesi.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'I trattamenti fanno male?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'La maggior parte dei trattamenti iniettivi prevede creme anestetiche topiche o prodotti già contenenti anestetico locale (lidocaina nei filler). Il fastidio è generalmente lieve e tollerabile.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Cos\'è la tecnica Anton Lips?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Anton Lips Technique è una tecnica proprietaria di filler labbra ideata dal Dr. Anton Kamel. Punta a un risultato naturale, definito e simmetrico, evitando l\'effetto «papera» tipico di tecniche standard.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Dove si trova lo studio?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Lo studio del Dr. Anton Kamel è in Via San Lucillo 16, 37100 Verona. Si prenota online tramite Skipres o telefonicamente al 380 103 5896.',
+      },
+    },
   ],
 }
 
@@ -85,7 +167,11 @@ export default function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(physicianSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
       </head>
       <body className="font-sans antialiased">

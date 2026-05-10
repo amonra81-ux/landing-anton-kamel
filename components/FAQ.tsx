@@ -59,7 +59,7 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
-    <section id="faq" className="bg-[#0a0a0a] py-32 px-6">
+    <section id="faq" className="bg-[#0a0a0a] py-16 sm:py-24 md:py-32 px-6">
       <div className="mx-auto max-w-3xl">
         {/* Header */}
         <motion.div
@@ -67,7 +67,7 @@ export default function FAQ() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
           <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-white/90 mb-4">
             Hai qualche domanda?
