@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, MessageCircle } from 'lucide-react'
+import Link from 'next/link'
 import { useBooking } from './BookingProvider'
 
 const WA_URL = 'https://wa.me/393801035896'
@@ -74,11 +75,17 @@ export default function Navbar() {
         }`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          {/* Logo */}
-          <div>
-            <p className="text-sm font-bold tracking-widest text-white">ANTON KAMEL</p>
+          {/* Logo — link to home */}
+          <Link
+            href={`${BASE_PATH}/`}
+            className="group block"
+            aria-label="Home — Dr. Anton Kamel"
+          >
+            <p className="text-sm font-bold tracking-widest text-white group-hover:text-[#C9A97A] transition-colors">
+              ANTON KAMEL
+            </p>
             <p className="text-xs text-white/40 tracking-wide">Medico Estetico · Verona</p>
-          </div>
+          </Link>
 
           {/* Desktop Links */}
           <div className="hidden items-center gap-7 md:flex">
