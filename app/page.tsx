@@ -7,6 +7,7 @@ import Trattamenti from '@/components/Trattamenti'
 import SocialProof from '@/components/SocialProof'
 import WidgetPrenotazione from '@/components/WidgetPrenotazione'
 import FAQ from '@/components/FAQ'
+import GlobalAcademy from '@/components/GlobalAcademy'
 import Footer from '@/components/Footer'
 import StickyCTA from '@/components/StickyCTA'
 
@@ -22,6 +23,7 @@ export default function Home() {
       <SocialProof />
       <WidgetPrenotazione />
       <FAQ />
+      <GlobalAcademy />
       <Footer />
       <StickyCTA />
     </main>
