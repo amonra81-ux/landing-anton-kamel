@@ -78,20 +78,22 @@ declare global {
   }
 }
 
+import { useBooking } from './BookingProvider'
+
 export default function Trattamenti() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const sectionRef = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start end', 'end start'] })
   const rawY = useTransform(scrollYProgress, [0, 1], [20, -20])
   const titleY = useSpring(rawY, { stiffness: 60, damping: 20 })
+  const { open } = useBooking()
 
   const handlePrenotaClick = (trattamento: string) => {
     window.fbq?.('track', 'ViewContent', {
       content_name: trattamento,
       content_category: 'Trattamento',
     })
-    const el = document.querySelector('#prenota')
-    if (el) el.scrollIntoView({ behavior: 'smooth' })
+    open(`Trattamento: ${trattamento}`)
   }
 
   return (

@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { Star, ChevronDown } from 'lucide-react'
+import { useBooking } from './BookingProvider'
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
@@ -12,21 +13,10 @@ const trust = [
   { value: '4.7', label: '79 recensioni Google', icon: Star },
 ]
 
-declare global {
-  interface Window {
-    fbq?: (...args: unknown[]) => void
-  }
-}
-
 export default function HeroLight() {
-  const handlePrenotaClick = () => {
-    window.fbq?.('track', 'InitiateCheckout', {
-      content_name: 'Hero CTA',
-      content_category: 'Prenotazione',
-    })
-    const el = document.querySelector('#prenota')
-    if (el) el.scrollIntoView({ behavior: 'smooth' })
-  }
+  const { open } = useBooking()
+
+  const handlePrenotaClick = () => open('Hero CTA')
 
   const handleScopriClick = () => {
     const el = document.querySelector('#trattamenti')

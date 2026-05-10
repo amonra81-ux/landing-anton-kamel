@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { GraduationCap, Sparkles, MapPin, Languages, Award, Calendar } from 'lucide-react'
 import Link from 'next/link'
+import { useBooking } from './BookingProvider'
 
 const formacao = [
   { year: '2014', title: 'Laurea in Medicina e Chirurgia', institution: 'Università di Verona' },
@@ -34,6 +35,7 @@ const techniques = [
 ]
 
 export default function ChiSono() {
+  const { open } = useBooking()
   return (
     <>
       {/* Hero introduttivo */}
@@ -231,13 +233,14 @@ export default function ChiSono() {
           </p>
 
           <div className="inline-flex flex-col sm:flex-row gap-3 sm:gap-4">
-            <Link
-              href="/#prenota"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#C9A97A] px-8 py-4 text-black font-bold text-base hover:scale-[1.03] active:scale-[0.98] transition-transform"
+            <button
+              onClick={() => open('Chi Sono CTA')}
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#C9A97A] px-8 py-4 text-black font-bold text-base hover:scale-[1.03] active:scale-[0.98] transition-transform cursor-pointer"
               style={{ boxShadow: '0 0 30px rgba(201,169,122,0.35)' }}
             >
+              <Calendar size={16} />
               Prenota consulto
-            </Link>
+            </button>
             <Link
               href="/chiamami"
               className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-4 text-white font-medium text-base hover:bg-white/10 transition-colors"

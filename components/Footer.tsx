@@ -1,6 +1,7 @@
 'use client'
 
 import { MapPin, Phone, Clock } from 'lucide-react'
+import { useBooking } from './BookingProvider'
 
 function InstagramIcon({ size = 18 }: { size?: number }) {
   return (
@@ -20,28 +21,34 @@ function WhatsappIcon({ size = 18 }: { size?: number }) {
   )
 }
 
-const quickLinks = [
-  { href: '/chi-sono', label: 'Chi sono', external: true },
-  { href: '/#trattamenti', label: 'Trattamenti', external: true },
-  { href: '/#faq', label: 'FAQ', external: true },
-  { href: '/chiamami', label: 'Ti richiamo io', external: true },
-  { href: '/#prenota', label: 'Prenota', external: true },
+type QuickLink = {
+  href: string
+  label: string
+  bookingTrigger?: boolean
+}
+const quickLinks: QuickLink[] = [
+  { href: '/chi-sono', label: 'Chi sono' },
+  { href: '/#trattamenti', label: 'Trattamenti' },
+  { href: '/#faq', label: 'FAQ' },
+  { href: '/chiamami', label: 'Ti richiamo io' },
+  { href: '#booking', label: 'Prenota', bookingTrigger: true },
 ]
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 export default function Footer() {
-  const handleClick = (href: string) => {
-    if (href.startsWith('/#')) {
-      // Cross-page hash navigation
-      window.location.assign(`${BASE_PATH}${href}`)
+  const { open } = useBooking()
+
+  const handleClick = (link: QuickLink) => {
+    if (link.bookingTrigger) {
+      open('Footer Prenota')
       return
     }
-    if (href.startsWith('/')) {
-      window.location.assign(`${BASE_PATH}${href}`)
+    if (link.href.startsWith('/')) {
+      window.location.assign(`${BASE_PATH}${link.href}`)
       return
     }
-    const el = document.querySelector(href)
+    const el = document.querySelector(link.href)
     if (el) el.scrollIntoView({ behavior: 'smooth' })
   }
 
@@ -104,7 +111,7 @@ export default function Footer() {
               {quickLinks.map((link) => (
                 <li key={link.href}>
                   <button
-                    onClick={() => handleClick(link.href)}
+                    onClick={() => handleClick(link)}
                     className="text-white/60 text-sm hover:text-white transition-colors cursor-pointer text-left"
                   >
                     {link.label}

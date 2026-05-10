@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { Calendar, Phone } from 'lucide-react'
+import { useBooking } from './BookingProvider'
 
 interface Props {
   eyebrow?: string
@@ -10,6 +11,8 @@ interface Props {
 }
 
 export default function CTAFinale({ eyebrow = 'Pronta?', title, subtitle }: Props) {
+  const { open } = useBooking()
+
   return (
     <section className="py-14 md:py-20 px-6 bg-[#0a0a0a] border-t border-white/10">
       <div className="mx-auto max-w-3xl text-center">
@@ -25,14 +28,14 @@ export default function CTAFinale({ eyebrow = 'Pronta?', title, subtitle }: Prop
           </p>
         )}
         <div className="inline-flex flex-col sm:flex-row gap-3 sm:gap-4">
-          <Link
-            href="/#prenota"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-[#C9A97A] px-8 py-4 text-black font-bold text-base hover:scale-[1.03] active:scale-[0.98] transition-transform"
+          <button
+            onClick={() => open(`CTA Finale: ${title}`)}
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-[#C9A97A] px-8 py-4 text-black font-bold text-base hover:scale-[1.03] active:scale-[0.98] transition-transform cursor-pointer"
             style={{ boxShadow: '0 0 30px rgba(201,169,122,0.35)' }}
           >
             <Calendar size={16} />
             Prenota consulto
-          </Link>
+          </button>
           <Link
             href="/chiamami"
             className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-4 text-white font-medium text-base hover:bg-white/10 transition-colors"
