@@ -36,7 +36,7 @@ export default function HeroLight() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[58%_22%] md:object-[55%_30%]"
+          className="object-cover object-[68%_25%] md:object-[58%_30%]"
           style={{ filter: 'brightness(0.82) contrast(1.05) saturate(1.05)' }}
         />
         {/* Gradient overlays — più scuri in basso per leggere CTA */}
