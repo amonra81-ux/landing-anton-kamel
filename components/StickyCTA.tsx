@@ -62,8 +62,7 @@ export default function StickyCTA() {
               style={{ boxShadow: '0 0 24px rgba(201,169,122,0.35)' }}
             >
               <Calendar size={18} />
-              Prenota consulto
-            </button>
+              Prenota la consulenza            </button>
           </div>
         </motion.div>
       )}

@@ -196,7 +196,7 @@ export default function Chiamami() {
         {/* Note onesta */}
         <p className="mt-8 text-center text-xs text-white/35 italic max-w-md mx-auto leading-relaxed">
           Pronta a prenotare direttamente? Apri il calendario online —
-          è il modo più rapido per fissare il consulto.
+          è il modo più rapido per fissare la consulenza.
         </p>
       </div>
     </section>

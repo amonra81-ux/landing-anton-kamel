@@ -34,8 +34,7 @@ export default function CTAFinale({ eyebrow = 'Pronta?', title, subtitle }: Prop
             style={{ boxShadow: '0 0 30px rgba(201,169,122,0.35)' }}
           >
             <Calendar size={16} />
-            Prenota consulto
-          </button>
+            Prenota la consulenza          </button>
           <Link
             href="/chiamami"
             className="inline-flex items-center justify-center gap-2 rounded-full border border-[#25D366]/40 bg-[#25D366]/[0.08] px-8 py-4 text-[#25D366] font-medium text-base hover:bg-[#25D366]/[0.15] transition-colors"

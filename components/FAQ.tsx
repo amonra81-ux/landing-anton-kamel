@@ -6,7 +6,7 @@ import { Plus, Minus } from 'lucide-react'
 
 const faq = [
   {
-    q: 'È necessario un consulto prima di qualsiasi trattamento?',
+    q: 'È necessaria una consulenza prima di qualsiasi trattamento?',
     a: 'Sì, sempre. Prima di procedere con qualsiasi trattamento, Anton Kamel effettua una visita conoscitiva per capire le tue esigenze, valutare le caratteristiche del tuo viso e spiegarti in modo chiaro cosa aspettarti. Non si inizia mai senza una conversazione.',
   },
   {
@@ -19,7 +19,7 @@ const faq = [
   },
   {
     q: 'Quanto durano i risultati del filler?',
-    a: 'Dipende dal tipo di filler, dalla zona trattata e dal metabolismo individuale. In media, i filler con acido ialuronico durano tra i 9 e i 18 mesi. Il botox ha una durata di circa 4–6 mesi. Durante il consulto riceverai indicazioni precise per il tuo caso.',
+    a: 'Dipende dal tipo di filler, dalla zona trattata e dal metabolismo individuale. In media, i filler con acido ialuronico durano tra i 9 e i 18 mesi. Il botox ha una durata di circa 4–6 mesi. Durante la consulenza riceverai indicazioni precise per il tuo caso.',
   },
   {
     q: 'Posso fare i trattamenti se sono in gravidanza o allattamento?',
@@ -43,11 +43,11 @@ const faq = [
   },
   {
     q: 'Posso combinare più trattamenti nella stessa seduta?',
-    a: 'In molti casi sì, e spesso è la scelta più efficace. Durante il consulto verrà valutato insieme a te un piano di trattamento completo, stabilendo eventuali sequenze e tempistiche ottimali per ottenere il risultato migliore in sicurezza.',
+    a: 'In molti casi sì, e spesso è la scelta più efficace. Durante la consulenza verrà valutato insieme a te un piano di trattamento completo, stabilendo eventuali sequenze e tempistiche ottimali per ottenere il risultato migliore in sicurezza.',
   },
   {
     q: 'Ci sono controindicazioni?',
-    a: 'Alcune malattie croniche, terapie farmacologiche in corso e allergie accertate possono rappresentare controindicazioni o richiedere un approccio modificato. È fondamentale comunicare al medico il proprio stato di salute completo durante il consulto. La visita preliminare serve proprio a questo.',
+    a: 'Alcune malattie croniche, terapie farmacologiche in corso e allergie accertate possono rappresentare controindicazioni o richiedere un approccio modificato. È fondamentale comunicare al medico il proprio stato di salute completo durante la consulenza. La visita preliminare serve proprio a questo.',
   },
   {
     q: 'Come mi preparo alla prima visita?',
@@ -73,7 +73,7 @@ export default function FAQ() {
             Hai qualche domanda?
           </h2>
           <p className="text-white/60 text-lg">
-            Le risposte più comuni. Per arrivare al consulto già informata/o.
+            Le risposte più comuni. Per arrivare alla consulenza già informata/o.
           </p>
         </motion.div>
 

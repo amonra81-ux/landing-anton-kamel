@@ -11,9 +11,9 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Dr. Anton Kamel — Medico Estetico a Verona | Consulto & Prenotazione',
+  title: 'Dr. Anton Kamel — Medico Estetico a Verona | Consulenza & Prenotazione',
   description:
-    'Medicina estetica premium a Verona. Filler, botulino, rinofiller, biorivitalizzazione e trattamenti personalizzati con il Dr. Anton Kamel. Prenota il tuo consulto online.',
+    'Medicina estetica premium a Verona. Filler, botulino, rinofiller, biorivitalizzazione e trattamenti personalizzati con il Dr. Anton Kamel. Prenota la tua consulenza online.',
   alternates: {
     canonical: 'https://antonkamel.it',
   },
@@ -109,7 +109,7 @@ const faqSchema = {
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'È necessario un consulto prima di qualsiasi trattamento?',
+      name: 'È necessaria una consulenza prima di qualsiasi trattamento?',
       acceptedAnswer: {
         '@type': 'Answer',
         text: 'Sì, sempre. Prima di qualsiasi trattamento il Dr. Anton Kamel effettua una visita conoscitiva per valutare le tue esigenze, le caratteristiche del viso e spiegare cosa aspettarsi.',

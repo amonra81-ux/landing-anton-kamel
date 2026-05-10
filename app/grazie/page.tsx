@@ -33,7 +33,7 @@ const checklist = [
   "Porta l'elenco dei farmaci che assumi, se presenti",
   'Se hai allergie accertate, segnalalo anche in anticipo',
   "Non è necessaria nessun'altra preparazione speciale",
-  'Il consulto è un momento di ascolto — non ci sono domande sbagliate',
+  'La consulenza è un momento di ascolto — non ci sono domande sbagliate',
   "Porta con te eventuali foto di riferimento se hai un'idea di risultato in mente",
 ]
 
@@ -45,12 +45,12 @@ export default function GraziePage() {
     const trackConversion = () => {
       // Schedule = evento standard Meta per prenotazioni appuntamenti
       window.fbq?.('track', 'Schedule', {
-        content_name: 'Consulto Dr. Anton Kamel',
+        content_name: 'Consulenza Dr. Anton Kamel',
         content_category: 'Medicina Estetica',
       })
       // CompleteRegistration = fallback per campagne ottimizzate su registrazioni
       window.fbq?.('track', 'CompleteRegistration', {
-        content_name: 'Prenotazione Consulto Anton Kamel',
+        content_name: 'Prenotazione Consulenza Anton Kamel',
         status: 'confirmed',
       })
     }
@@ -66,7 +66,7 @@ export default function GraziePage() {
   const handleInvia = () => {
     if (!notaLibera.trim()) return
     const msg = encodeURIComponent(
-      `Ciao Anton, ho appena prenotato un consulto. Il trattamento che ho in mente: ${notaLibera}`
+      `Ciao Anton, ho appena prenotato una consulenza. Il trattamento che ho in mente: ${notaLibera}`
     )
     window.open(`https://wa.me/393801035896?text=${msg}`, '_blank')
     setInviato(true)
