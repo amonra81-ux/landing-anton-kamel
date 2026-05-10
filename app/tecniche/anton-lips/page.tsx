@@ -4,7 +4,7 @@ import Footer from '@/components/Footer'
 import StickyCTA from '@/components/StickyCTA'
 import PageHero from '@/components/PageHero'
 import CTAFinale from '@/components/CTAFinale'
-import { Sparkles, Target, Heart, ShieldCheck } from 'lucide-react'
+import { Sparkles, Target, Heart, ShieldCheck, MessageCircle, Pencil, Syringe, RefreshCw } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Anton Lips Technique™ — Filler Labbra Verona | Dr. Anton Kamel',
@@ -146,50 +146,75 @@ export default function Page() {
               Iter trattamento.
             </h2>
           </div>
-          <ol className="space-y-6">
+          {/* Timeline verticale con connettore animato */}
+          <ol className="relative pl-10 sm:pl-14">
+            {/* Connettore continuo */}
+            <span
+              aria-hidden
+              className="absolute left-[1.0625rem] sm:left-[1.4375rem] top-3 bottom-3 w-px bg-gradient-to-b from-[#C9A97A] via-[#C9A97A]/40 to-[#C9A97A]/0"
+            />
+
             {[
               {
                 n: '01',
+                icon: MessageCircle,
                 title: 'Consulenza valutativa',
                 text:
                   'Conversazione di 30-45 minuti. Valuto la tua anatomia, ascolto cosa vorresti, ti spiego cosa è possibile e cosa no.',
               },
               {
                 n: '02',
+                icon: Pencil,
                 title: 'Disegno personalizzato',
                 text:
                   'Mappo il labbro superiore e inferiore, segno i punti di iniezione su misura. Ti mostro il piano prima di procedere.',
               },
               {
                 n: '03',
+                icon: Syringe,
                 title: 'Trattamento (30-45 min)',
                 text:
                   'Crema anestetica + filler con lidocaina. Tecnica «multi-punto» con micro-iniezioni precise. Risultato visibile subito.',
               },
               {
                 n: '04',
+                icon: RefreshCw,
                 title: 'Controllo a 14-21 giorni',
                 text:
                   'Verifico il risultato finale (post-gonfiore). Se serve, aggiustiamo in seduta gratuita. Mai eccessi al primo colpo.',
               },
-            ].map((s) => (
-              <li
-                key={s.n}
-                className="flex gap-5 rounded-2xl border border-white/10 bg-white/[0.03] p-5 md:p-6"
-              >
-                <span className="shrink-0 text-[#C9A97A] font-bold text-2xl md:text-3xl tabular-nums">
-                  {s.n}
-                </span>
-                <div>
-                  <h3 className="text-lg md:text-xl font-semibold text-white/95 mb-1">
-                    {s.title}
-                  </h3>
-                  <p className="text-white/60 text-sm md:text-base leading-relaxed">
-                    {s.text}
-                  </p>
-                </div>
-              </li>
-            ))}
+            ].map((s, i) => {
+              const Icon = s.icon
+              return (
+                <li key={s.n} className="relative pb-8 last:pb-0">
+                  {/* Dot icon */}
+                  <span
+                    className="absolute -left-10 sm:-left-14 top-0 flex items-center justify-center w-9 h-9 rounded-full border-2 border-[#C9A97A] bg-[#0a0a0a] text-[#C9A97A]"
+                    style={{ boxShadow: '0 0 20px rgba(201,169,122,0.18)' }}
+                  >
+                    <Icon size={14} strokeWidth={2.2} />
+                  </span>
+
+                  <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 md:p-6">
+                    <div className="flex items-baseline gap-3 mb-2">
+                      <span className="text-[#C9A97A] font-mono text-xs tracking-wider tabular-nums">
+                        STEP {s.n}
+                      </span>
+                      <span className="text-white/15">·</span>
+                      <span className="text-white/35 text-xs uppercase tracking-wider">
+                        {i === 0 ? 'oggi' : i === 1 ? 'stessa visita' : i === 2 ? 'in studio' : '+14-21 giorni'}
+                      </span>
+                    </div>
+                    <h3 className="text-lg md:text-xl font-semibold text-white/95 mb-1">
+                      {s.title}
+                    </h3>
+                    <p className="text-white/60 text-sm md:text-base leading-relaxed">
+                      {s.text}
+                    </p>
+                  </div>
+                </li>
+              )
+            })}
           </ol>
         </div>
       </section>

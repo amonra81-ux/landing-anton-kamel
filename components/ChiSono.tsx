@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { GraduationCap, Sparkles, Stethoscope, Award, Calendar, MessageCircle } from 'lucide-react'
+import { GraduationCap, Sparkles, Stethoscope, Award, Calendar, MessageCircle, Languages } from 'lucide-react'
 import Link from 'next/link'
 import { useBooking } from './BookingProvider'
 
@@ -199,19 +199,32 @@ export default function ChiSono() {
 
       {/* Quick facts */}
       <section className="py-12 md:py-16 px-6 bg-[#0a0a0a] border-t border-white/10">
-        <div className="mx-auto max-w-5xl grid grid-cols-2 md:grid-cols-4 gap-5">
+        <div className="mx-auto max-w-6xl grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-5">
           {[
-            { icon: Calendar, label: 'Anni di esperienza', value: '10+' },
+            { icon: Calendar, label: 'Anni esperienza', value: '10+' },
             { icon: Award, label: 'Recensioni Google', value: '4.7 / 5' },
-            { icon: GraduationCap, label: 'Master in Med. Estetica', value: '2' },
+            { icon: GraduationCap, label: 'Master Med. Estetica', value: '2' },
             { icon: Stethoscope, label: 'Pazienti trattati', value: '1500+' },
+            {
+              icon: Languages,
+              label: 'Anton parla',
+              value: 'IT · EN · ض',
+              valueClass: 'text-xl md:text-2xl',
+              tooltip:
+                'Italiano · English · العربية. Sito disponibile in italiano.',
+            },
           ].map((f) => (
             <div
               key={f.label}
+              title={f.tooltip}
               className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 text-center"
             >
               <f.icon size={20} className="mx-auto mb-3 text-[#C9A97A]" />
-              <p className="text-2xl md:text-3xl font-bold text-white tabular-nums">{f.value}</p>
+              <p
+                className={`font-bold text-white tabular-nums ${f.valueClass || 'text-2xl md:text-3xl'}`}
+              >
+                {f.value}
+              </p>
               <p className="mt-1 text-[11px] uppercase tracking-wider text-white/45">{f.label}</p>
             </div>
           ))}
