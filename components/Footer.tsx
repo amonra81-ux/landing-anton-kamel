@@ -221,6 +221,7 @@ export default function Footer() {
             Le informazioni presenti in questo sito hanno finalità informative e non sostituiscono
             in alcun modo una visita medica. Le immagini di trattamenti e risultati sono indicative;
             i risultati possono variare in base alle caratteristiche individuali del paziente.
+            I trattamenti di medicina estetica sono riservati a soggetti maggiorenni (18+).
           </p>
         </div>
       </div>
