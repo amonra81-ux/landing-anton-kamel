@@ -16,6 +16,7 @@ type QuickLink = {
 const quickLinks: QuickLink[] = [
   { href: '/chi-sono', label: 'Chi sono' },
   { href: '/#trattamenti', label: 'Trattamenti' },
+  { href: '/contatti', label: 'Contatti' },
   { href: '/#faq', label: 'FAQ' },
   { href: '/chiamami', label: 'Scrivimi su WhatsApp' },
   { href: '#booking', label: 'Prenota', bookingTrigger: true },

@@ -55,13 +55,13 @@ export default function WidgetPrenotazione() {
               </div>
               <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5">
                 <Clock size={14} className="text-[#C9A97A]" />
-                <span className="text-xs text-white/55">45 min consulenza</span>
+                <span className="text-xs text-white/55">20 min · 80 €</span>
               </div>
             </div>
 
             <p className="mt-5 text-white/40 text-xs leading-relaxed max-w-xs mx-auto">
-              La consulenza è a pagamento. Costo e disponibilità reali sono
-              indicati nel calendario di prenotazione.
+              Consulenza valutativa. Per altri trattamenti durata e prezzo nel
+              calendario di prenotazione.
             </p>
 
             <p className="mt-10 text-white/30 text-xs leading-relaxed max-w-sm mx-auto">
