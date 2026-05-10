@@ -2,13 +2,19 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Phone } from 'lucide-react'
+
+const TEL = '+393801035896'
+const TEL_DISPLAY = '380 103 5896'
+
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 const navLinks = [
-  { href: '#perche', label: 'Perché scegliermi', cta: false },
-  { href: '#trattamenti', label: 'Trattamenti', cta: false },
-  { href: '#faq', label: 'FAQ', cta: false },
-  { href: '#prenota', label: 'Prenota', cta: true },
+  { href: '/chi-sono', label: 'Chi sono', cta: false, page: true },
+  { href: '#trattamenti', label: 'Trattamenti', cta: false, page: false },
+  { href: '#faq', label: 'FAQ', cta: false, page: false },
+  { href: '/chiamami', label: 'Ti richiamo', cta: false, page: true },
+  { href: '#prenota', label: 'Prenota', cta: true, page: false },
 ]
 
 export default function Navbar() {
@@ -21,10 +27,19 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = (href: string, isPage: boolean) => {
     setMobileOpen(false)
-    const el = document.querySelector(href)
-    if (el) el.scrollIntoView({ behavior: 'smooth' })
+    if (isPage) {
+      window.location.assign(`${BASE_PATH}${href}`)
+      return
+    }
+    // Hash link: scroll su home page (se siamo già lì) o naviga + hash
+    if (typeof window !== 'undefined' && window.location.pathname.endsWith('/')) {
+      const el = document.querySelector(href)
+      if (el) el.scrollIntoView({ behavior: 'smooth' })
+      return
+    }
+    window.location.assign(`${BASE_PATH}/${href}`)
   }
 
   const desktopLinks = navLinks.filter((l) => !l.cta)
@@ -46,33 +61,49 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Links */}
-          <div className="hidden items-center gap-8 md:flex">
+          <div className="hidden items-center gap-7 md:flex">
             {desktopLinks.map((link) => (
               <button
                 key={link.href}
-                onClick={() => handleNavClick(link.href)}
+                onClick={() => handleNavClick(link.href, link.page)}
                 className="text-sm text-white/60 transition-colors duration-200 hover:text-white cursor-pointer"
               >
                 {link.label}
               </button>
             ))}
+            <a
+              href={`tel:${TEL}`}
+              className="inline-flex items-center gap-1.5 text-sm text-white/70 hover:text-white transition-colors"
+            >
+              <Phone size={14} className="text-[#C9A97A]" />
+              {TEL_DISPLAY}
+            </a>
             <button
-              onClick={() => handleNavClick(ctaLink.href)}
+              onClick={() => handleNavClick(ctaLink.href, ctaLink.page)}
               className="rounded-full border border-[#C9A97A] px-4 py-1.5 text-sm text-[#C9A97A] transition-all duration-200 hover:bg-[#C9A97A]/10 cursor-pointer"
             >
               {ctaLink.label}
             </button>
           </div>
 
-          {/* Mobile Hamburger */}
-          <button
-            className="md:hidden text-white/80 hover:text-white transition-colors"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label={mobileOpen ? 'Chiudi menu' : 'Apri menu'}
-            aria-expanded={mobileOpen}
-          >
-            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          {/* Mobile right side: phone + hamburger */}
+          <div className="flex items-center gap-1 md:hidden">
+            <a
+              href={`tel:${TEL}`}
+              aria-label={`Chiama ${TEL_DISPLAY}`}
+              className="flex items-center justify-center w-10 h-10 rounded-full text-[#C9A97A] active:scale-95 transition-transform"
+            >
+              <Phone size={18} />
+            </a>
+            <button
+              className="text-white/80 hover:text-white transition-colors p-2"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label={mobileOpen ? 'Chiudi menu' : 'Apri menu'}
+              aria-expanded={mobileOpen}
+            >
+              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -89,7 +120,7 @@ export default function Navbar() {
             {navLinks.map((link) => (
               <button
                 key={link.href}
-                onClick={() => handleNavClick(link.href)}
+                onClick={() => handleNavClick(link.href, link.page)}
                 className={`text-left text-lg font-medium transition-colors ${
                   link.cta ? 'text-[#C9A97A]' : 'text-white/70 hover:text-white'
                 }`}
