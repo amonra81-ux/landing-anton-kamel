@@ -150,54 +150,48 @@ export default function WavesHero() {
       role="region"
       aria-label="Dr. Anton Kamel — hero"
     >
-      {/* LAYER 1 — Foto Anton con maschera radial + padding-top per evitare badge zone */}
-      <div
-        className="absolute inset-0 pt-32 md:pt-24"
-        style={{
-          maskImage:
-            'radial-gradient(ellipse 95% 100% at center 50%, #000 55%, transparent 95%)',
-          WebkitMaskImage:
-            'radial-gradient(ellipse 95% 100% at center 50%, #000 55%, transparent 95%)',
-        }}
-      >
-        <Image
-          src={`${BASE_PATH}/anton-hero.jpg?v=8`}
-          alt="Dr. Anton Kamel — Medico Estetico Verona"
-          fill
-          priority
-          sizes="100vw"
-          className="object-contain object-top"
-          style={{ filter: 'brightness(0.8) contrast(1.05) saturate(1.05)' }}
-        />
-      </div>
-
-      {/* LAYER 2 — Glow radiale dorato dietro Anton */}
+      {/* LAYER 1 — Glow radiale dorato dietro avatar */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] md:h-[800px] md:w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#C9A97A]/[0.10] blur-[160px]" />
+        <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] md:h-[700px] md:w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#C9A97A]/[0.12] blur-[140px]" />
       </div>
 
-      {/* LAYER 3 — Wave canvas (linee dorate animate) */}
+      {/* LAYER 2 — Wave canvas (linee dorate animate) */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 w-full h-full pointer-events-none opacity-80"
+        className="absolute inset-0 w-full h-full pointer-events-none opacity-90"
         aria-hidden="true"
       />
 
-      {/* LAYER 4 — Bottom gradient per CTA leggibilità */}
-      <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/70 to-transparent pointer-events-none" />
-
-      {/* LAYER 5 — Contenuto: badge in alto + headline + CTA in basso, NIENTE overlap su Anton */}
-      <div className="relative z-10 min-h-[90vh] md:min-h-screen flex flex-col items-center justify-between px-6 pt-28 pb-16 md:pt-32 md:pb-20">
-        {/* Top: badges */}
+      {/* LAYER 5 — Contenuto centrato: avatar circle Anton + badge + headline + CTA */}
+      <div className="relative z-10 min-h-[90vh] md:min-h-screen flex flex-col items-center justify-center px-6 py-24 md:py-32">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="w-full max-w-3xl text-center flex flex-col items-center gap-3"
+          className="w-full max-w-3xl text-center flex flex-col items-center"
         >
+          {/* Avatar circle Anton — "palla al centro" */}
           <motion.div
             variants={itemVariants}
-            className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/50 px-3 py-1 backdrop-blur-md"
+            className="relative mb-6 h-40 w-40 sm:h-48 sm:w-48 md:h-56 md:w-56 rounded-full overflow-hidden border-2 border-[#C9A97A]/40"
+            style={{
+              boxShadow: '0 0 80px rgba(201,169,122,0.45), inset 0 0 40px rgba(0,0,0,0.4)',
+            }}
+          >
+            <Image
+              src={`${BASE_PATH}/anton-hero.jpg?v=8`}
+              alt="Dr. Anton Kamel"
+              fill
+              priority
+              sizes="(max-width: 768px) 192px, 224px"
+              className="object-cover object-[center_18%]"
+            />
+          </motion.div>
+
+          {/* Brand pill */}
+          <motion.div
+            variants={itemVariants}
+            className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/40 px-3 py-1 backdrop-blur-md"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-[#C9A97A]" />
             <span className="text-[10px] tracking-[0.2em] text-white/80 uppercase">
@@ -205,9 +199,10 @@ export default function WavesHero() {
             </span>
           </motion.div>
 
+          {/* Anton Lips badge */}
           <motion.div
             variants={itemVariants}
-            className="inline-flex items-center gap-2 rounded-full bg-[#C9A97A]/15 border border-[#C9A97A]/40 px-3 py-1 backdrop-blur-md"
+            className="mb-5 inline-flex items-center gap-2 rounded-full bg-[#C9A97A]/15 border border-[#C9A97A]/40 px-3 py-1 backdrop-blur-md"
           >
             <Sparkles size={11} className="text-[#C9A97A]" />
             <span className="text-[10px] tracking-wider text-[#C9A97A] font-semibold uppercase">
@@ -216,12 +211,12 @@ export default function WavesHero() {
           </motion.div>
         </motion.div>
 
-        {/* Bottom: headline + CTA */}
+        {/* Headline + CTA */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="w-full max-w-3xl text-center"
+          className="w-full max-w-3xl text-center mt-2"
         >
           <motion.h1
             variants={itemVariants}
