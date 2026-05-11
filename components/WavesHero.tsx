@@ -150,9 +150,9 @@ export default function WavesHero() {
       role="region"
       aria-label="Dr. Anton Kamel — hero"
     >
-      {/* LAYER 1 — Foto Anton con maschera radial più ampia (no taglio testa) */}
+      {/* LAYER 1 — Foto Anton con maschera radial + padding-top per evitare badge zone */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 pt-32 md:pt-24"
         style={{
           maskImage:
             'radial-gradient(ellipse 95% 100% at center 50%, #000 55%, transparent 95%)',
@@ -161,7 +161,7 @@ export default function WavesHero() {
         }}
       >
         <Image
-          src={`${BASE_PATH}/anton-hero.jpg?v=7`}
+          src={`${BASE_PATH}/anton-hero.jpg?v=8`}
           alt="Dr. Anton Kamel — Medico Estetico Verona"
           fill
           priority
