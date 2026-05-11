@@ -146,65 +146,58 @@ export default function WavesHero() {
   return (
     <section
       ref={sectionRef}
-      className="relative isolate w-full min-h-[85vh] md:min-h-screen overflow-hidden bg-[#0a0a0a]"
+      className="relative isolate w-full min-h-[90vh] md:min-h-screen overflow-hidden bg-[#0a0a0a]"
       role="region"
       aria-label="Dr. Anton Kamel — hero"
     >
-      {/* LAYER 1 — Foto Anton: bg full mobile / metà destra desktop (split layout) */}
-      {/* Mobile: full bg con object-cover */}
-      <div className="absolute inset-0 md:hidden">
+      {/* LAYER 1 — Foto Anton con CSS mask-image radial fade naturale (no riquadri) */}
+      <div
+        className="absolute inset-0 pt-16 md:pt-20"
+        style={{
+          maskImage:
+            'radial-gradient(ellipse 70% 80% at center 55%, #000 30%, transparent 85%)',
+          WebkitMaskImage:
+            'radial-gradient(ellipse 70% 80% at center 55%, #000 30%, transparent 85%)',
+        }}
+      >
         <Image
-          src={`${BASE_PATH}/anton-hero.jpg?v=5`}
+          src={`${BASE_PATH}/anton-hero.jpg?v=6`}
           alt="Dr. Anton Kamel — Medico Estetico Verona"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[center_70%]"
-          style={{ filter: 'brightness(0.85) contrast(1.05)' }}
+          className="object-contain object-center"
+          style={{ filter: 'brightness(0.85) contrast(1.05) saturate(1.05)' }}
         />
       </div>
-      {/* Desktop: foto solo nella metà destra, fade verso sx */}
-      <div className="absolute inset-y-0 right-0 w-[55%] hidden md:block">
-        <Image
-          src={`${BASE_PATH}/anton-hero.jpg?v=5`}
-          alt="Dr. Anton Kamel — Medico Estetico Verona"
-          fill
-          priority
-          sizes="55vw"
-          className="object-cover object-[center_60%]"
-          style={{ filter: 'brightness(0.95) contrast(1.05)' }}
-        />
-        {/* Fade dal nero verso foto (sinistra→destra) */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/70 to-transparent" />
+
+      {/* LAYER 2 — Glow radiale dorato dietro Anton */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] md:h-[800px] md:w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#C9A97A]/[0.10] blur-[160px]" />
       </div>
 
-      {/* LAYER 2 — Gradient overlay mobile (testo leggibile sopra foto) */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/85 md:hidden" />
-
-      {/* LAYER 3 — Wave canvas SOPRA foto, parte mid-bottom della section */}
+      {/* LAYER 3 — Wave canvas (linee dorate animate) */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 w-full h-full pointer-events-none"
+        className="absolute inset-0 w-full h-full pointer-events-none opacity-80"
         aria-hidden="true"
       />
 
-      {/* LAYER 4 — Soft glows decorativi */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute left-1/2 top-1/3 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-[#C9A97A]/[0.08] blur-[140px]" />
-      </div>
+      {/* LAYER 4 — Bottom gradient per CTA leggibilità */}
+      <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/70 to-transparent pointer-events-none" />
 
-      {/* LAYER 5 — Contenuto: centrato mobile / sinistra desktop (split layout) */}
-      <div className="relative z-10 min-h-[85vh] md:min-h-screen flex flex-col items-center md:items-start justify-center px-6 md:px-16 lg:px-24 py-24 md:py-32 md:max-w-[55%]">
+      {/* LAYER 5 — Contenuto: badge in alto + headline + CTA in basso, NIENTE overlap su Anton */}
+      <div className="relative z-10 min-h-[90vh] md:min-h-screen flex flex-col items-center justify-between px-6 pt-28 pb-16 md:pt-32 md:pb-20">
+        {/* Top: badges */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="w-full max-w-2xl text-center md:text-left"
+          className="w-full max-w-3xl text-center flex flex-col items-center gap-3"
         >
-          {/* Brand pill */}
           <motion.div
             variants={itemVariants}
-            className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/40 px-3 py-1 backdrop-blur-md"
+            className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/50 px-3 py-1 backdrop-blur-md"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-[#C9A97A]" />
             <span className="text-[10px] tracking-[0.2em] text-white/80 uppercase">
@@ -212,47 +205,53 @@ export default function WavesHero() {
             </span>
           </motion.div>
 
-          {/* Anton Lips authority badge */}
           <motion.div
             variants={itemVariants}
-            className="mb-5 inline-flex items-center gap-2 rounded-full bg-[#C9A97A]/15 border border-[#C9A97A]/40 px-3 py-1 backdrop-blur-md"
+            className="inline-flex items-center gap-2 rounded-full bg-[#C9A97A]/15 border border-[#C9A97A]/40 px-3 py-1 backdrop-blur-md"
           >
             <Sparkles size={11} className="text-[#C9A97A]" />
             <span className="text-[10px] tracking-wider text-[#C9A97A] font-semibold uppercase">
               Ideatore Anton Lips Technique™
             </span>
           </motion.div>
+        </motion.div>
 
-          {/* Headline */}
+        {/* Bottom: headline + CTA */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="w-full max-w-3xl text-center"
+        >
           <motion.h1
             variants={itemVariants}
-            className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter text-white leading-[1.05]"
-            style={{ textShadow: '0 2px 24px rgba(0,0,0,0.5)' }}
+            className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter leading-[1.05] bg-gradient-to-b from-white to-white/70 bg-clip-text text-transparent"
+            style={{ filter: 'drop-shadow(0 4px 24px rgba(0,0,0,0.6))' }}
           >
             Risultati naturali.
             <br />
-            <span className="text-[#C9A97A]">Mai maschere.</span>
+            <span className="bg-gradient-to-r from-[#C9A97A] via-[#E5C998] to-[#C9A97A] bg-clip-text text-transparent">
+              Mai maschere.
+            </span>
           </motion.h1>
 
-          {/* Subtitle */}
           <motion.p
             variants={itemVariants}
-            className="mt-5 max-w-xl mx-auto md:mx-0 text-base sm:text-lg md:text-xl text-white/85 leading-relaxed"
-            style={{ textShadow: '0 1px 12px rgba(0,0,0,0.6)' }}
+            className="mt-5 max-w-xl mx-auto text-base sm:text-lg md:text-xl text-white/85 leading-relaxed"
+            style={{ textShadow: '0 1px 12px rgba(0,0,0,0.7)' }}
           >
             Medicina estetica costruita su di te. Filler, botulino, rinofiller —
             con un approccio medico, mai standard.
           </motion.p>
 
-          {/* CTAs */}
           <motion.div
             variants={itemVariants}
-            className="mt-8 flex flex-col items-center md:items-start gap-3"
+            className="mt-8 flex flex-col items-center gap-3"
           >
             <button
               onClick={() => open('Hero CTA')}
               className="w-full sm:w-auto inline-flex items-center justify-center rounded-full bg-[#C9A97A] px-10 py-4 text-black font-semibold text-base sm:text-lg hover:scale-[1.03] active:scale-[0.98] transition-transform cursor-pointer"
-              style={{ boxShadow: '0 0 40px rgba(201,169,122,0.55)' }}
+              style={{ boxShadow: '0 0 60px rgba(201,169,122,0.6)' }}
             >
               Prenota la consulenza →
             </button>
@@ -274,7 +273,7 @@ export default function WavesHero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 1.2 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 pointer-events-none z-20"
+        className="absolute bottom-3 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 pointer-events-none z-20"
       >
         <span className="text-[10px] tracking-widest uppercase text-white/55">Scorri</span>
         <motion.div
