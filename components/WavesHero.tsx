@@ -150,7 +150,7 @@ export default function WavesHero() {
       role="region"
       aria-label="Dr. Anton Kamel — hero"
     >
-      {/* LAYER 1 — Foto Anton bg (mobile + desktop) */}
+      {/* LAYER 1 — Foto Anton vignettata (uguale mobile + desktop, fonde con bg nero) */}
       <div className="absolute inset-0">
         <Image
           src={`${BASE_PATH}/anton-hero.jpg`}
@@ -158,14 +158,13 @@ export default function WavesHero() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[center_center] md:object-[center_30%]"
-          style={{ filter: 'brightness(0.5) contrast(1.05) saturate(1.05)' }}
+          className="object-contain"
+          style={{ filter: 'brightness(0.95) contrast(1.05)' }}
         />
       </div>
 
-      {/* LAYER 2 — Gradient overlay per leggibilità testo */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/30 to-black/90" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-black/50 hidden md:block" />
+      {/* LAYER 2 — Gradient overlay leggero per leggibilità testo (vignette già nella foto) */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/70" />
 
       {/* LAYER 3 — Wave canvas SOPRA foto, parte mid-bottom della section */}
       <canvas
