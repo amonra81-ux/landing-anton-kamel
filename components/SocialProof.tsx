@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Star, Quote, ChevronLeft, ChevronRight, Calendar } from 'lucide-react'
+import { useBooking } from './BookingProvider'
 
 // Recensioni reali da Google My Business (https://g.co/kgs/AntonKamel)
 const GOOGLE_REVIEWS_URL =
@@ -12,7 +13,9 @@ const AVG_RATING = 4.7
 
 const testimonials = [
   {
-    name: 'Aurora Garlatti',
+    name: 'Aurora G.',
+    age: 28,
+    city: 'Verona',
     treatment: 'Prima volta filler labbra',
     story: 'Aveva paura. Si è affidata. Ora lo rifarebbe.',
     text:
@@ -22,6 +25,8 @@ const testimonials = [
   },
   {
     name: 'Vanessa',
+    age: 35,
+    city: 'Vicenza',
     treatment: 'Correzione filler migrato',
     story: 'Aveva migrazioni dopo anni di filler altrove. Risultato finale: labbra naturali come mai prima.',
     text:
@@ -30,8 +35,10 @@ const testimonials = [
     when: '6 mesi fa',
   },
   {
-    name: 'Cristina Zanatta',
-    treatment: 'Filler Labbra · viene da Treviso',
+    name: 'Cristina Z.',
+    age: 41,
+    city: 'Treviso',
+    treatment: 'Filler Labbra · cliente dal 2021',
     story: 'Cliente dal 2021. Fa 1h30 di strada per venire a Verona.',
     text:
       'Sono sua cliente dal 2021. Faccio più di un\'ora e mezza di strada da Treviso per venire a Verona, e continuo senza esitazione: la fiducia che ho nel suo lavoro è totale.',
@@ -39,7 +46,9 @@ const testimonials = [
     when: '2 mesi fa',
   },
   {
-    name: 'Vanessa Sivi',
+    name: 'Vanessa S.',
+    age: 38,
+    city: 'Verona',
     treatment: 'Filler Labbra + Botox · 3 anni',
     story: '3 anni di trattamenti combinati. Risultato continuativo nel tempo.',
     text:
@@ -48,7 +57,9 @@ const testimonials = [
     when: '2 mesi fa',
   },
   {
-    name: 'Sara Draisci',
+    name: 'Sara D.',
+    age: 32,
+    city: 'Verona',
     treatment: 'Filler Labbra · cliente dal 2023',
     story: '3 trattamenti, sempre lo stesso medico.',
     text:
@@ -57,7 +68,9 @@ const testimonials = [
     when: '2 mesi fa',
   },
   {
-    name: 'Alice Cavaler',
+    name: 'Alice C.',
+    age: 36,
+    city: 'Padova',
     treatment: 'Percorso continuativo',
     story: 'Trattamento dopo trattamento, non solo tecnica — relazione.',
     text:
@@ -76,6 +89,7 @@ export default function SocialProof() {
   const [direction, setDirection] = useState(1)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const total = testimonials.length
+  const { open } = useBooking()
 
   const go = useCallback((dir: 1 | -1) => {
     setDirection(dir)
@@ -181,7 +195,7 @@ export default function SocialProof() {
                       animate="center"
                       exit="exit"
                       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                      className="relative bg-white/[0.03] border border-white/10 rounded-2xl p-7 flex flex-col hover:bg-white/[0.05] hover:border-[#C9A97A]/30 transition-colors duration-300 h-[340px]"
+                      className="relative bg-white/[0.03] border border-white/10 rounded-2xl p-7 flex flex-col hover:bg-white/[0.05] hover:border-[#C9A97A]/30 transition-colors duration-300 h-[360px]"
                     >
                       <Quote className="absolute top-6 right-6 text-white/10 w-7 h-7" />
 
@@ -202,10 +216,13 @@ export default function SocialProof() {
 
                       <div className="mt-auto border-t border-white/10 pt-4">
                         <div className="flex items-baseline justify-between gap-3">
-                          <p className="text-white font-medium text-sm truncate">{t.name}</p>
+                          <p className="text-white font-medium text-sm truncate">
+                            {t.name}, {t.age} anni
+                          </p>
                           <p className="text-white/30 text-xs shrink-0">{t.when}</p>
                         </div>
-                        <p className="text-[#C9A97A] text-xs mt-0.5">{t.treatment}</p>
+                        <p className="text-white/40 text-[11px] mt-0.5">{t.city}</p>
+                        <p className="text-[#C9A97A] text-xs mt-1">{t.treatment}</p>
                       </div>
                     </motion.div>
                   )
@@ -258,8 +275,8 @@ export default function SocialProof() {
           </button>
         </div>
 
-        {/* Leggi tutte */}
-        <div className="mt-10 text-center">
+        {/* Leggi tutte + Mid-CTA */}
+        <div className="mt-10 flex flex-col items-center gap-6">
           <a
             href={GOOGLE_REVIEWS_URL}
             target="_blank"
@@ -269,6 +286,26 @@ export default function SocialProof() {
             Leggi tutte le {TOTAL_REVIEWS} recensioni su Google
             <ChevronRight size={14} />
           </a>
+
+          {/* Mid-page CTA dopo testimonianze */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mt-4 flex flex-col items-center gap-2 rounded-2xl border border-[#C9A97A]/25 bg-[#C9A97A]/[0.05] px-6 py-5"
+          >
+            <p className="text-white/70 text-sm text-center max-w-md">
+              Prenota anche tu · posti limitati questo mese
+            </p>
+            <button
+              onClick={() => open('SocialProof Mid CTA')}
+              className="inline-flex items-center gap-2 rounded-full bg-[#C9A97A] px-6 py-3 text-black font-bold text-sm hover:scale-[1.03] active:scale-[0.98] transition-transform cursor-pointer"
+            >
+              <Calendar size={14} />
+              Prenota la consulenza · 80 €
+            </button>
+          </motion.div>
         </div>
 
       </div>

@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar'
 import WavesHero from '@/components/WavesHero'
 import InfoStrip from '@/components/InfoStrip'
+import AntonLipsHighlight from '@/components/AntonLipsHighlight'
 import PercheScegliere from '@/components/PercheScegliere'
 import PerTeSection from '@/components/PerTeSection'
 import Trattamenti from '@/components/Trattamenti'
@@ -17,6 +18,7 @@ export default function Home() {
       <Navbar />
       <WavesHero />
       <InfoStrip />
+      <AntonLipsHighlight />
       <PercheScegliere />
       <PerTeSection />
       <Trattamenti />
