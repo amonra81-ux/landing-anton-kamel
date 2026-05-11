@@ -179,12 +179,12 @@ export default function WavesHero() {
             }}
           >
             <Image
-              src={`${BASE_PATH}/anton-hero.jpg?v=8`}
+              src={`${BASE_PATH}/anton-avatar.jpg?v=1`}
               alt="Dr. Anton Kamel"
               fill
               priority
               sizes="(max-width: 768px) 192px, 224px"
-              className="object-cover object-[center_18%]"
+              className="object-cover object-[60%_30%]"
             />
           </motion.div>
 
