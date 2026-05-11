@@ -158,7 +158,7 @@ export default function WavesHero() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[28%_75%] md:object-[20%_bottom]"
+          className="object-cover object-[center_center] md:object-[center_30%]"
           style={{ filter: 'brightness(0.5) contrast(1.05) saturate(1.05)' }}
         />
       </div>
