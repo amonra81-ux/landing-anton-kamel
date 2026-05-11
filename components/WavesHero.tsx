@@ -146,26 +146,25 @@ export default function WavesHero() {
   return (
     <section
       ref={sectionRef}
-      className="relative isolate w-full min-h-screen overflow-hidden bg-[#0a0a0a]"
+      className="relative isolate w-full min-h-[85vh] md:min-h-screen overflow-hidden bg-[#0a0a0a]"
       role="region"
       aria-label="Dr. Anton Kamel — hero"
     >
-      {/* LAYER 1 — Foto Anton full bleed background */}
-      <div className="absolute inset-0">
+      {/* LAYER 1 — Foto Anton SOLO mobile (desktop sfondo nero per linee dorate) */}
+      <div className="absolute inset-0 md:hidden">
         <Image
           src={`${BASE_PATH}/hero-image.jpg`}
           alt="Dr. Anton Kamel — Medico Estetico Verona"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[28%_85%] md:object-[30%_center]"
-          style={{ filter: 'brightness(0.55) contrast(1.05) saturate(1.05)' }}
+          className="object-cover object-[28%_75%]"
+          style={{ filter: 'brightness(0.5) contrast(1.05) saturate(1.05)' }}
         />
       </div>
 
-      {/* LAYER 2 — Gradient overlays per leggibilità testo */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/35 to-black/95" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-transparent to-black/40 hidden md:block" />
+      {/* LAYER 2 — Gradient overlay per leggibilità testo (mobile only) */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/30 to-black/90 md:hidden" />
 
       {/* LAYER 3 — Wave canvas SOPRA foto, parte mid-bottom della section */}
       <canvas
@@ -179,8 +178,8 @@ export default function WavesHero() {
         <div className="absolute left-1/2 top-1/3 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-[#C9A97A]/[0.08] blur-[140px]" />
       </div>
 
-      {/* LAYER 5 — Contenuto */}
-      <div className="relative z-10 min-h-screen flex flex-col items-center justify-end md:justify-center px-6 pt-24 pb-20 md:pt-32 md:pb-28">
+      {/* LAYER 5 — Contenuto centrato */}
+      <div className="relative z-10 min-h-[85vh] md:min-h-screen flex flex-col items-center justify-center px-6 py-24 md:py-32">
         <motion.div
           variants={containerVariants}
           initial="hidden"
