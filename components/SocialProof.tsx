@@ -150,7 +150,7 @@ export default function SocialProof() {
               ))}
             </span>
             <span className="text-sm text-white/65">
-              su {TOTAL_REVIEWS} recensioni Google
+              · Recensioni verificate Google →
             </span>
           </motion.a>
         </div>
@@ -266,7 +266,7 @@ export default function SocialProof() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-sm text-white/55 hover:text-[#C9A97A] transition-colors"
           >
-            Leggi tutte le {TOTAL_REVIEWS} recensioni su Google
+            Leggi tutte le recensioni su Google
             <ChevronRight size={14} />
           </a>
         </div>

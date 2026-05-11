@@ -241,7 +241,7 @@ export default function WavesHero() {
 
           <motion.div
             variants={itemVariants}
-            className="mt-8 flex flex-col items-center gap-3"
+            className="mt-8 flex justify-center"
           >
             <button
               onClick={() => open('Hero CTA')}
@@ -249,15 +249,6 @@ export default function WavesHero() {
               style={{ boxShadow: '0 0 60px rgba(201,169,122,0.6)' }}
             >
               Prenota la consulenza →
-            </button>
-            <button
-              onClick={() => {
-                const el = document.querySelector('#trattamenti')
-                if (el) el.scrollIntoView({ behavior: 'smooth' })
-              }}
-              className="text-sm text-white/65 hover:text-[#C9A97A] underline-offset-4 hover:underline transition-colors cursor-pointer"
-            >
-              o vedi prima i trattamenti
             </button>
           </motion.div>
         </motion.div>

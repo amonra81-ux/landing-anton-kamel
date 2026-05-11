@@ -4,6 +4,7 @@ import InfoStrip from '@/components/InfoStrip'
 import PercheScegliere from '@/components/PercheScegliere'
 import PerTeSection from '@/components/PerTeSection'
 import Trattamenti from '@/components/Trattamenti'
+import AntonLipsHighlight from '@/components/AntonLipsHighlight'
 import SocialProof from '@/components/SocialProof'
 import WidgetPrenotazione from '@/components/WidgetPrenotazione'
 import FAQ from '@/components/FAQ'
@@ -20,6 +21,7 @@ export default function Home() {
       <PercheScegliere />
       <PerTeSection />
       <Trattamenti />
+      <AntonLipsHighlight />
       <SocialProof />
       <WidgetPrenotazione />
       <FAQ />
