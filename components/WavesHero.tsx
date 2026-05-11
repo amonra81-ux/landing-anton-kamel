@@ -32,13 +32,15 @@ const itemVariants: Variants = {
 
 export default function WavesHero() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
+  const sectionRef = useRef<HTMLElement | null>(null)
   const mouseRef = useRef({ x: 0, y: 0 })
   const targetMouseRef = useRef({ x: 0, y: 0 })
   const { open } = useBooking()
 
   useEffect(() => {
     const canvas = canvasRef.current
-    if (!canvas) return
+    const section = sectionRef.current
+    if (!canvas || !section) return
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
@@ -46,11 +48,10 @@ export default function WavesHero() {
     let time = 0
 
     const wavePalette: WaveConfig[] = [
-      { offset: 0, amplitude: 70, frequency: 0.003, color: 'rgba(201,169,122,0.85)', opacity: 0.5 },
-      { offset: Math.PI / 2, amplitude: 90, frequency: 0.0026, color: 'rgba(201,169,122,0.65)', opacity: 0.4 },
-      { offset: Math.PI, amplitude: 60, frequency: 0.0034, color: 'rgba(201,169,122,0.5)', opacity: 0.3 },
-      { offset: Math.PI * 1.5, amplitude: 80, frequency: 0.0022, color: 'rgba(255,255,255,0.3)', opacity: 0.25 },
-      { offset: Math.PI * 2, amplitude: 55, frequency: 0.004, color: 'rgba(201,169,122,0.4)', opacity: 0.2 },
+      { offset: 0, amplitude: 80, frequency: 0.0026, color: 'rgba(201,169,122,0.95)', opacity: 0.65 },
+      { offset: Math.PI / 2, amplitude: 100, frequency: 0.0022, color: 'rgba(201,169,122,0.8)', opacity: 0.5 },
+      { offset: Math.PI, amplitude: 65, frequency: 0.003, color: 'rgba(255,255,255,0.7)', opacity: 0.35 },
+      { offset: Math.PI * 1.4, amplitude: 90, frequency: 0.0018, color: 'rgba(201,169,122,0.6)', opacity: 0.3 },
     ]
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -59,15 +60,18 @@ export default function WavesHero() {
     const smoothing = prefersReducedMotion ? 0.04 : 0.1
 
     const resize = () => {
+      const rect = section.getBoundingClientRect()
       const dpr = Math.min(window.devicePixelRatio || 1, 2)
-      canvas.width = window.innerWidth * dpr
-      canvas.height = window.innerHeight * dpr
-      canvas.style.width = `${window.innerWidth}px`
-      canvas.style.height = `${window.innerHeight}px`
+      canvas.width = rect.width * dpr
+      canvas.height = rect.height * dpr
+      canvas.style.width = `${rect.width}px`
+      canvas.style.height = `${rect.height}px`
+      ctx.setTransform(1, 0, 0, 1, 0, 0)
       ctx.scale(dpr, dpr)
     }
     const recenter = () => {
-      const c = { x: window.innerWidth / 2, y: window.innerHeight / 2 }
+      const rect = section.getBoundingClientRect()
+      const c = { x: rect.width / 2, y: rect.height / 2 }
       mouseRef.current = c
       targetMouseRef.current = c
     }
@@ -79,7 +83,8 @@ export default function WavesHero() {
       recenter()
     }
     const onMove = (e: MouseEvent) => {
-      targetMouseRef.current = { x: e.clientX, y: e.clientY }
+      const rect = section.getBoundingClientRect()
+      targetMouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top }
     }
     const onLeave = () => recenter()
     window.addEventListener('resize', onResize)
@@ -87,10 +92,11 @@ export default function WavesHero() {
     window.addEventListener('mouseleave', onLeave)
 
     const drawWave = (wave: WaveConfig) => {
+      const rect = section.getBoundingClientRect()
+      const w = rect.width
+      const h = rect.height
       ctx.save()
       ctx.beginPath()
-      const w = window.innerWidth
-      const h = window.innerHeight
       for (let x = 0; x <= w; x += 4) {
         const dx = x - mouseRef.current.x
         const dy = h / 2 - mouseRef.current.y
@@ -105,10 +111,10 @@ export default function WavesHero() {
         if (x === 0) ctx.moveTo(x, y)
         else ctx.lineTo(x, y)
       }
-      ctx.lineWidth = 2.2
+      ctx.lineWidth = 2.5
       ctx.strokeStyle = wave.color
       ctx.globalAlpha = wave.opacity
-      ctx.shadowBlur = 30
+      ctx.shadowBlur = 35
       ctx.shadowColor = wave.color
       ctx.stroke()
       ctx.restore()
@@ -119,12 +125,8 @@ export default function WavesHero() {
       mouseRef.current.x += (targetMouseRef.current.x - mouseRef.current.x) * smoothing
       mouseRef.current.y += (targetMouseRef.current.y - mouseRef.current.y) * smoothing
 
-      const grad = ctx.createLinearGradient(0, 0, 0, window.innerHeight)
-      grad.addColorStop(0, '#0a0a0a')
-      grad.addColorStop(1, '#050505')
-      ctx.fillStyle = grad
-      ctx.fillRect(0, 0, window.innerWidth, window.innerHeight)
-
+      const rect = section.getBoundingClientRect()
+      ctx.clearRect(0, 0, rect.width, rect.height)
       ctx.globalAlpha = 1
       ctx.shadowBlur = 0
       wavePalette.forEach(drawWave)
@@ -143,51 +145,47 @@ export default function WavesHero() {
 
   return (
     <section
+      ref={sectionRef}
       className="relative isolate w-full min-h-screen overflow-hidden bg-[#0a0a0a]"
       role="region"
       aria-label="Dr. Anton Kamel — hero"
     >
-      {/* Wave canvas — sfondo */}
+      {/* LAYER 1 — Foto Anton full bleed background */}
+      <div className="absolute inset-0">
+        <Image
+          src={`${BASE_PATH}/hero-image.jpg`}
+          alt="Dr. Anton Kamel — Medico Estetico Verona"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[28%_85%] md:object-[30%_center]"
+          style={{ filter: 'brightness(0.55) contrast(1.05) saturate(1.05)' }}
+        />
+      </div>
+
+      {/* LAYER 2 — Gradient overlays per leggibilità testo */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/35 to-black/95" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-transparent to-black/40 hidden md:block" />
+
+      {/* LAYER 3 — Wave canvas SOPRA foto, parte mid-bottom della section */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 h-full w-full"
+        className="absolute inset-0 w-full h-full pointer-events-none"
         aria-hidden="true"
       />
 
-      {/* Soft glows */}
-      <div className="absolute inset-0 -z-10 pointer-events-none">
-        <div className="absolute left-1/2 top-0 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[#C9A97A]/[0.04] blur-[140px]" />
-        <div className="absolute bottom-0 right-0 h-[360px] w-[360px] rounded-full bg-[#C9A97A]/[0.03] blur-[120px]" />
+      {/* LAYER 4 — Soft glows decorativi */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute left-1/2 top-1/3 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-[#C9A97A]/[0.08] blur-[140px]" />
       </div>
 
-      {/* Mobile: foto bleed top + content sotto.
-          Desktop: split 2 colonne (text sx, foto half dx). */}
-      <div className="relative z-10 min-h-screen flex flex-col md:grid md:grid-cols-12 md:items-center md:gap-8 lg:gap-12 max-w-7xl mx-auto px-6 pt-24 pb-12 md:pt-20 md:pb-16">
-
-        {/* MOBILE — foto sopra, full bleed */}
-        <div className="md:hidden -mx-6 mb-6">
-          <div className="relative aspect-[4/5] w-full overflow-hidden">
-            <Image
-              src={`${BASE_PATH}/hero-image.jpg`}
-              alt="Dr. Anton Kamel — Medico Estetico Verona"
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover object-[42%_28%]"
-              style={{ filter: 'brightness(0.85) contrast(1.05)' }}
-            />
-            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-b from-transparent to-[#0a0a0a]" />
-            {/* Cornice gold sottile decorativa */}
-            <div className="pointer-events-none absolute inset-3 sm:inset-5 rounded-[2rem] border border-[#C9A97A]/30" />
-          </div>
-        </div>
-
-        {/* TEXT COLUMN */}
+      {/* LAYER 5 — Contenuto */}
+      <div className="relative z-10 min-h-screen flex flex-col items-center justify-end md:justify-center px-6 pt-24 pb-20 md:pt-32 md:pb-28">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="md:col-span-7 lg:col-span-6 text-center md:text-left"
+          className="w-full max-w-3xl text-center"
         >
           {/* Brand pill */}
           <motion.div
@@ -214,7 +212,8 @@ export default function WavesHero() {
           {/* Headline */}
           <motion.h1
             variants={itemVariants}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-white leading-[1.05]"
+            className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter text-white leading-[1.05]"
+            style={{ textShadow: '0 2px 24px rgba(0,0,0,0.5)' }}
           >
             Risultati naturali.
             <br />
@@ -224,7 +223,8 @@ export default function WavesHero() {
           {/* Subtitle */}
           <motion.p
             variants={itemVariants}
-            className="mt-5 max-w-xl mx-auto md:mx-0 text-base sm:text-lg text-white/70 leading-relaxed"
+            className="mt-5 max-w-xl mx-auto text-base sm:text-lg md:text-xl text-white/85 leading-relaxed"
+            style={{ textShadow: '0 1px 12px rgba(0,0,0,0.6)' }}
           >
             Medicina estetica costruita su di te. Filler, botulino, rinofiller —
             con un approccio medico, mai standard.
@@ -233,12 +233,12 @@ export default function WavesHero() {
           {/* CTAs */}
           <motion.div
             variants={itemVariants}
-            className="mt-7 flex flex-col sm:flex-row items-center md:justify-start justify-center gap-3"
+            className="mt-8 flex flex-col items-center gap-3"
           >
             <button
               onClick={() => open('Hero CTA')}
-              className="w-full sm:w-auto inline-flex items-center justify-center rounded-full bg-[#C9A97A] px-9 py-4 text-black font-semibold text-base sm:text-lg hover:scale-[1.03] active:scale-[0.98] transition-transform cursor-pointer"
-              style={{ boxShadow: '0 0 36px rgba(201,169,122,0.4)' }}
+              className="w-full sm:w-auto inline-flex items-center justify-center rounded-full bg-[#C9A97A] px-10 py-4 text-black font-semibold text-base sm:text-lg hover:scale-[1.03] active:scale-[0.98] transition-transform cursor-pointer"
+              style={{ boxShadow: '0 0 40px rgba(201,169,122,0.55)' }}
             >
               Prenota la consulenza →
             </button>
@@ -247,48 +247,27 @@ export default function WavesHero() {
                 const el = document.querySelector('#trattamenti')
                 if (el) el.scrollIntoView({ behavior: 'smooth' })
               }}
-              className="text-sm text-white/55 hover:text-[#C9A97A] underline-offset-4 hover:underline transition-colors cursor-pointer"
+              className="text-sm text-white/65 hover:text-[#C9A97A] underline-offset-4 hover:underline transition-colors cursor-pointer"
             >
               o vedi prima i trattamenti
             </button>
           </motion.div>
         </motion.div>
-
-        {/* DESKTOP — foto half right column */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          className="hidden md:block md:col-span-5 lg:col-span-6 md:relative md:h-[78vh] md:max-h-[680px]"
-        >
-          <div className="relative h-full w-full overflow-hidden rounded-[2rem]">
-            <Image
-              src={`${BASE_PATH}/hero-image.jpg`}
-              alt="Dr. Anton Kamel — Medico Estetico Verona"
-              fill
-              priority
-              sizes="(min-width: 1024px) 50vw, 42vw"
-              className="object-cover object-[42%_30%]"
-              style={{ filter: 'brightness(0.92) contrast(1.05)' }}
-            />
-            {/* Cornice gold sottile decorativa */}
-            <div className="pointer-events-none absolute inset-4 rounded-[1.5rem] border border-[#C9A97A]/35" />
-            {/* Gold glow accent */}
-            <div className="pointer-events-none absolute -bottom-8 -right-8 h-40 w-40 rounded-full bg-[#C9A97A]/20 blur-[80px]" />
-          </div>
-        </motion.div>
       </div>
 
-      {/* Scroll indicator (desktop only) */}
+      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 1.2 }}
-        className="hidden md:flex absolute bottom-6 left-1/2 -translate-x-1/2 flex-col items-center gap-1 pointer-events-none"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 pointer-events-none z-20"
       >
-        <span className="text-[10px] tracking-widest uppercase text-white/40">Scorri</span>
-        <motion.div animate={{ y: [0, 5, 0] }} transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}>
-          <ChevronDown size={16} className="text-white/40" />
+        <span className="text-[10px] tracking-widest uppercase text-white/55">Scorri</span>
+        <motion.div
+          animate={{ y: [0, 5, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <ChevronDown size={16} className="text-white/55" />
         </motion.div>
       </motion.div>
     </section>
