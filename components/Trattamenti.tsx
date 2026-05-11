@@ -2,64 +2,36 @@
 
 import { useRef } from 'react'
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
-import { Heart, Sparkles, Activity, Wand2, ArrowUpRight, Calendar, Clock } from 'lucide-react'
+import { Heart, Sparkles, Activity, Wand2, ArrowUpRight, Calendar } from 'lucide-react'
 import Link from 'next/link'
 import { useBooking } from './BookingProvider'
 
-type Invasivita = 'minimo' | 'basso' | 'medio'
-
-const categories: Array<{
-  slug: string
-  label: string
-  icon: typeof Heart
-  teaser: string
-  durata: string
-  sessioni: string
-  invasivita: Invasivita
-}> = [
+const categories = [
   {
     slug: 'labbra',
     label: 'Labbra',
     icon: Heart,
     teaser: 'Filler labbra Anton Lips™ + Russian Lips. Correzione lavori altri.',
-    durata: '30–45 min',
-    sessioni: '1 sessione',
-    invasivita: 'minimo',
   },
   {
     slug: 'viso',
     label: 'Viso e profilo',
     icon: Wand2,
     teaser: 'Zigomi, mento, mandibola, rinofiller, armonizzazione facciale.',
-    durata: '45–60 min',
-    sessioni: '1–2 sessioni',
-    invasivita: 'basso',
   },
   {
     slug: 'rughe',
     label: 'Rughe e bruxismo',
     icon: Activity,
     teaser: 'Tossina botulinica avanzata. Espressioni naturali preservate.',
-    durata: '15–25 min',
-    sessioni: '1 sessione · ogni 4–6 mesi',
-    invasivita: 'minimo',
   },
   {
     slug: 'pelle',
     label: 'Qualità della pelle',
     icon: Sparkles,
     teaser: 'Biorivitalizzazione, skinbooster, peeling. Texture luminosa.',
-    durata: '30–45 min',
-    sessioni: '3–4 sessioni',
-    invasivita: 'minimo',
   },
 ]
-
-const invasivitaConfig: Record<Invasivita, { dot: string; label: string; cls: string }> = {
-  minimo: { dot: 'bg-emerald-400', label: 'Invasività minima', cls: 'text-emerald-300/85 border-emerald-400/25 bg-emerald-400/[0.06]' },
-  basso: { dot: 'bg-amber-400', label: 'Invasività bassa', cls: 'text-amber-300/85 border-amber-400/25 bg-amber-400/[0.06]' },
-  medio: { dot: 'bg-rose-400', label: 'Invasività media', cls: 'text-rose-300/85 border-rose-400/25 bg-rose-400/[0.06]' },
-}
 
 export default function Trattamenti() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -103,7 +75,6 @@ export default function Trattamenti() {
         <div className="rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-xl overflow-hidden divide-y divide-white/10">
           {categories.map((cat, ci) => {
             const Icon = cat.icon
-            const inv = invasivitaConfig[cat.invasivita]
             return (
               <motion.div
                 key={cat.slug}
@@ -127,24 +98,6 @@ export default function Trattamenti() {
                     <p className="text-white/45 text-xs md:text-sm mt-0.5 leading-relaxed">
                       {cat.teaser}
                     </p>
-
-                    {/* Metadati: durata, sessioni, invasività, 18+ */}
-                    <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5">
-                      <span className="inline-flex items-center gap-1 text-[11px] text-white/50">
-                        <Clock size={11} className="text-white/35" />
-                        {cat.durata}
-                      </span>
-                      <span className="text-white/15">·</span>
-                      <span className="text-[11px] text-white/50">{cat.sessioni}</span>
-                      <span className="text-white/15">·</span>
-                      <span className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[10px] font-medium ${inv.cls}`}>
-                        <span className={`h-1.5 w-1.5 rounded-full ${inv.dot}`} />
-                        {inv.label}
-                      </span>
-                      <span className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.04] px-2 py-0.5 text-[10px] font-semibold text-white/65">
-                        18+
-                      </span>
-                    </div>
                   </div>
 
                   <span className="shrink-0 mt-2 text-white/30 group-hover:text-[#C9A97A] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all">

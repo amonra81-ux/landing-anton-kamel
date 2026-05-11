@@ -43,35 +43,6 @@ export default function Footer() {
   return (
     <footer className="bg-[#0a0a0a] border-t border-white/10 py-12 md:py-16 px-6 pb-28 md:pb-16">
       <div className="mx-auto max-w-6xl">
-        {/* Google Maps embed — Local SEO + trust */}
-        <div className="mb-10 md:mb-14 rounded-2xl overflow-hidden border border-white/10">
-          <iframe
-            src="https://www.google.com/maps?q=Via+San+Lucillo+16,+37100+Verona,+VR&output=embed&z=16"
-            width="100%"
-            height="280"
-            style={{ border: 0, filter: 'invert(0.92) hue-rotate(180deg) saturate(0.8)' }}
-            allowFullScreen={false}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="Mappa studio Dr. Anton Kamel — Via San Lucillo 16, Verona"
-            className="block"
-          />
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-[#0f0f0f] px-5 py-3 border-t border-white/10">
-            <div className="flex items-center gap-2 text-sm text-white/70">
-              <MapPin size={14} className="text-[#C9A97A]" />
-              Via San Lucillo 16, 37100 Verona
-            </div>
-            <a
-              href="https://www.google.com/maps/place/DR.+ANTON+KAMEL/@45.4425759,10.9410775,17z"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs text-[#C9A97A] hover:underline font-semibold uppercase tracking-wider"
-            >
-              Apri in Google Maps →
-            </a>
-          </div>
-        </div>
-
         {/* Top grid: 4 columns */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-10 mb-10 md:mb-12">
           {/* Brand */}

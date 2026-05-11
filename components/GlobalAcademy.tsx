@@ -1,54 +1,224 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Award, ArrowUpRight } from 'lucide-react'
+import { Globe } from './Globe'
+import { Users, Award, Globe as GlobeIcon, ArrowUpRight } from 'lucide-react'
 
-/**
- * Network strip compatto — social proof autorevolezza
- * (sostituisce sezione full-page con globo che generava confusione paziente B2C)
- */
+// Coordinate [latitudine, longitudine]
+const ANTON: [number, number] = [45.4425, 10.9911] // Verona
+
+const members = [
+  {
+    id: 'anton',
+    name: 'Dr. Anton Kamel',
+    city: 'Verona, Italia',
+    handle: '@dr.antonlips',
+    url: 'https://www.instagram.com/dr.antonlips/',
+    location: ANTON,
+    you: true,
+  },
+  {
+    id: 'latifi',
+    name: 'Dr. Latifi Radwan',
+    city: 'Modena, Italia',
+    handle: '@dr.latilips',
+    url: 'https://www.instagram.com/dr.latilips/',
+    location: [44.6471, 10.9252] as [number, number],
+  },
+  {
+    id: 'ghofran',
+    name: 'Dr. Ghofran',
+    city: 'Cairo, Egitto',
+    handle: '@thedrghofran',
+    url: 'https://www.instagram.com/thedrghofran/',
+    location: [30.0626, 31.2497] as [number, number], // Cairo (offset da Nahla)
+    badge: '81k follower',
+  },
+  {
+    id: 'nahla',
+    name: 'Dr. Nahla Elsantawy',
+    city: 'Cairo, Egitto',
+    handle: '@dr.nahla_elsantawy',
+    url: 'https://www.instagram.com/dr.nahla_elsantawy/',
+    location: [30.0444, 31.2357] as [number, number],
+    badge: '124k follower',
+  },
+  {
+    id: 'arisa',
+    name: 'Dr. Arisa Sinanaj',
+    city: 'Tirana, Albania',
+    handle: '@dr.arisa_',
+    url: 'https://www.instagram.com/dr.arisa_/',
+    location: [41.3275, 19.8187] as [number, number],
+    badge: '73k follower',
+  },
+]
+
+// Aggrega membri per città — label uniche sul globo
+type City = {
+  id: string
+  city: string
+  location: [number, number]
+  isHome?: boolean
+  count: number
+}
+
+const cities: City[] = [
+  { id: 'verona', city: 'Verona', location: ANTON, isHome: true, count: 1 },
+  { id: 'modena', city: 'Modena', location: [44.6471, 10.9252], count: 1 },
+  { id: 'cairo', city: 'Cairo', location: [30.0444, 31.2357], count: 2 }, // Ghofran + Nahla
+  { id: 'tirana', city: 'Tirana', location: [41.3275, 19.8187], count: 1 },
+]
+
+const globeMarkers = cities.map((c, i) => ({
+  id: c.id,
+  location: c.location,
+  label: c.count > 1 ? `${c.city} (${c.count})` : c.city,
+  isHome: c.isHome,
+  pulseDelay: c.isHome ? 0 : i * 0.4,
+}))
+
+// Anton è il centro: archi da Verona verso ogni altra città
+const globeArcs = cities
+  .filter((c) => !c.isHome)
+  .map((c) => ({
+    id: `arc-${c.id}`,
+    from: ANTON,
+    to: c.location,
+  }))
+
 export default function GlobalAcademy() {
   return (
     <section
       id="academy"
-      className="relative bg-[#0a0a0a] border-t border-white/10 px-6 py-10 md:py-14"
+      className="relative bg-[#0a0a0a] py-16 sm:py-24 md:py-32 px-6 border-t border-white/10 overflow-hidden"
     >
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="relative mx-auto max-w-4xl"
-      >
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.03] px-5 sm:px-7 py-5">
-          {/* Left: icon + claim */}
-          <div className="flex items-center gap-3 sm:gap-4">
-            <span className="shrink-0 flex items-center justify-center w-10 h-10 rounded-full border border-[#C9A97A]/40 bg-[#C9A97A]/10 text-[#C9A97A]">
-              <Award size={18} />
-            </span>
-            <div className="text-center sm:text-left">
-              <p className="text-white/90 text-sm sm:text-base font-semibold leading-tight">
-                Parte del network <span className="text-[#C9A97A]">Global Experts Academy</span>
-              </p>
-              <p className="text-white/50 text-xs sm:text-sm mt-1 leading-relaxed">
-                Confronto clinico continuo con medici di riferimento in Italia, Egitto, Albania ·
-                tecniche sempre aggiornate
-              </p>
-            </div>
-          </div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#C9A97A] opacity-[0.03] blur-[180px] rounded-full pointer-events-none" />
 
-          {/* Right: subtle link */}
-          <a
-            href="https://www.instagram.com/dr.antonlips/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="shrink-0 inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase text-white/55 hover:text-[#C9A97A] transition-colors"
+      <div className="relative mx-auto max-w-6xl">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-12 md:mb-16"
+        >
+          <p className="mb-3 text-xs font-semibold tracking-[0.2em] text-[#C9A97A] uppercase">
+            Riconosciuto a livello internazionale
+          </p>
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tighter text-white/95 mb-4">
+            Non solo Verona.
+          </h2>
+          <p className="text-white/60 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+            Anton condivide protocolli, casistica e aggiornamento clinico con un network
+            di medici estetici di riferimento in Italia, Egitto e Albania. Confronto
+            continuo = tecniche sempre allineate al meglio della disciplina.
+          </p>
+        </motion.div>
+
+        {/* Stats row */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="grid grid-cols-3 gap-3 sm:gap-6 mb-10 md:mb-14 max-w-3xl mx-auto"
+        >
+          {[
+            { icon: GlobeIcon, value: '3', label: 'Paesi' },
+            { icon: Users, value: '4', label: 'Città in network' },
+            { icon: Award, value: 'Anton Lips', label: 'Tecnica firmata IT' },
+          ].map((s) => (
+            <div
+              key={s.label}
+              className="text-center rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-5"
+            >
+              <s.icon size={18} className="mx-auto mb-2 text-[#C9A97A]" />
+              <p className="text-base md:text-xl font-bold text-white tabular-nums leading-tight">{s.value}</p>
+              <p className="mt-0.5 text-[10px] uppercase tracking-wider text-white/45">{s.label}</p>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Globe + members */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14 items-center">
+          {/* Globo */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9 }}
+            className="mx-auto w-full max-w-[440px]"
           >
-            Vedi su Instagram
-            <ArrowUpRight size={13} />
-          </a>
+            <Globe
+              markers={globeMarkers}
+              arcs={globeArcs}
+              markerSize={0.001}
+              markerColor={[0.79, 0.66, 0.48]}
+              arcColor={[0.79, 0.66, 0.48]}
+            />
+            <p className="mt-4 text-center text-xs text-white/35 italic">
+              Trascina il globo per esplorare
+            </p>
+          </motion.div>
+
+          {/* Lista membri */}
+          <div className="space-y-3">
+            {members.map((m, i) => (
+              <motion.a
+                key={m.id}
+                href={m.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, x: 16 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className={`group flex items-center gap-4 rounded-2xl border p-4 md:p-5 transition-colors ${
+                  m.you
+                    ? 'border-[#C9A97A]/40 bg-[#C9A97A]/[0.06]'
+                    : 'border-white/10 bg-white/[0.03] hover:border-[#C9A97A]/30 hover:bg-white/[0.06]'
+                }`}
+              >
+                {/* Pin */}
+                <div
+                  className={`shrink-0 flex items-center justify-center w-10 h-10 rounded-full border ${
+                    m.you ? 'border-[#C9A97A] bg-[#C9A97A]/15' : 'border-white/15 bg-white/5'
+                  }`}
+                >
+                  <span className={`text-xs font-bold ${m.you ? 'text-[#C9A97A]' : 'text-white/55'}`}>
+                    {m.id === 'anton' ? 'AK' : m.name.split(' ').slice(-1)[0][0] + (m.name.split(' ')[1]?.[0] || '')}
+                  </span>
+                </div>
+
+                {/* Info */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-baseline gap-2 flex-wrap">
+                    <p className={`font-semibold text-sm md:text-base truncate ${m.you ? 'text-white' : 'text-white/90'}`}>
+                      {m.name}
+                    </p>
+                    {m.you && (
+                      <span className="inline-flex items-center text-[9px] font-bold uppercase tracking-wider rounded-full bg-[#C9A97A] text-black px-2 py-0.5">
+                        Anton
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-white/45 text-xs mt-0.5">
+                    {m.city} · <span className="text-white/55">{m.handle}</span>
+                  </p>
+                </div>
+
+                <ArrowUpRight
+                  size={16}
+                  className="shrink-0 text-white/30 group-hover:text-[#C9A97A] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
+                />
+              </motion.a>
+            ))}
+
+          </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   )
 }
