@@ -153,7 +153,7 @@ export default function WavesHero() {
       {/* LAYER 1 — Foto Anton vignettata (uguale mobile + desktop, fonde con bg nero) */}
       <div className="absolute inset-0">
         <Image
-          src={`${BASE_PATH}/anton-hero.jpg`}
+          src={`${BASE_PATH}/anton-hero.jpg?v=3`}
           alt="Dr. Anton Kamel — Medico Estetico Verona"
           fill
           priority

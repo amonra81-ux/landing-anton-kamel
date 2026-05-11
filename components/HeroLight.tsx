@@ -31,7 +31,7 @@ export default function HeroLight() {
       {/* Photo background */}
       <div className="absolute inset-0">
         <Image
-          src={`${BASE_PATH}/anton-hero.jpg`}
+          src={`${BASE_PATH}/anton-hero.jpg?v=3`}
           alt="Medicina estetica Verona — Dr. Anton Kamel"
           fill
           priority
