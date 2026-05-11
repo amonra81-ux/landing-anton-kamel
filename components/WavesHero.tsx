@@ -150,21 +150,36 @@ export default function WavesHero() {
       role="region"
       aria-label="Dr. Anton Kamel — hero"
     >
-      {/* LAYER 1 — Foto Anton vignettata, object-bottom desktop per non finire testa sotto navbar */}
-      <div className="absolute inset-0 pt-20 md:pt-24">
+      {/* LAYER 1 — Foto Anton: bg full mobile / metà destra desktop (split layout) */}
+      {/* Mobile: full bg con object-cover */}
+      <div className="absolute inset-0 md:hidden">
         <Image
-          src={`${BASE_PATH}/anton-hero.jpg?v=4`}
+          src={`${BASE_PATH}/anton-hero.jpg?v=5`}
           alt="Dr. Anton Kamel — Medico Estetico Verona"
           fill
           priority
           sizes="100vw"
-          className="object-contain object-bottom"
-          style={{ filter: 'brightness(0.95) contrast(1.05)' }}
+          className="object-cover object-[center_70%]"
+          style={{ filter: 'brightness(0.85) contrast(1.05)' }}
         />
       </div>
+      {/* Desktop: foto solo nella metà destra, fade verso sx */}
+      <div className="absolute inset-y-0 right-0 w-[55%] hidden md:block">
+        <Image
+          src={`${BASE_PATH}/anton-hero.jpg?v=5`}
+          alt="Dr. Anton Kamel — Medico Estetico Verona"
+          fill
+          priority
+          sizes="55vw"
+          className="object-cover object-[center_60%]"
+          style={{ filter: 'brightness(0.95) contrast(1.05)' }}
+        />
+        {/* Fade dal nero verso foto (sinistra→destra) */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/70 to-transparent" />
+      </div>
 
-      {/* LAYER 2 — Gradient overlay leggero (vignette già nella foto) */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
+      {/* LAYER 2 — Gradient overlay mobile (testo leggibile sopra foto) */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/85 md:hidden" />
 
       {/* LAYER 3 — Wave canvas SOPRA foto, parte mid-bottom della section */}
       <canvas
@@ -178,13 +193,13 @@ export default function WavesHero() {
         <div className="absolute left-1/2 top-1/3 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-[#C9A97A]/[0.08] blur-[140px]" />
       </div>
 
-      {/* LAYER 5 — Contenuto centrato */}
-      <div className="relative z-10 min-h-[85vh] md:min-h-screen flex flex-col items-center justify-center px-6 py-24 md:py-32">
+      {/* LAYER 5 — Contenuto: centrato mobile / sinistra desktop (split layout) */}
+      <div className="relative z-10 min-h-[85vh] md:min-h-screen flex flex-col items-center md:items-start justify-center px-6 md:px-16 lg:px-24 py-24 md:py-32 md:max-w-[55%]">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="w-full max-w-3xl text-center"
+          className="w-full max-w-2xl text-center md:text-left"
         >
           {/* Brand pill */}
           <motion.div
@@ -222,7 +237,7 @@ export default function WavesHero() {
           {/* Subtitle */}
           <motion.p
             variants={itemVariants}
-            className="mt-5 max-w-xl mx-auto text-base sm:text-lg md:text-xl text-white/85 leading-relaxed"
+            className="mt-5 max-w-xl mx-auto md:mx-0 text-base sm:text-lg md:text-xl text-white/85 leading-relaxed"
             style={{ textShadow: '0 1px 12px rgba(0,0,0,0.6)' }}
           >
             Medicina estetica costruita su di te. Filler, botulino, rinofiller —
@@ -232,7 +247,7 @@ export default function WavesHero() {
           {/* CTAs */}
           <motion.div
             variants={itemVariants}
-            className="mt-8 flex flex-col items-center gap-3"
+            className="mt-8 flex flex-col items-center md:items-start gap-3"
           >
             <button
               onClick={() => open('Hero CTA')}
