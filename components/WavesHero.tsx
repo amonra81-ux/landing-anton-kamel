@@ -150,24 +150,24 @@ export default function WavesHero() {
       role="region"
       aria-label="Dr. Anton Kamel — hero"
     >
-      {/* LAYER 1 — Foto Anton con CSS mask-image radial fade naturale (no riquadri) */}
+      {/* LAYER 1 — Foto Anton con maschera radial più ampia (no taglio testa) */}
       <div
-        className="absolute inset-0 pt-16 md:pt-20"
+        className="absolute inset-0"
         style={{
           maskImage:
-            'radial-gradient(ellipse 70% 80% at center 55%, #000 30%, transparent 85%)',
+            'radial-gradient(ellipse 95% 100% at center 50%, #000 55%, transparent 95%)',
           WebkitMaskImage:
-            'radial-gradient(ellipse 70% 80% at center 55%, #000 30%, transparent 85%)',
+            'radial-gradient(ellipse 95% 100% at center 50%, #000 55%, transparent 95%)',
         }}
       >
         <Image
-          src={`${BASE_PATH}/anton-hero.jpg?v=6`}
+          src={`${BASE_PATH}/anton-hero.jpg?v=7`}
           alt="Dr. Anton Kamel — Medico Estetico Verona"
           fill
           priority
           sizes="100vw"
           className="object-contain object-center"
-          style={{ filter: 'brightness(0.85) contrast(1.05) saturate(1.05)' }}
+          style={{ filter: 'brightness(0.8) contrast(1.05) saturate(1.05)' }}
         />
       </div>
 
