@@ -47,12 +47,16 @@ export default function WavesHero() {
     let animationId: number
     let time = 0
 
-    const wavePalette: WaveConfig[] = [
+    const isMobile = window.innerWidth < 768
+    const fullPalette: WaveConfig[] = [
       { offset: 0, amplitude: 80, frequency: 0.0026, color: 'rgba(201,169,122,0.95)', opacity: 0.65 },
       { offset: Math.PI / 2, amplitude: 100, frequency: 0.0022, color: 'rgba(201,169,122,0.8)', opacity: 0.5 },
       { offset: Math.PI, amplitude: 65, frequency: 0.003, color: 'rgba(255,255,255,0.7)', opacity: 0.35 },
       { offset: Math.PI * 1.4, amplitude: 90, frequency: 0.0018, color: 'rgba(201,169,122,0.6)', opacity: 0.3 },
     ]
+    // Mobile: 2 waves instead of 4 + step più ampio (perf boost)
+    const wavePalette: WaveConfig[] = isMobile ? fullPalette.slice(0, 2) : fullPalette
+    const xStep = isMobile ? 8 : 4
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const mouseInfluence = prefersReducedMotion ? 10 : 70
@@ -97,7 +101,7 @@ export default function WavesHero() {
       const h = rect.height
       ctx.save()
       ctx.beginPath()
-      for (let x = 0; x <= w; x += 4) {
+      for (let x = 0; x <= w; x += xStep) {
         const dx = x - mouseRef.current.x
         const dy = h / 2 - mouseRef.current.y
         const dist = Math.sqrt(dx * dx + dy * dy)
@@ -179,11 +183,13 @@ export default function WavesHero() {
             }}
           >
             <Image
-              src={`${BASE_PATH}/anton-avatar.jpg?v=2`}
+              src={`${BASE_PATH}/anton-avatar.jpg?v=3`}
               alt="Dr. Anton Kamel"
               fill
               priority
-              sizes="(max-width: 768px) 192px, 224px"
+              fetchPriority="high"
+              sizes="(max-width: 640px) 160px, (max-width: 768px) 192px, 224px"
+              quality={85}
               className="object-cover object-[65%_25%]"
             />
           </motion.div>

@@ -166,6 +166,16 @@ export default function RootLayout({
   return (
     <html lang="it" className={inter.variable}>
       <head>
+        {/* Preconnect risorse esterne critiche */}
+        <link rel="preconnect" href="https://skipres.com" />
+        <link rel="dns-prefetch" href="https://wa.me" />
+        <link rel="dns-prefetch" href="https://www.google.com" />
+        <link
+          rel="preload"
+          as="image"
+          href="/landing-anton-kamel/anton-avatar.jpg?v=3"
+          fetchPriority="high"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(physicianSchema) }}
