@@ -173,7 +173,7 @@ export default function RootLayout({
         <link
           rel="preload"
           as="image"
-          href="/landing-anton-kamel/anton-avatar.jpg?v=3"
+          href="/landing-anton-kamel/anton-avatar.jpg?v=2"
           fetchPriority="high"
         />
         <script

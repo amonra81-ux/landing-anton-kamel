@@ -50,3 +50,34 @@ a, button {
 .animate-marquee {
   animation: marquee 50s linear infinite;
 }
+
+/* Hero animations CSS-only (zero framer-motion = bundle più leggero) */
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-fade {
+  animation: heroFadeIn 0.6s ease-out both;
+}
+.hero-stagger > * {
+  opacity: 0;
+  animation: heroFadeIn 0.5s ease-out forwards;
+}
+.hero-stagger > *:nth-child(1) { animation-delay: 0.05s; }
+.hero-stagger > *:nth-child(2) { animation-delay: 0.15s; }
+.hero-stagger > *:nth-child(3) { animation-delay: 0.25s; }
+.hero-stagger > *:nth-child(4) { animation-delay: 0.35s; }
+.hero-stagger > *:nth-child(5) { animation-delay: 0.45s; }
+
+.hero-scroll-fade {
+  opacity: 0;
+  animation: heroFadeIn 0.8s ease-out 1.2s forwards;
+}
+
+@keyframes bounceY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+.hero-bounce {
+  animation: bounceY 1.6s ease-in-out infinite;
+}
