@@ -41,6 +41,8 @@ export default function WavesHero() {
     const canvas = canvasRef.current
     const section = sectionRef.current
     if (!canvas || !section) return
+    // Skip canvas su mobile (perf boost: niente RAF loop, niente getContext)
+    if (window.innerWidth < 768) return
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
@@ -159,12 +161,17 @@ export default function WavesHero() {
         <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] md:h-[700px] md:w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#C9A97A]/[0.12] blur-[140px]" />
       </div>
 
-      {/* LAYER 2 — Wave canvas (linee dorate animate) */}
+      {/* LAYER 2 — Wave canvas (solo desktop, mobile gradient statico per perf) */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 w-full h-full pointer-events-none opacity-90"
+        className="absolute inset-0 w-full h-full pointer-events-none opacity-90 hidden md:block"
         aria-hidden="true"
       />
+      {/* Mobile fallback: gradient statico al posto canvas animate */}
+      <div className="absolute inset-0 md:hidden pointer-events-none">
+        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[1px] bg-gradient-to-r from-transparent via-[#C9A97A]/40 to-transparent" />
+        <div className="absolute inset-x-0 top-[55%] h-[1px] bg-gradient-to-r from-transparent via-[#C9A97A]/25 to-transparent" />
+      </div>
 
       {/* LAYER 5 — Contenuto centrato: avatar circle Anton + badge + headline + CTA */}
       <div className="relative z-10 min-h-[90vh] md:min-h-screen flex flex-col items-center justify-center px-6 py-24 md:py-32">
