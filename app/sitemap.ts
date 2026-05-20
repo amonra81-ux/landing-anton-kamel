@@ -19,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/trattamenti/viso',
     '/trattamenti/rughe',
     '/trattamenti/pelle',
+    '/trattamenti/corpo',
     '/tecniche/anton-lips',
     '/tecniche/russian-lips',
     '/per-te/prima-volta',

@@ -13,7 +13,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'Dr. Anton Kamel — Medico Estetico a Verona | Consulenza & Prenotazione',
   description:
-    'Medicina estetica premium a Verona. Filler, botulino, rinofiller, biorivitalizzazione e trattamenti personalizzati con il Dr. Anton Kamel. Prenota la tua consulenza online.',
+    'Medicina estetica premium a Verona. Filler, botulino, biorivitalizzazione e trattamenti personalizzati con il Dr. Anton Kamel. Prenota la tua consulenza online.',
   alternates: {
     canonical: 'https://antonkamel.it',
   },
@@ -51,7 +51,7 @@ const physicianSchema = {
   '@type': 'Physician',
   name: 'Dr. Anton Kamel',
   description:
-    'Medico chirurgo specializzato in medicina estetica a Verona. Ideatore della tecnica Anton Lips, esperto Russian Lips. Filler, botulino, rinofiller, biorivitalizzazione.',
+    'Medico chirurgo specializzato in medicina estetica a Verona. Ideatore della tecnica Anton Lips, esperto Russian Lips. Filler, botulino, biorivitalizzazione.',
   url: 'https://antonkamel.it',
   telephone: '+39 380 103 5896',
   image: 'https://antonkamel.it/og-image.jpg',
@@ -92,8 +92,10 @@ const physicianSchema = {
     { '@type': 'MedicalProcedure', name: 'Filler labbra (Anton Lips Technique)' },
     { '@type': 'MedicalProcedure', name: 'Filler labbra (Russian Lips Technique)' },
     { '@type': 'MedicalProcedure', name: 'Filler viso (zigomi, mento, mandibola)' },
-    { '@type': 'MedicalProcedure', name: 'Rinofiller' },
     { '@type': 'MedicalProcedure', name: 'Tossina botulinica' },
+    { '@type': 'MedicalProcedure', name: 'Polilattato (stimolatore collagene)' },
+    { '@type': 'MedicalProcedure', name: 'Nefertiti lift collo' },
+    { '@type': 'MedicalProcedure', name: 'Trattamento cellulite' },
     { '@type': 'MedicalProcedure', name: 'Botulino massetere (bruxismo)' },
     { '@type': 'MedicalProcedure', name: 'Biorivitalizzazione' },
     { '@type': 'MedicalProcedure', name: 'Fili di lifting riassorbibili' },

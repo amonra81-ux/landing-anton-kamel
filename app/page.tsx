@@ -13,7 +13,8 @@ const AntonLipsHighlight = dynamic(() => import('@/components/AntonLipsHighlight
 const SocialProof = dynamic(() => import('@/components/SocialProof'))
 const WidgetPrenotazione = dynamic(() => import('@/components/WidgetPrenotazione'))
 const FAQ = dynamic(() => import('@/components/FAQ'))
-const GlobalAcademy = dynamic(() => import('@/components/GlobalAcademy'))
+const AcademySection = dynamic(() => import('@/components/AcademySection'))
+const CosmeticiSection = dynamic(() => import('@/components/CosmeticiSection'))
 const Footer = dynamic(() => import('@/components/Footer'))
 
 export default function Home() {
@@ -29,7 +30,8 @@ export default function Home() {
       <SocialProof />
       <WidgetPrenotazione />
       <FAQ />
-      <GlobalAcademy />
+      <AcademySection />
+      <CosmeticiSection />
       <Footer />
       <StickyCTA />
     </main>

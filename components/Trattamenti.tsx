@@ -2,7 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
-import { Heart, Sparkles, Activity, Wand2, ArrowUpRight, Calendar } from 'lucide-react'
+import { Heart, Sparkles, Activity, Wand2, Waves, ArrowUpRight, Calendar } from 'lucide-react'
 import Link from 'next/link'
 import { useBooking } from './BookingProvider'
 
@@ -17,7 +17,7 @@ const categories = [
     slug: 'viso',
     label: 'Viso e profilo',
     icon: Wand2,
-    teaser: 'Zigomi, mento, mandibola, rinofiller, armonizzazione facciale.',
+    teaser: 'Zigomi, mento, mandibola, armonizzazione facciale, polilattato.',
   },
   {
     slug: 'rughe',
@@ -30,6 +30,12 @@ const categories = [
     label: 'Qualità della pelle',
     icon: Sparkles,
     teaser: 'Biorivitalizzazione, skinbooster, peeling. Texture luminosa.',
+  },
+  {
+    slug: 'corpo',
+    label: 'Collo e corpo',
+    icon: Waves,
+    teaser: 'Nefertiti collo, cellulite, adiposità, sudorazione eccessiva.',
   },
 ]
 

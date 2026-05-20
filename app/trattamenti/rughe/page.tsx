@@ -44,11 +44,11 @@ export default function Page() {
               'Iniezione nel muscolo massetere. Riduzione del digrignamento dei denti e delle tensioni mandibolari. Beneficio estetico: rimodellamento dell\'ovale del viso (jaw slimming). Molti pazienti riferiscono meno cefalee e sonno migliore.',
           },
           {
-            nome: 'Trattamento occhiaie',
+            nome: 'Trattamento occhiaie con G-Pointlift (laterale)',
             durata: '30–45 min',
             prezzo: 'da 300 €',
             descrizione:
-              'Riduzione di occhiaie e borse con filler specifici per la zona perioculare. Tecnica delicata in zona molto sottile.',
+              'Trattamento delle occhiaie con tecnica G-Pointlift in zona laterale. Approccio mirato e poco invasivo per ridurre l\'occhiaia colorata e migliorare la zona perioculare. Tecnica delicata in tessuto molto sottile.',
           },
         ]}
       />

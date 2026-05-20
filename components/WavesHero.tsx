@@ -215,7 +215,7 @@ export default function WavesHero() {
             className="mt-5 max-w-xl mx-auto text-base sm:text-lg md:text-xl text-white/85 leading-relaxed"
             style={{ textShadow: '0 1px 12px rgba(0,0,0,0.7)' }}
           >
-            Medicina estetica costruita su di te. Filler, botulino, rinofiller —
+            Medicina estetica costruita su di te. Filler, botulino, biorivitalizzazione —
             con un approccio medico, mai standard.
           </p>
 

@@ -6,9 +6,9 @@ import PageHero from '@/components/PageHero'
 import CategoriaTrattamenti from '@/components/CategoriaTrattamenti'
 
 export const metadata: Metadata = {
-  title: 'Filler viso, Rinofiller, Armonizzazione facciale Verona | Dr. Anton Kamel',
+  title: 'Filler viso, Mentoplastica, Polilattato, Armonizzazione Verona | Dr. Anton Kamel',
   description:
-    'Filler viso (zigomi, mento, mandibola), rinofiller, fili di lifting e armonizzazione facciale a Verona. Effetto lifting non chirurgico naturale.',
+    'Filler viso (zigomi, mento, mandibola), mentoplastica liquida, polilattato stimolatore collagene e armonizzazione facciale a Verona.',
   alternates: { canonical: 'https://antonkamel.it/trattamenti/viso' },
 }
 
@@ -30,11 +30,18 @@ export default function Page() {
         subtitle="Si valuta il viso nel suo insieme — proporzioni, volumi, simmetria. Si interviene per zone."
         trattamenti={[
           {
-            nome: 'Filler viso (zigomi, mento, mandibola)',
-            durata: '45–60 min',
+            nome: 'Zigomi — acido ialuronico',
+            durata: '60 min',
             prezzo: 'da 500 €',
             descrizione:
-              'Armonizzazione e definizione dei volumi facciali. Effetto lifting non chirurgico. Si tratta una zona alla volta o più zone in un unico piano.',
+              'Trattamento dell\'area zigomatica per definizione e rinfresco del terzo medio del viso. Volumi calibrati sull\'anatomia.',
+          },
+          {
+            nome: 'Mentoplastica liquida',
+            durata: '30 min',
+            prezzo: 'da 280 €',
+            descrizione:
+              'Allungamento e proiezione del mento con acido ialuronico. Migliora il profilo senza chirurgia.',
           },
           {
             nome: 'Angolo mandibolare (jawline contouring)',
@@ -44,18 +51,11 @@ export default function Page() {
               'Definizione della linea mandibolare per un ovale più netto. Adatto a chi cerca un profilo più marcato.',
           },
           {
-            nome: 'Rinofiller — correzione naso',
-            durata: '20–30 min',
-            prezzo: 'da 350 €',
+            nome: 'Polilattato — stimolatore di collagene',
+            durata: '45–60 min',
+            prezzo: 'piano personalizzato',
             descrizione:
-              'Correzione di gobba, punta o asimmetrie nasali con acido ialuronico. Risultato immediato, senza chirurgia. Effetto 12–18 mesi.',
-          },
-          {
-            nome: 'Fili di lifting riassorbibili',
-            durata: '60–90 min',
-            prezzo: 'da 700 €',
-            descrizione:
-              'Tensore immediato + stimolazione del collagene. Per il rilassamento cutaneo del viso e del collo. Effetto durativo 12–18 mesi.',
+              'Acido polilattico (PLA) per stimolare la produzione di collagene endogeno. Effetto progressivo nel tempo, rivitalizza pelle del viso e dell\'ovale. Percorso di sedute.',
           },
           {
             nome: 'Armonizzazione facciale completa',

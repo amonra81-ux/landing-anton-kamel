@@ -65,11 +65,11 @@ export default function Page() {
               'Rinnovamento cellulare superficiale e profondo. Uniforma il colorito e migliora la texture cutanea. Cicli stagionali.',
           },
           {
-            nome: 'Trattamento acne e cicatrici',
+            nome: 'Trattamento acne attiva',
             durata: '45–60 min',
             prezzo: 'piano personalizzato',
             descrizione:
-              'Protocolli combinati per migliorare texture e ridurre i segni dell\'acne. Si valuta in consulenza.',
+              'Protocolli combinati per migliorare il quadro dermatologico dell\'acne in fase attiva. Si valuta in consulenza il protocollo più adatto.',
           },
         ]}
       />

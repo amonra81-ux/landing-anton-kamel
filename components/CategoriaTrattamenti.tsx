@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useBooking } from './BookingProvider'
-import { Calendar } from 'lucide-react'
+import { Calendar, AlertCircle } from 'lucide-react'
 
 export type Trattamento = {
   nome: string
@@ -85,6 +85,37 @@ export default function CategoriaTrattamenti({
           <div className="mx-auto max-w-3xl">{approfondimento}</div>
         </section>
       )}
+
+      {/* Indicazioni pre/post trattamento — FANS + herpes (compliance medico-legale) */}
+      <section className="py-10 md:py-14 px-6 bg-[#0a0a0a] border-t border-white/10">
+        <div className="mx-auto max-w-3xl">
+          <div className="rounded-2xl border border-amber-400/20 bg-amber-400/[0.04] p-5 md:p-6">
+            <div className="flex items-center gap-2 mb-3">
+              <AlertCircle size={16} className="text-amber-300/80" />
+              <p className="text-amber-300/90 text-xs font-semibold tracking-wider uppercase">
+                Indicazioni importanti
+              </p>
+            </div>
+            <ul className="space-y-2 text-white/70 text-sm leading-relaxed">
+              <li>
+                <span className="text-white/90 font-semibold">Evitare FANS</span> (ibuprofene,
+                aspirina, ketoprofene) nei 3 giorni successivi all&apos;iniezione: aumentano
+                il rischio di ematomi.
+              </li>
+              <li>
+                <span className="text-white/90 font-semibold">Herpes labiale attivo</span>:
+                trattamento <span className="text-white/90 font-semibold">da rimandare</span>.
+                In caso di herpes ricorrente, terapia antivirale 5 giorni prima e 5 giorni dopo.
+              </li>
+              <li>
+                Evitare anche: alcool, fumo, attività fisica intensa, sauna, esposizione solare
+                diretta nelle 48–72 ore successive.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
 
       {/* CTA finale — consulenza 80€ */}
       <section className="py-14 md:py-20 px-6 bg-[#0a0a0a] border-t border-white/10">

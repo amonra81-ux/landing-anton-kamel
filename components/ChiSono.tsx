@@ -67,7 +67,8 @@ export default function ChiSono() {
           >
             Medico chirurgo, specialista in medicina estetica.
             Ideatore della tecnica <span className="text-[#C9A97A]">Anton Lips</span>™.
-            Studio a Verona dal 2014.
+            CEO di <span className="text-white/85">Global Experts (Verona + Dubai)</span> e{' '}
+            professore a contratto presso l&apos;Università di Verona.
           </motion.p>
         </div>
       </section>

@@ -48,8 +48,8 @@ const faq: FAQItem[] = [
   },
   {
     icon: Sparkles,
-    q: 'Cosa sono i fili riassorbibili?',
-    a: 'I fili riassorbibili sono sottili filamenti inseriti sotto la pelle con un ago, che creano un effetto tensore immediato e stimolano la produzione di collagene nel tempo. Si riassorbono naturalmente in 12–18 mesi. Sono indicati per il rilassamento cutaneo del viso e del collo.',
+    q: 'Cos\'è il polilattato e a cosa serve?',
+    a: 'Il polilattato (acido polilattico - PLA) è uno stimolatore di collagene. Iniettato nei piani profondi attiva la produzione di collagene endogeno con effetto progressivo nel tempo. Indicato per pelle del viso rilassata o per l\'ovale. Si esegue in cicli di sedute.',
   },
   {
     icon: Heart,
@@ -57,9 +57,14 @@ const faq: FAQItem[] = [
     a: 'Se eseguito correttamente, no. La tossina botulinica agisce selettivamente sui muscoli responsabili delle rughe dinamiche, senza eliminare le espressioni naturali. Il risultato è un viso più rilassato, non immobile.',
   },
   {
-    icon: Sparkles,
-    q: 'Cos\'è il rinofiller e come funziona?',
-    a: 'Il rinofiller è una tecnica di medicina estetica che utilizza filler a base di acido ialuronico per correggere piccole irregolarità del naso (gobba, punta, asimmetrie) senza intervento chirurgico. Il risultato è immediato, il recupero minimo e l\'effetto dura mediamente 12–18 mesi.',
+    icon: AlertCircle,
+    q: 'Posso prendere antinfiammatori (FANS) prima o dopo il trattamento?',
+    a: 'No. Nei 3 giorni successivi all\'iniezione di filler/botulino è necessario evitare l\'assunzione di FANS (es. ibuprofene, aspirina, ketoprofene), alcool, fumo, attività sportive intense e cibi caldi/piccanti. I FANS possono aumentare il rischio di ematomi e gonfiore.',
+  },
+  {
+    icon: AlertCircle,
+    q: 'Cosa succede se ho l\'herpes labiale attivo?',
+    a: 'Se sei in fase attiva di herpes labiale il trattamento va rimandato. Se hai una storia di herpes ricorrente, è opportuno iniziare la terapia antivirale 5 giorni prima e proseguire 5 giorni dopo il trattamento (con buona idratazione). Parla del tuo quadro clinico in consulenza.',
   },
   {
     icon: Heart,
