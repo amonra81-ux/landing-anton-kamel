@@ -174,13 +174,13 @@ export default function WavesHero() {
             }}
           >
             <Image
-              src={`${BASE_PATH}/anton-avatar.jpg?v=2`}
+              src={`${BASE_PATH}/anton-avatar.jpg?v=3`}
               alt="Dr. Anton Kamel"
               fill
               priority
               fetchPriority="high"
               sizes="(max-width: 768px) 192px, 224px"
-              className="object-cover object-[65%_25%]"
+              className="object-cover object-[center_30%]"
             />
           </div>
 
