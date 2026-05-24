@@ -15,6 +15,7 @@ const WidgetPrenotazione = dynamic(() => import('@/components/WidgetPrenotazione
 const FAQ = dynamic(() => import('@/components/FAQ'))
 const AcademySection = dynamic(() => import('@/components/AcademySection'))
 const CosmeticiSection = dynamic(() => import('@/components/CosmeticiSection'))
+const GlobalAcademy = dynamic(() => import('@/components/GlobalAcademy'))
 const Footer = dynamic(() => import('@/components/Footer'))
 
 export default function Home() {
@@ -31,6 +32,7 @@ export default function Home() {
       <WidgetPrenotazione />
       <FAQ />
       <AcademySection />
+      <GlobalAcademy />
       <CosmeticiSection />
       <Footer />
       <StickyCTA />
